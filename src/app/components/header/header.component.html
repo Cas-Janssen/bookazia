@@ -1,0 +1,40 @@
+<header>
+  <nav>
+    <img
+      class="nav-logo"
+      src="assets/img/bookazia_banner.png"
+      alt="Het logo van de winkel"
+      (click)="goToMainMenu()"
+    />
+
+    <input type="text" class="nav-search_input" placeholder="Search..." />
+
+    <section class="nav-button-section">
+      <button class="nav-favorite_menu" (click)="goToMainMenu()">
+        <img
+          class="nav-favorite_picture"
+          src="assets/img/favorite.svg"
+          alt="Favorite icon"
+        />
+        <p>Favorites</p>
+      </button>
+      <button class="nav-shopping_menu">
+        <img
+          class="nav-card_picture"
+          src="assets/img/shopping_card_icon.svg"
+          alt="Shopping cart icon"
+        />
+        <p>Shopping Card</p>
+      </button>
+      <button class="nav-profile_menu">
+        <img
+          class="nav-profile_picture"
+          src="assets/img/default_profile_picture.svg"
+          alt="Profile icon"
+        />
+        <p>Login</p>
+      </button>
+    </section>
+  </nav>
+  <app-search-filters class="nav-search_options"></app-search-filters>
+</header>
