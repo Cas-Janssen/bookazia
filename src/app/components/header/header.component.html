@@ -4,13 +4,18 @@
       class="nav-logo"
       src="assets/img/bookazia_banner.png"
       alt="Het logo van de winkel"
-      (click)="goToMainMenu()"
+      (click)="goToMenu('home')"
     />
 
-    <input type="text" class="nav-search_input" placeholder="Search..." />
-
+    <input
+      type="text"
+      name="search_bar"
+      class="nav-search_input"
+      placeholder="Search..."
+      (keydown.enter)="navigateFromInput($event)"
+    />
     <section class="nav-button-section">
-      <button class="nav-favorite_menu" (click)="goToMainMenu()">
+      <button class="nav-favorite_menu" (click)="goToMenu('saved')">
         <img
           class="nav-favorite_picture"
           src="assets/img/favorite.svg"
@@ -18,15 +23,15 @@
         />
         <p>Favorites</p>
       </button>
-      <button class="nav-shopping_menu">
+      <button class="nav-shopping_menu" (click)="goToMenu('cart')">
         <img
-          class="nav-card_picture"
-          src="assets/img/shopping_card_icon.svg"
+          class="nav-cart_picture"
+          src="assets/img/shopping_cart_icon.svg"
           alt="Shopping cart icon"
         />
-        <p>Shopping Card</p>
+        <p>Shopping cart</p>
       </button>
-      <button class="nav-profile_menu">
+      <button class="nav-profile_menu" (click)="goToMenu('login')">
         <img
           class="nav-profile_picture"
           src="assets/img/default_profile_picture.svg"

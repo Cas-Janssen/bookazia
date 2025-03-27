@@ -1,1 +1,37 @@
-<p>login works!</p>
+<section class="login-section">
+  <nav class="nav-login">
+    <p class="nav-login-go_back" (click)="goBack()">&lt; Go back</p>
+    <div class="nav-login-actions">
+      <h2>Login</h2>
+      <p class="nav-login-register" (click)="goToRegisterMenu()">Register</p>
+    </div>
+    <div class="nav-login-divider"></div>
+  </nav>
+  <form class="login-form">
+    <label for="email">Email:</label>
+    <input
+      id="email"
+      type="email"
+      [(ngModel)]="email"
+      name="email"
+      required
+      autocomplete="email"
+      placeholder="example@email.com"
+    />
+    <div class="password-actions">
+      <label for="password">Password:</label>
+      <p class="nav-forgot_password">Forgot password?</p>
+    </div>
+    <input
+      id="password"
+      type="password"
+      [(ngModel)]="password"
+      name="password"
+      required
+      autocomplete="new-password"
+      placeholder="Password123!"
+    />
+
+    <button (click)="login()" class="login-btn">Login</button>
+  </form>
+</section>

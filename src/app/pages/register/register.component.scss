@@ -1,4 +1,4 @@
-.login-section {
+.registration {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,24 +11,18 @@
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
-  .nav-login {
+  .nav-registration {
     width: 100%;
     text-align: left;
     display: flex;
     flex-direction: column;
 
-    .nav-login-go_back {
+    .nav-registration-go_back {
       cursor: pointer;
       color: #002f6c;
       text-decoration: underline;
       font-size: 14px;
       margin-bottom: 10px;
-    }
-
-    .nav-login-actions {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
     }
 
     h2 {
@@ -37,33 +31,26 @@
       margin: 0;
     }
 
-    .nav-login-register {
-      cursor: pointer;
-      color: #242424;
-      text-decoration: underline;
-      font-size: 16px;
-      margin-left: 20px;
-    }
-
-    .nav-login-divider {
+    .nav-registration-divider {
       width: 100%;
       margin: 20px 0;
       border-bottom: 1px solid #d7d8db;
     }
   }
-  .login-form {
+
+  .registration-form {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 15px;
   }
 
-  .login-form label {
+  .registration-form label {
     font-size: 14px;
     color: #333;
   }
 
-  .login-form input {
+  .registration-form input {
     padding: 10px;
     font-size: 14px;
     border: 1px solid #ccc;
@@ -71,14 +58,12 @@
     outline: none;
     transition: border-color 0.3s;
   }
-  .login-form input:hover {
-    border-color: #0066cc;
-  }
-  .login-form input:focus {
+
+  .registration-form input:focus {
     border-color: #0066cc;
   }
 
-  .password-actions {
+  .nav-password-actions {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -90,7 +75,7 @@
     cursor: pointer;
   }
 
-  .login-btn {
+  .register-btn {
     background-color: #0066cc;
     color: white;
     padding: 12px 20px;
@@ -101,7 +86,7 @@
     transition: background-color 0.3s ease;
   }
 
-  .login-btn:hover {
+  .register-btn:hover {
     background-color: #005bb5;
   }
 }
