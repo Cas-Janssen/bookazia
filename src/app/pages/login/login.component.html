@@ -7,12 +7,21 @@
     </div>
     <div class="nav-login-divider"></div>
   </nav>
+  <div *ngIf="errorMessage != null" class="error-message">
+    <img
+      class="error-icon"
+      src="assets/img/error_icon.svg"
+      alt="Icon of an warning symbol"
+    />
+    <p>{{ errorMessage }}</p>
+  </div>
   <form class="login-form">
     <label for="email">Email:</label>
     <input
       id="email"
       type="email"
       [(ngModel)]="email"
+      (ngModelChange)="onInputChange()"
       name="email"
       required
       autocomplete="email"
@@ -26,12 +35,20 @@
       id="password"
       type="password"
       [(ngModel)]="password"
+      (ngModelChange)="onInputChange()"
       name="password"
       required
       autocomplete="new-password"
       placeholder="Password123!"
     />
 
-    <button (click)="login()" class="login-btn">Login</button>
+    <button
+      (click)="login()"
+      [disabled]="isButtonDisabled"
+      [ngClass]="{ 'login-button-disabled': isButtonDisabled }"
+      class="login-button"
+    >
+      Login
+    </button>
   </form>
 </section>

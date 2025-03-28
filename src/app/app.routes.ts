@@ -9,13 +9,14 @@ import { RegisterComponent } from './pages/register/register.component';
 import { SavedItemsComponent } from './pages/saved-items/saved-items.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { AuthGuard } from './services/auth-guard.service';
+import { SearchComponent } from './pages/search/search.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'cart', component: CartComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'book/:id', component: BookDetailComponent },
+  { path: 'books/:id', component: BookDetailComponent },
   { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
   { path: 'home', redirectTo: '/' },
   {
@@ -24,5 +25,6 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: 'saved', component: SavedItemsComponent, canActivate: [AuthGuard] },
+  { path: 'search/:searchquery', component: SearchComponent },
   { path: '**', component: NotFoundComponent },
 ];

@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from '../../components/header/header.component';
-import { FooterComponent } from '../../components/footer/footer.component';
+import { ProductWrapperComponent } from '../../components/product-list/product-wrapper.component';
 
 @Component({
   selector: 'app-home',
-  imports: [FooterComponent, HeaderComponent],
+  imports: [ProductWrapperComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
