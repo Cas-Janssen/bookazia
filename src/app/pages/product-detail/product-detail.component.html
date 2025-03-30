@@ -36,8 +36,9 @@
       }}</span>
     </div>
     <p class="book-description">{{ book.description }}</p>
-    <button class="add-to-cart" (click)="addToCart(book)">
-      Toevoegen aan winkelwagen
+    <button class="add-to-cart" (click)="addToCart(book)">Add to cart</button>
+    <button class="add-to-favorites" (click)="addToFavorites(book)">
+      Add to favorites
     </button>
   </div>
 </div>

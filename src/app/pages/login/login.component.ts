@@ -30,7 +30,7 @@ export class LoginComponent {
 
   protected login(): void {
     const loginData = {
-      email: this.email,
+      email: this.email.toLowerCase(),
       password: this.password,
     };
     if (this.isInputFieldEmpty()) {
@@ -38,21 +38,18 @@ export class LoginComponent {
     } else if (this.isButtonDisabled) {
       this.errorMessage = 'Please change a value before submitting again!';
     } else {
-      const subscription = this.authService
-        .login(loginData)
-        .pipe(take(1))
-        .subscribe({
-          next: (responseData) => {
-            this.errorMessage = null;
-            this.router.navigate(['/']);
-          },
-          error: (error) => {
-            console.error('Error:', error);
-            this.errorMessage =
-              'The combination of email address and password is not valid!';
-            this.isButtonDisabled = true;
-          },
-        });
+      const subscription = this.authService.login(loginData).subscribe({
+        next: (responseData) => {
+          this.errorMessage = null;
+          this.router.navigate(['/']);
+        },
+        error: (error) => {
+          console.error('Error:', error);
+          this.errorMessage =
+            'The combination of email address and password is not valid!';
+          this.isButtonDisabled = true;
+        },
+      });
       this.destroyRef.onDestroy(() => subscription.unsubscribe());
     }
   }

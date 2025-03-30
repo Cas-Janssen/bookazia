@@ -1,10 +1,11 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ResponseLoginData } from '../models/ResponseLoginData';
+import { ResponseAuthData } from '../models/ResponseAuthData';
 import { environment } from '../../environments/environment';
 import { Login } from '../models/Login';
 import { tap, BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { Register } from '../models/Register';
 @Injectable({
   providedIn: 'root',
 })
@@ -28,9 +29,23 @@ export class AuthService {
   public isAuthenticated(): boolean {
     return this.loggedIn.getValue();
   }
-  public login(login: Login): Observable<ResponseLoginData> {
+  public login(login: Login): Observable<ResponseAuthData> {
     const subscription = this.httpClient
-      .post<ResponseLoginData>(this.apiLink + '/auth/login', login)
+      .post<ResponseAuthData>(this.apiLink + '/auth/login', login)
+      .pipe(
+        tap((responseData) => {
+          if (responseData.token) {
+            this.loggedIn.next(true);
+            this.token = responseData.token;
+            this.saveTokenInLocalStorage(responseData.token);
+          }
+        })
+      );
+    return subscription;
+  }
+  public register(register: Register): Observable<ResponseAuthData> {
+    const subscription = this.httpClient
+      .post<ResponseAuthData>(this.apiLink + '/auth/register', register)
       .pipe(
         tap((responseData) => {
           if (responseData.token) {

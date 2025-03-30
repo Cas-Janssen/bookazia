@@ -4,6 +4,7 @@ import { ProductService } from '../../services/product.service';
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -13,14 +14,15 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class ProductDetailComponent implements OnInit, OnDestroy {
   public book?: Product;
-  private productService: ProductService = inject(ProductService);
-  private route: ActivatedRoute = inject(ActivatedRoute);
-  private router: Router = inject(Router);
   public bookTitle!: string;
   public isbn!: string;
   public bookId!: number;
   public errorMessage?: string;
   private destroy$ = new Subject<void>();
+  private authService: AuthService = inject(AuthService);
+  private productService: ProductService = inject(ProductService);
+  private route: ActivatedRoute = inject(ActivatedRoute);
+  private router: Router = inject(Router);
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -61,7 +63,12 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
       this.book = product;
     });
   }
-  protected addToCart(product: Product): void {
-    console.log(`Added ${product.title} to cart`);
+  protected addToCart(product: Product): void {}
+  protected addToFavorites(product: Product): void {
+    if (!this.authService.isAuthenticated()) {
+      window.alert('Log in to add a product to favorites!');
+      return;
+    }
+    console.log(`Added ${product.title} to favorites`);
   }
 }

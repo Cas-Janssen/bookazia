@@ -70,5 +70,20 @@
     .add-to-cart:hover {
       background-color: #0056b3;
     }
+
+    .add-to-favorites {
+      margin-top: 15px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .add-to-favorites:hover {
+      background-color: #0056b3;
+    }
   }
 }
