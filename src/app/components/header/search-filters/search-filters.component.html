@@ -1,5 +1,10 @@
 <section class="search-wrapper">
   <ul>
-    <button *ngFor="let category of categories">{{ category.name }}</button>
+    <button
+      (click)="goToCategory(category.name)"
+      *ngFor="let category of categories"
+    >
+      {{ category.name }}
+    </button>
   </ul>
 </section>

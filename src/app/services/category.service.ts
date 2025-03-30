@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Category } from '../models/Category';
+import { CategoryDetails } from '../models/CategoryDetails';
 
 @Injectable({
   providedIn: 'root',
@@ -13,5 +14,10 @@ export class CategoryService {
 
   getAllCategories(): Observable<Category[]> {
     return this.httpClient.get<Category[]>(this.apiLink + '/categories/names');
+  }
+  getCategoryDetails(categoryId: number): Observable<CategoryDetails> {
+    return this.httpClient.get<CategoryDetails>(
+      this.apiLink + '/categories/' + categoryId
+    );
   }
 }

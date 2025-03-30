@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { CartComponent } from './pages/cart/cart.component';
 import { LoginComponent } from './pages/login/login.component';
-import { BookDetailComponent } from './pages/book-detail/book-detail.component';
+import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { HomeComponent } from './pages/home/home.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
@@ -10,13 +10,14 @@ import { SavedItemsComponent } from './pages/saved-items/saved-items.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { SearchComponent } from './pages/search/search.component';
+import { CategoryComponent } from './pages/category/category.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'cart', component: CartComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'books/:id', component: BookDetailComponent },
+  { path: 'products/:details/:id', component: ProductDetailComponent },
   { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
   { path: 'home', redirectTo: '/' },
   {
@@ -26,5 +27,6 @@ export const routes: Routes = [
   },
   { path: 'saved', component: SavedItemsComponent, canActivate: [AuthGuard] },
   { path: 'search/:searchquery', component: SearchComponent },
+  { path: 'books/:categoryname', component: CategoryComponent },
   { path: '**', component: NotFoundComponent },
 ];

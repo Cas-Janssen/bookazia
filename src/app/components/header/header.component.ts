@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { SearchFiltersComponent } from './search-filters/search-filters.component';
@@ -14,13 +14,17 @@ import { AuthService } from '../../services/auth.service';
 export class HeaderComponent {
   protected search_query: string = '';
   private router = inject(Router);
+  private destroyRef = inject(DestroyRef);
   public isLoggedIn: boolean = false;
   private authService: AuthService = inject(AuthService);
 
   ngOnInit(): void {
-    this.authService.currentLoginStatus.subscribe((status) => {
-      this.isLoggedIn = status;
-    });
+    const subscription = this.authService.currentLoginStatus.subscribe(
+      (status) => {
+        this.isLoggedIn = status;
+      }
+    );
+    this.destroyRef.onDestroy(subscription.unsubscribe);
   }
 
   public onLogout(): void {

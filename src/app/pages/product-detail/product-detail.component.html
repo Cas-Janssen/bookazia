@@ -1,0 +1,43 @@
+<div *ngIf="book == null">
+  <p>
+    Boek kan niet worden ingeladen. Probeer het later opnieuw of probeer een
+    ander boek.
+  </p>
+</div>
+<div *ngIf="book != null" class="book-card">
+  <img
+    [src]="book.coverImgUrl"
+    alt="{{ book.title }} cover"
+    class="book-cover"
+  />
+  <div class="book-details">
+    <h2 class="book-title">{{ book.title }}</h2>
+    <p class="book-authors">{{ book.authors }}</p>
+    <p class="book-price">Prijs: &euro;{{ book.price }}</p>
+    <p
+      class="book-stock"
+      [ngClass]="{
+        'in-stock': book.stock > 0,
+        'out-of-stock': book.stock === 0
+      }"
+    >
+      {{ book.stock > 0 ? "Op voorraad" : "Niet op voorraad" }}
+    </p>
+    <p class="book-isbn">ISBN: {{ book.isbn }}</p>
+    <p class="book-publication">Gepubliceerd op: {{ book.publicationDate }}</p>
+    <p class="book-language">Originele taal: {{ book.originalLanguage }}</p>
+    <p class="book-publisher">
+      Uitgever: {{ book.publisher.firstName }} {{ book.publisher.lastName }}
+    </p>
+    <div class="book-categories">
+      Categorieën:
+      <span *ngFor="let category of book.categories" class="category">{{
+        category.name
+      }}</span>
+    </div>
+    <p class="book-description">{{ book.description }}</p>
+    <button class="add-to-cart" (click)="addToCart(book)">
+      Toevoegen aan winkelwagen
+    </button>
+  </div>
+</div>

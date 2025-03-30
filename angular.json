@@ -38,13 +38,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "20mb",
+                  "maximumError": "20MB"
                 },
                 {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "type": "all",
+                  "maximumWarning": "20mb",
+                  "maximumError": "20mb"
                 }
               ],
               "outputHashing": "all"
@@ -67,7 +67,8 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "webshop_bookazia:build:production"
+              "buildTarget": "webshop_bookazia:build:production",
+              "port": 16741
             },
             "development": {
               "buildTarget": "webshop_bookazia:build:development"

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ResponseLoginData } from '../models/ResponseLoginData';
 import { environment } from '../../environments/environment';
 import { Login } from '../models/Login';
-import { tap, BehaviorSubject } from 'rxjs';
+import { tap, BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
@@ -16,7 +16,7 @@ export class AuthService {
   );
   private token: string | null = null;
   private apiLink: string = environment.apiUrl;
-  currentLoginStatus = this.loggedIn.asObservable();
+  public currentLoginStatus = this.loggedIn.asObservable();
 
   constructor() {
     this.loadTokenFromLocalStorage();
@@ -28,7 +28,7 @@ export class AuthService {
   public isAuthenticated(): boolean {
     return this.loggedIn.getValue();
   }
-  public login(login: Login) {
+  public login(login: Login): Observable<ResponseLoginData> {
     const subscription = this.httpClient
       .post<ResponseLoginData>(this.apiLink + '/auth/login', login)
       .pipe(
@@ -47,15 +47,15 @@ export class AuthService {
     return this.token;
   }
 
-  private saveTokenInLocalStorage(token: string) {
+  private saveTokenInLocalStorage(token: string): void {
     localStorage.setItem('authToken', token);
   }
 
-  private loadTokenFromLocalStorage() {
+  private loadTokenFromLocalStorage(): void {
     this.token = localStorage.getItem('authToken');
   }
 
-  public logout() {
+  public logout(): void {
     this.loggedIn.next(false);
     this.token = null;
     localStorage.removeItem('authToken');

@@ -18,12 +18,12 @@ export class RegisterComponent {
   protected address: string = '';
   protected city: string = '';
   protected zipCode: string = '';
-
   private location: Location = inject(Location);
-  goBack(): void {
+
+  public goBack(): void {
     this.location.back();
   }
-  onSubmit(): void {
+  protected onSubmit(): void {
     location.reload();
   }
 }

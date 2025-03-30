@@ -1,9 +1,16 @@
-<div *ngIf="errorMessage == null" class="product-list">
-  <app-product-item *ngFor="let product of products" [product]="product" />
+<div *ngIf="errorMessage == null && products != null" class="product-list">
+  <app-product-item
+    *ngFor="let product of products"
+    [product]="product"
+    (click)="goToProductDetails(product)"
+  />
+</div>
+<div *ngIf="products?.length === 0 && errorMessage === null">
+  No products found. Please try another category or add products to this
+  category!
 </div>
 <div *ngIf="errorMessage != null">
   <h1>There was an error loading the products from the database!</h1>
   <p>You can provide the following error code to the developer:</p>
   <p>{{ errorMessage }}</p>
-  <button (click)="refreshProducts()">Refresh products</button>
 </div>
