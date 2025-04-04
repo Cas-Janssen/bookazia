@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ProductWrapperComponent } from '../../components/product-list/product-wrapper.component';
-import { SharedCategoryService } from '../../shared/shared-category.service';
+import { ProductWrapperComponent } from '../product/product-list/product-wrapper.component';
+import { SharedProductSearchService } from '../../shared/shared-product-search.service';
 
 @Component({
   selector: 'app-home',
@@ -9,11 +9,11 @@ import { SharedCategoryService } from '../../shared/shared-category.service';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit {
-  private sharedCategoryService: SharedCategoryService = inject(
-    SharedCategoryService
+  private sharedProductSearchService: SharedProductSearchService = inject(
+    SharedProductSearchService
   );
 
   ngOnInit(): void {
-    this.sharedCategoryService.clearSelectedCategory();
+    this.sharedProductSearchService.clearSelectedCategory();
   }
 }

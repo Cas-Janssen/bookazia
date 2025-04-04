@@ -1,10 +1,12 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { Product } from '../../models/Product';
-import { ProductService } from '../../services/product.service';
+import { Product } from '../../../models/Product';
+import { ProductService } from '../../../services/product.service';
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
+import { LocalCartProduct } from '../../../models/LocalCartProduct';
+import { CartService } from '../../../services/cart.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -21,6 +23,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   private authService: AuthService = inject(AuthService);
   private productService: ProductService = inject(ProductService);
+  private cartService: CartService = inject(CartService);
   private route: ActivatedRoute = inject(ActivatedRoute);
   private router: Router = inject(Router);
 
@@ -49,7 +52,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
           this.isbn = book.isbn;
           this.book = book;
           this.router.navigate(
-            ['/products', `${this.bookTitle}-${this.isbn}`, this.bookId],
+            ['/products', this.bookId, `${this.bookTitle}-${this.isbn}`],
             { replaceUrl: true }
           );
         },
@@ -58,12 +61,17 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
         },
       });
   }
+
   public getProductById(id: number): void {
     this.productService.getProductById(id).subscribe((product) => {
       this.book = product;
     });
   }
-  protected addToCart(product: Product): void {}
+
+  protected addToCart(product: Product): void {
+    this.cartService.addCartItem(product);
+  }
+
   protected addToFavorites(product: Product): void {
     if (!this.authService.isAuthenticated()) {
       window.alert('Log in to add a product to favorites!');

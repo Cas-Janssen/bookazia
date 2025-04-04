@@ -3,7 +3,7 @@ import { NgFor } from '@angular/common';
 import { CategoryService } from '../../../services/category.service';
 import { Category } from '../../../models/Category';
 import { Router } from '@angular/router';
-import { SharedCategoryService } from '../../../shared/shared-category.service';
+import { SharedProductSearchService } from '../../../shared/shared-product-search.service';
 
 @Component({
   selector: 'app-search-filters',
@@ -15,8 +15,8 @@ export class SearchFiltersComponent implements OnInit {
   private categoryService: CategoryService = inject(CategoryService);
   private router: Router = inject(Router);
   private destroyRef: DestroyRef = inject(DestroyRef);
-  private sharedCategoryService: SharedCategoryService = inject(
-    SharedCategoryService
+  private sharedProductSearchService: SharedProductSearchService = inject(
+    SharedProductSearchService
   );
   public categories: Category[] = [];
 
@@ -41,7 +41,7 @@ export class SearchFiltersComponent implements OnInit {
       (category) => category.name.toLowerCase() === categoryName.toLowerCase()
     );
     if (category) {
-      this.sharedCategoryService.setSelectedCategory(category);
+      this.sharedProductSearchService.setSelectedCategory(category);
     }
   }
 

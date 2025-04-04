@@ -8,7 +8,6 @@ export function authInterceptor(
 ) {
   const authService = inject(AuthService);
   const authToken = authService.getToken();
-
   if (authToken != null) {
     const newRequest = req.clone({
       headers: req.headers.set('Authorization', `Bearer ${authToken}`),

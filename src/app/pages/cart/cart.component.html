@@ -1,1 +1,41 @@
-<p>card works!</p>
+<h1 class="cart-title">Shopping Cart</h1>
+
+<div class="cart-container" *ngIf="productCart.length >= 1">
+  <section class="cart-item" *ngFor="let product of productCart">
+    <img
+      [src]="product.coverImgUrl"
+      [alt]="product.name"
+      class="cart-item__image"
+    />
+
+    <div class="cart-item__details">
+      <h2 class="cart-item__name">{{ product.name }}</h2>
+      <p class="cart-item__price">Price: €{{ product.price }}</p>
+
+      <label for="quantity-{{ product.id }}" class="cart-item__label"
+        >Quantity:</label
+      >
+      <select
+        [id]="'quantity-' + product.id"
+        [(ngModel)]="product.quantity"
+        (change)="updateTotalPrice(product)"
+        class="cart-item__select"
+      >
+        <option
+          *ngFor="let qty of getQuantityArray(product.stock)"
+          [value]="qty"
+        >
+          {{ qty }}
+        </option>
+      </select>
+
+      <p class="cart-item__total">Total: €{{ product.totalPrice }}</p>
+    </div>
+  </section>
+  <button class="cart-clear-btn" (click)="clearCartItems()">Clear Cart</button>
+  <button class="cart-order-btn" (click)="placeOrder()">Place Order</button>
+</div>
+
+<p class="cart-empty" *ngIf="productCart.length < 1">
+  Er bestaan geen producten in de winkelwagen, bozo!!! 🛒
+</p>

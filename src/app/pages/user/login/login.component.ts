@@ -1,9 +1,8 @@
 import { Component, DestroyRef, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import { NgClass, NgIf, Location } from '@angular/common';
-import { take } from 'rxjs';
 
 @Component({
   selector: 'app-login',

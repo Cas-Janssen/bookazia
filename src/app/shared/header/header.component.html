@@ -7,12 +7,13 @@
       (click)="goToMenu('home')"
     />
     <input
+      #search_bar
       type="search"
       name="search_bar"
       [(ngModel)]="search_query"
       class="nav-search_input"
       placeholder="Search..."
-      (keydown.enter)="navigateFromQuery(search_query)"
+      (keydown.enter)="navigateFromQuery(search_query, search_bar)"
     />
     <section class="nav-button-section">
       <button class="nav-favorite_menu" (click)="goToMenu('saved')">

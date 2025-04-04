@@ -5,7 +5,7 @@ import { Category } from '../models/Category';
 @Injectable({
   providedIn: 'root',
 })
-export class SharedCategoryService {
+export class SharedProductSearchService {
   private selectedCategorySubject = new BehaviorSubject<Category | null>(null);
   selectedCategory$ = this.selectedCategorySubject.asObservable();
 

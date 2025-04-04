@@ -1,10 +1,10 @@
-import { NgFor, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { Product } from '../../../models/Product';
+import { Product } from '../../../../models/Product';
 
 @Component({
   selector: 'app-product-item',
-  imports: [NgFor, NgIf],
+  imports: [NgIf],
   templateUrl: './product-item.component.html',
   styleUrl: './product-item.component.scss',
 })

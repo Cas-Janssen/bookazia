@@ -35,7 +35,18 @@ export class HeaderComponent {
     this.router.navigate([path]);
   }
 
-  public navigateFromQuery(query: string): void {
+  public navigateFromQuery(
+    query: string,
+    inputElement: HTMLInputElement
+  ): void {
+    inputElement.blur();
+    if (query == '') {
+      query = '*';
+    }
+    if (query.includes(' ')) {
+      query = query.replaceAll(/\s+/g, '-');
+    }
+
     this.goToMenu('search/' + query);
     this.search_query = '';
   }

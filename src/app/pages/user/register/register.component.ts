@@ -1,8 +1,8 @@
 import { Component, DestroyRef, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Location, NgIf } from '@angular/common';
-import { Register } from '../../models/Register';
-import { AuthService } from '../../services/auth.service';
+import { Register } from '../../../models/Register';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-register',
