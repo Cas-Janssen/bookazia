@@ -1,14 +1,15 @@
-import { CartItem } from './CartItem';
+import { CartProduct } from './CartProduct';
 
 export interface Order {
-  paymentMethod: string;
-  totalPrice: bigint;
+  usedPaymentMethod: string;
+  totalPrice: number;
   email: string;
   firstName: string;
-  middleName: string;
+  middleName?: string;
   lastName: string;
   address: string;
   city: string;
   postalCode: string;
-  cartItems: CartItem[];
+  cartItems: Array<CartProduct>;
+  phoneNumber?: string;
 }

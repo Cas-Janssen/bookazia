@@ -1,4 +1,4 @@
-export interface ResponseAuthData {
+export interface ResponseLogin {
   email: string;
   token: string;
 }

@@ -15,9 +15,9 @@ export class CategoryService {
   getAllCategories(): Observable<Category[]> {
     return this.httpClient.get<Category[]>(this.apiLink + '/categories/names');
   }
-  getCategoryDetails(categoryId: number): Observable<CategoryDetails> {
+  getCategoryDetails(categoryName: string): Observable<CategoryDetails> {
     return this.httpClient.get<CategoryDetails>(
-      this.apiLink + '/categories/' + categoryId
+      this.apiLink + '/categories/' + categoryName
     );
   }
 }

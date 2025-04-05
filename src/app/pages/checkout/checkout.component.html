@@ -30,12 +30,24 @@
     </div>
   </div>
 
-  <app-personal-info *ngIf="currentStep === 1" />
-  <app-delivery-option *ngIf="currentStep === 2" />
-  <app-payment-options *ngIf="currentStep === 3" />
+  <app-personal-info
+    (personalInfoChange)="personalInfo = $event"
+    *ngIf="currentStep === 1"
+  ></app-personal-info>
+
+  <app-delivery-option
+    (deliveryOptionChange)="deliveryOption = $event"
+    *ngIf="currentStep === 2"
+  ></app-delivery-option>
+
+  <app-payment
+    (paymentMethodChange)="paymentMethod = $event"
+    *ngIf="currentStep === 3"
+  ></app-payment>
 
   <div class="buttons">
     <button *ngIf="currentStep > 1" (click)="previousStep()">Back</button>
     <button *ngIf="currentStep < 3" (click)="nextStep()">Next</button>
+    <button *ngIf="currentStep === 3" (click)="submitOrder()">Buy</button>
   </div>
 </div>

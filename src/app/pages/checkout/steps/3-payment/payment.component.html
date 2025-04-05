@@ -1,10 +1,43 @@
 <div class="step">
   <h3>Step 3: Choose Payment Method</h3>
   <label>
-    <input type="radio" name="payment" value="credit-card" /> Credit Card
+    <input
+      type="radio"
+      name="payment"
+      value="CREDIT_CARD"
+      [(ngModel)]="selectedPaymentMethod"
+      (ngModelChange)="onPaymentMethodChange()"
+    />
+    Credit Card
   </label>
-  <label> <input type="radio" name="payment" value="paypal" /> PayPal </label>
   <label>
-    <input type="radio" name="payment" value="bank-transfer" /> Bank Transfer
+    <input
+      type="radio"
+      name="payment"
+      value="PAYPAL"
+      [(ngModel)]="selectedPaymentMethod"
+      (ngModelChange)="onPaymentMethodChange()"
+    />
+    PayPal
+  </label>
+  <label>
+    <input
+      type="radio"
+      name="payment"
+      value="IDEAL"
+      [(ngModel)]="selectedPaymentMethod"
+      (ngModelChange)="onPaymentMethodChange()"
+    />
+    Ideal
+  </label>
+  <label>
+    <input
+      type="radio"
+      name="payment"
+      value="BANK_TRANSFER"
+      [(ngModel)]="selectedPaymentMethod"
+      (ngModelChange)="onPaymentMethodChange()"
+    />
+    Bank Transfer
   </label>
 </div>

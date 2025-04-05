@@ -1,9 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-payment-options',
-  imports: [],
+  selector: 'app-payment',
   templateUrl: './payment.component.html',
-  styleUrl: './payment.component.scss',
+  styleUrls: ['./payment.component.scss'],
+  standalone: true,
+  imports: [FormsModule],
 })
-export class PaymentComponent {}
+export class PaymentComponent {
+  @Output() paymentMethodChange = new EventEmitter<string>();
+  selectedPaymentMethod: string = '';
+
+  onPaymentMethodChange(): void {
+    this.paymentMethodChange.emit(this.selectedPaymentMethod);
+  }
+}

@@ -1,28 +1,76 @@
 <div class="step">
   <h3>Step 1: Personal Information</h3>
-  <form [formGroup]="personalForm">
-    <label>First Name *</label>
-    <input type="text" formControlName="firstName" />
+  <form>
+    <label for="firstName">First Name *</label>
+    <input
+      type="text"
+      id="firstName"
+      name="firstName"
+      [(ngModel)]="firstName"
+      (ngModelChange)="onInputChange()"
+    />
 
-    <label>Middle Name (Optional)</label>
-    <input type="text" formControlName="middleName" />
+    <label for="middleName">Middle Name (Optional)</label>
+    <input
+      type="text"
+      id="middleName"
+      name="middleName"
+      [(ngModel)]="middleName"
+      (ngModelChange)="onInputChange()"
+    />
 
-    <label>Last Name *</label>
-    <input type="text" formControlName="lastName" />
+    <label for="lastName">Last Name *</label>
+    <input
+      type="text"
+      id="lastName"
+      name="lastName"
+      [(ngModel)]="lastName"
+      (ngModelChange)="onInputChange()"
+    />
 
-    <label>Address *</label>
-    <input type="text" formControlName="address" />
+    <label for="address">Address *</label>
+    <input
+      type="text"
+      id="address"
+      name="address"
+      [(ngModel)]="address"
+      (ngModelChange)="onInputChange()"
+    />
 
-    <label>City *</label>
-    <input type="text" formControlName="city" />
+    <label for="city">City *</label>
+    <input
+      type="text"
+      id="city"
+      name="city"
+      [(ngModel)]="city"
+      (ngModelChange)="onInputChange()"
+    />
 
-    <label>Postal Code *</label>
-    <input type="text" formControlName="postalCode" />
+    <label for="postalCode">Postal Code *</label>
+    <input
+      type="text"
+      id="postalCode"
+      name="postalCode"
+      [(ngModel)]="postalCode"
+      (ngModelChange)="onInputChange()"
+    />
 
-    <label>Email *</label>
-    <input type="email" formControlName="email" />
+    <label for="email">Email *</label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      [(ngModel)]="email"
+      (ngModelChange)="onInputChange()"
+    />
 
-    <label>Phone Number (Optional)</label>
-    <input type="text" formControlName="phoneNumber" />
+    <label for="phoneNumber">Phone Number (Optional)</label>
+    <input
+      type="text"
+      id="phoneNumber"
+      name="phoneNumber"
+      [(ngModel)]="phoneNumber"
+      (ngModelChange)="onInputChange()"
+    />
   </form>
 </div>

@@ -27,5 +27,6 @@ export const routes: Routes = [
   { path: 'saved', component: SavedItemsComponent, canActivate: [AuthGuard] },
   { path: 'search/:searchquery', component: ProductWrapperComponent },
   { path: 'books/:categoryname', component: ProductWrapperComponent },
+  { path: 'books', component: ProductWrapperComponent },
   { path: '**', component: NotFoundComponent },
 ];

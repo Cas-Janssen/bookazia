@@ -1,5 +1,6 @@
 <section class="search-wrapper">
   <ul>
+    <button (click)="goToCategory(all)">All</button>
     <button
       (click)="goToCategory(category.name)"
       *ngFor="let category of categories"

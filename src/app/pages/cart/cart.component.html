@@ -1,7 +1,7 @@
 <h1 class="cart-title">Shopping Cart</h1>
 
-<div class="cart-container" *ngIf="productCart.length >= 1">
-  <section class="cart-item" *ngFor="let product of productCart">
+<div class="cart-container" *ngIf="cartProducts.length >= 1">
+  <section class="cart-item" *ngFor="let product of cartProducts">
     <img
       [src]="product.coverImgUrl"
       [alt]="product.name"
@@ -28,7 +28,9 @@
           {{ qty }}
         </option>
       </select>
-
+      <button class="cart-remove-item-btn" (click)="removeCartItem(product)">
+        Remove item
+      </button>
       <p class="cart-item__total">Total: €{{ product.totalPrice }}</p>
     </div>
   </section>
@@ -36,6 +38,6 @@
   <button class="cart-order-btn" (click)="placeOrder()">Place Order</button>
 </div>
 
-<p class="cart-empty" *ngIf="productCart.length < 1">
-  Er bestaan geen producten in de winkelwagen, bozo!!! 🛒
+<p class="cart-empty" *ngIf="cartProducts.length < 1">
+  There are no products in your shopping cart :( go shopping! 🛒
 </p>

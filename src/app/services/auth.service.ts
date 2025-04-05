@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ResponseAuthData } from '../models/ResponseAuthData';
+import { ResponseLogin } from '../models/ResponseLogin';
 import { environment } from '../../environments/environment';
 import { Login } from '../models/Login';
 import { tap, BehaviorSubject, Observable } from 'rxjs';
@@ -29,9 +29,9 @@ export class AuthService {
   public isAuthenticated(): boolean {
     return this.loggedIn.getValue();
   }
-  public login(login: Login): Observable<ResponseAuthData> {
+  public login(login: Login): Observable<ResponseLogin> {
     const subscription = this.httpClient
-      .post<ResponseAuthData>(this.apiLink + '/auth/login', login)
+      .post<ResponseLogin>(this.apiLink + '/auth/login', login)
       .pipe(
         tap((responseData) => {
           if (responseData.token) {
@@ -43,9 +43,9 @@ export class AuthService {
       );
     return subscription;
   }
-  public register(register: Register): Observable<ResponseAuthData> {
+  public register(register: Register): Observable<ResponseLogin> {
     const subscription = this.httpClient
-      .post<ResponseAuthData>(this.apiLink + '/auth/register', register)
+      .post<ResponseLogin>(this.apiLink + '/auth/register', register)
       .pipe(
         tap((responseData) => {
           if (responseData.token) {

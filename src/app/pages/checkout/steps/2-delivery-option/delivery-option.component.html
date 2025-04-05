@@ -1,11 +1,23 @@
 <div class="step">
   <h3>Step 2: Choose Delivery Option</h3>
   <label>
-    <input type="radio" name="delivery" value="standard" /> Standard Delivery
-    (3-5 days)
+    <input
+      type="radio"
+      name="delivery"
+      value="standard"
+      [(ngModel)]="selectedOption"
+      (ngModelChange)="onOptionChange()"
+    />
+    Standard Delivery
   </label>
   <label>
-    <input type="radio" name="delivery" value="express" /> Express Delivery (1-2
-    days)
+    <input
+      type="radio"
+      name="delivery"
+      value="express"
+      [(ngModel)]="selectedOption"
+      (ngModelChange)="onOptionChange()"
+    />
+    Express Delivery
   </label>
 </div>

@@ -5,7 +5,6 @@ import { NgClass, NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from '../../../services/auth.service';
-import { LocalCartProduct } from '../../../models/LocalCartProduct';
 import { CartService } from '../../../services/cart.service';
 
 @Component({

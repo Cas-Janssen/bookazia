@@ -1,9 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-delivery-option',
-  imports: [],
   templateUrl: './delivery-option.component.html',
-  styleUrl: './delivery-option.component.scss',
+  styleUrls: ['./delivery-option.component.scss'],
+  standalone: true,
+  imports: [FormsModule],
 })
-export class DeliveryOptionComponent {}
+export class DeliveryOptionComponent {
+  @Output() deliveryOptionChange = new EventEmitter<string>();
+  selectedOption: string = '';
+
+  onOptionChange(): void {
+    this.deliveryOptionChange.emit(this.selectedOption);
+  }
+}

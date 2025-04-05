@@ -11,11 +11,11 @@ export class ProductService {
   private apiLink: string = environment.apiUrl;
   private httpClient: HttpClient = inject(HttpClient);
 
-  getAllProducts(): Observable<Product[]> {
+  public getAllProducts(): Observable<Product[]> {
     return this.httpClient.get<Product[]>(this.apiLink + '/products');
   }
 
-  getProductById(productId: number): Observable<Product> {
+  public getProductById(productId: number): Observable<Product> {
     return this.httpClient.get<Product>(
       this.apiLink + `/products/${productId}`
     );
