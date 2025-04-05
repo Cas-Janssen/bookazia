@@ -1,28 +1,35 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, OnDestroy } from '@angular/core';
 import { AuthService } from './auth.service';
 import { CartProductDetailed } from '../models/CartProductDetailed';
 import { SimpleCartProduct } from '../models/SimpleCartProduct';
 import { Product } from '../models/Product';
 import { ProductService } from './product.service';
-import { forkJoin, map, Observable } from 'rxjs';
+import { forkJoin, map, Observable, Subject, take, takeUntil } from 'rxjs';
 import { CartProduct } from '../models/CartProduct';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { ShoppingCart } from '../models/ShoppingCart';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CartService {
+export class CartService implements OnDestroy {
   private authService: AuthService = inject(AuthService);
   private productService: ProductService = inject(ProductService);
   private httpClient: HttpClient = inject(HttpClient);
   private apiLink: String = environment.apiUrl;
   public cartProducts: CartProduct[] = [];
+  private destroy$ = new Subject<void>();
 
-  private getCartItemsFromDatabase(): [] {
-    const cartItems: any = this.httpClient.get<any>(this.apiLink + 'user/cart');
-    console.log('cartItems', cartItems);
-    return [];
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  public getShoppingCartFromDatabase(): Observable<ShoppingCart> {
+    const shoppingCart: Observable<ShoppingCart> =
+      this.httpClient.get<ShoppingCart>(this.apiLink + '/user/cart');
+    return shoppingCart;
   }
 
   private getCartItemsFromLocalStorage(): SimpleCartProduct[] {
@@ -33,11 +40,6 @@ export class CartService {
       const localCartItems: SimpleCartProduct[] = JSON.parse(optionalProducts);
       return localCartItems;
     }
-  }
-
-  public getCartProducts(): CartProductDetailed[] | [] {
-    const cartItems: any = this.getCartItemsFromDatabase();
-    return [];
   }
 
   public getCartProductsLocal(): Observable<CartProductDetailed[]> {
@@ -73,7 +75,30 @@ export class CartService {
     }
   }
 
-  private addCartItemToDatabase(product: Product): void {}
+  private addCartItemToDatabase(product: Product): void {
+    const shoppingCart: Observable<ShoppingCart> =
+      this.getShoppingCartFromDatabase();
+
+    shoppingCart.pipe(take(1)).subscribe({
+      next: (cart) => {
+        const cartItems = cart.cartItems.map((item) => item.product.id);
+        if (cartItems.includes(product.id)) {
+          window.alert('Product already in cart!');
+          return;
+        }
+      },
+      error: (error) => {
+        console.error('Error fetching shopping cart:', error);
+      },
+    });
+    this.httpClient
+      .put(this.apiLink + '/user/cart/update', {
+        productId: product.id,
+        quantity: 1,
+      })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({});
+  }
 
   private addCartItemToLocalStorage(product: Product): void {
     const cartItems: SimpleCartProduct[] = this.getCartItemsFromLocalStorage();
@@ -111,7 +136,20 @@ export class CartService {
         window.alert('Product not found in cart!');
       }
     } else {
-      window.alert('This logic is not implemented yet');
+      this.httpClient
+        .put(this.apiLink + '/user/cart/update', {
+          productId: productCart.id,
+          quantity: productCart.quantity,
+        })
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: (response) => {
+            window.alert('Cart item updated:');
+          },
+          error: (error) => {
+            window.alert('Error updating cart item. Please try again later.');
+          },
+        });
     }
   }
 
@@ -137,7 +175,10 @@ export class CartService {
     if (!this.authService.isAuthenticated()) {
       localStorage.removeItem('CartItems');
     } else {
-      window.alert('This logic is not implemented yet');
+      this.httpClient
+        .delete<void>(this.apiLink + '/user/cart/clear')
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({});
     }
   }
 

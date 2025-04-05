@@ -1,9 +1,16 @@
-import { Component, DestroyRef, inject } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  inject,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { SearchFiltersComponent } from './search-filters/search-filters.component';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -11,20 +18,25 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit, OnDestroy {
   protected search_query: string = '';
   private router = inject(Router);
   private destroyRef = inject(DestroyRef);
   public isLoggedIn: boolean = false;
   private authService: AuthService = inject(AuthService);
+  private destroy$ = new Subject<void>();
 
   ngOnInit(): void {
-    const subscription = this.authService.currentLoginStatus.subscribe(
-      (status) => {
+    this.authService.currentLoginStatus
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((status) => {
         this.isLoggedIn = status;
-      }
-    );
-    this.destroyRef.onDestroy(subscription.unsubscribe);
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   public onLogout(): void {

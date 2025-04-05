@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, OnDestroy, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ResponseLogin } from '../models/ResponseLogin';
 import { environment } from '../../environments/environment';
@@ -9,7 +9,7 @@ import { Register } from '../models/Register';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class AuthService implements OnDestroy {
   private httpClient = inject(HttpClient);
   private router = inject(Router);
   private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
@@ -29,6 +29,7 @@ export class AuthService {
   public isAuthenticated(): boolean {
     return this.loggedIn.getValue();
   }
+
   public login(login: Login): Observable<ResponseLogin> {
     const subscription = this.httpClient
       .post<ResponseLogin>(this.apiLink + '/auth/login', login)
@@ -75,5 +76,9 @@ export class AuthService {
     this.token = null;
     localStorage.removeItem('authToken');
     this.router.navigate(['/']);
+  }
+
+  ngOnDestroy(): void {
+    this.loggedIn.complete();
   }
 }

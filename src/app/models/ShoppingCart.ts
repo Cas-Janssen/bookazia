@@ -1,6 +1,6 @@
-import { CartProduct } from './CartProduct';
+import { Product } from './Product';
 
 export interface ShoppingCart {
   totalPrice: number;
-  cartItems: CartProduct[];
+  cartItems: { id: number; product: Product; quantity: number }[];
 }

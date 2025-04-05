@@ -36,6 +36,24 @@ export class CartComponent implements OnInit, OnDestroy {
         },
       });
     } else {
+      this.cartService.getShoppingCartFromDatabase().subscribe({
+        next: (cart) => {
+          this.totalPrice = cart.totalPrice;
+          this.cartProducts = cart.cartItems.map(
+            (item): CartProductDetailed => {
+              return {
+                id: item.product.id,
+                name: item.product.title,
+                coverImgUrl: item.product.coverImgUrl,
+                price: item.product.price,
+                quantity: item.quantity,
+                totalPrice: (item.product.price * item.quantity).toFixed(2),
+                stock: item.product.stock,
+              };
+            }
+          );
+        },
+      });
     }
   }
 

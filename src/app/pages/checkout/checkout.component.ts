@@ -103,17 +103,17 @@ export class CheckoutComponent {
         },
       });
     } else {
-      const cartProducts: CartProductDetailed[] =
-        this.cartService.getCartProducts();
-      const cartItems: CartProduct[] = [];
-      cartProducts.forEach((product: CartProductDetailed) => {
-        const cartItem: CartProduct = {
-          productId: product.id,
-          productPrice: product.price,
-          quantity: product.quantity,
-        };
-        cartItems.push(cartItem);
-      });
+      // const cartProducts: CartProductDetailed[] =
+      // this.cartService.getCartProducts();
+      // const cartItems: CartProduct[] = [];
+      // cartProducts.forEach((product: CartProductDetailed) => {
+      //   const cartItem: CartProduct = {
+      //     productId: product.id,
+      //     productPrice: product.price,
+      //     quantity: product.quantity,
+      //   };
+      //   cartItems.push(cartItem);
+      // });
     }
   }
 

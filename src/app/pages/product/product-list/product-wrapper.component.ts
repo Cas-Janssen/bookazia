@@ -25,13 +25,15 @@ export class ProductWrapperComponent implements OnInit, OnDestroy {
   private router: Router = inject(Router);
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params) => {
-      if (params['categoryname']) {
-        this.fetchProductsByCategory(params['categoryname']);
-      } else {
-        this.fetchAllProducts();
-      }
-    });
+    this.activatedRoute.params
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((params) => {
+        if (params['categoryname']) {
+          this.fetchProductsByCategory(params['categoryname']);
+        } else {
+          this.fetchAllProducts();
+        }
+      });
   }
 
   ngOnDestroy(): void {
