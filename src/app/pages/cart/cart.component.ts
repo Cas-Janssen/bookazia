@@ -1,6 +1,6 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { CartService } from '../../services/cart.service';
-import { Subject } from 'rxjs';
+import { Subject, take, takeUntil } from 'rxjs';
 import { NgFor, NgIf } from '@angular/common';
 import { CartProductDetailed } from '../../models/CartProductDetailed';
 import { FormsModule } from '@angular/forms';
@@ -27,33 +27,39 @@ export class CartComponent implements OnInit, OnDestroy {
 
   private loadProducts(): void {
     if (!this.authService.isAuthenticated()) {
-      this.cartService.getCartProductsLocal().subscribe({
-        next: (productItems: CartProductDetailed[]) => {
-          this.cartProducts = productItems;
-        },
-        error: (err) => {
-          console.error('Error loading cart products:', err);
-        },
-      });
+      this.cartService
+        .getCartProductsLocal()
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: (productItems: CartProductDetailed[]) => {
+            this.cartProducts = productItems;
+          },
+          error: (err) => {
+            console.error('Error loading cart products:', err);
+          },
+        });
     } else {
-      this.cartService.getShoppingCartFromDatabase().subscribe({
-        next: (cart) => {
-          this.totalPrice = cart.totalPrice;
-          this.cartProducts = cart.cartItems.map(
-            (item): CartProductDetailed => {
-              return {
-                id: item.product.id,
-                name: item.product.title,
-                coverImgUrl: item.product.coverImgUrl,
-                price: item.product.price,
-                quantity: item.quantity,
-                totalPrice: (item.product.price * item.quantity).toFixed(2),
-                stock: item.product.stock,
-              };
-            }
-          );
-        },
-      });
+      this.cartService
+        .getShoppingCartFromDatabase()
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: (cart) => {
+            this.totalPrice = cart.totalPrice;
+            this.cartProducts = cart.cartItems.map(
+              (item): CartProductDetailed => {
+                return {
+                  id: item.product.id,
+                  name: item.product.title,
+                  coverImgUrl: item.product.coverImgUrl,
+                  price: item.product.price,
+                  quantity: item.quantity,
+                  totalPrice: (item.product.price * item.quantity).toFixed(2),
+                  stock: item.product.stock,
+                };
+              }
+            );
+          },
+        });
     }
   }
 
@@ -68,12 +74,21 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   protected removeCartItem(product: CartProductDetailed): void {
-    this.cartService.removeCartItem(product);
-    if (this.cartProducts.length == 1) {
-      this.cartProducts = [];
-      return;
-    }
-    this.loadProducts();
+    this.cartService
+      .removeCartItem(product)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => {},
+        error: (err) => {
+          console.error('Error removing cart item:', err);
+          window.alert('Failed to remove the item. Please try again.');
+        },
+        complete: () => {
+          {
+            this.loadProducts();
+          }
+        },
+      });
   }
 
   protected clearCartItems(): void {

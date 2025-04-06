@@ -4,7 +4,7 @@ import { CartProductDetailed } from '../models/CartProductDetailed';
 import { SimpleCartProduct } from '../models/SimpleCartProduct';
 import { Product } from '../models/Product';
 import { ProductService } from './product.service';
-import { forkJoin, map, Observable, Subject, take, takeUntil } from 'rxjs';
+import { forkJoin, map, Observable, Subject, takeUntil, of } from 'rxjs';
 import { CartProduct } from '../models/CartProduct';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
@@ -79,25 +79,25 @@ export class CartService implements OnDestroy {
     const shoppingCart: Observable<ShoppingCart> =
       this.getShoppingCartFromDatabase();
 
-    shoppingCart.pipe(take(1)).subscribe({
+    shoppingCart.pipe(takeUntil(this.destroy$)).subscribe({
       next: (cart) => {
         const cartItems = cart.cartItems.map((item) => item.product.id);
         if (cartItems.includes(product.id)) {
           window.alert('Product already in cart!');
           return;
         }
+        this.httpClient
+          .put(this.apiLink + '/user/cart/update', {
+            productId: product.id,
+            quantity: 1,
+          })
+          .pipe(takeUntil(this.destroy$))
+          .subscribe({});
       },
       error: (error) => {
         console.error('Error fetching shopping cart:', error);
       },
     });
-    this.httpClient
-      .put(this.apiLink + '/user/cart/update', {
-        productId: product.id,
-        quantity: 1,
-      })
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({});
   }
 
   private addCartItemToLocalStorage(product: Product): void {
@@ -153,7 +153,7 @@ export class CartService implements OnDestroy {
     }
   }
 
-  public removeCartItem(cartProduct: CartProductDetailed): void {
+  public removeCartItem(cartProduct: CartProductDetailed): Observable<void> {
     if (!this.authService.isAuthenticated()) {
       const cartItems: SimpleCartProduct[] =
         this.getCartItemsFromLocalStorage();
@@ -166,8 +166,11 @@ export class CartService implements OnDestroy {
       } else {
         window.alert('Product not found in cart!');
       }
+      return of();
     } else {
-      window.alert('This logic is not implemented yet');
+      return this.httpClient.delete<void>(
+        `${this.apiLink}/user/cart/remove/${cartProduct.id}`
+      );
     }
   }
 
