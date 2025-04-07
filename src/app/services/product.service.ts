@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class ProductService {
-  private apiLink: string = environment.apiUrl;
+  private apiLink: String = environment.apiUrl;
   private httpClient: HttpClient = inject(HttpClient);
 
   public getAllProducts(): Observable<Product[]> {

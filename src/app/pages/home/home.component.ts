@@ -1,12 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { ProductWrapperComponent } from '../product/product-list/product-wrapper.component';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-home',
-  imports: [ProductWrapperComponent],
+  imports: [],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent implements OnInit {
-  ngOnInit(): void {}
-}
+export class HomeComponent {}

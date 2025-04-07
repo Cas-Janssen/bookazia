@@ -1,6 +1,9 @@
+@use "variables" as vars;
+
 .footer {
-  background: #333;
-  color: #fff;
+  display: none;
+  background: vars.$primary-bg;
+  color: vars.$text-color;
   padding: 20px 0;
   text-align: center;
 
@@ -18,7 +21,7 @@
     margin: 10px;
 
     h3 {
-      color: #f4a261;
+      color: vars.$accent-color;
     }
 
     ul {
@@ -29,12 +32,12 @@
         margin: 5px 0;
 
         a {
-          color: #fff;
+          color: vars.$text-color;
           text-decoration: none;
           transition: 0.3s;
 
           &:hover {
-            color: #f4a261;
+            color: vars.$accent-color;
           }
         }
       }
@@ -42,13 +45,13 @@
 
     .social-icons {
       a {
-        color: #f4a261;
+        color: vars.$accent-color;
         margin: 0 10px;
         font-size: 20px;
         transition: 0.3s;
 
         &:hover {
-          color: #fff;
+          color: vars.$text-color;
         }
       }
     }
@@ -56,7 +59,7 @@
 
   .footer-bottom {
     margin-top: 20px;
-    border-top: 1px solid #555;
+    border-top: 1px solid vars.$border-color;
     padding-top: 10px;
     font-size: 14px;
   }

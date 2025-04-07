@@ -1,0 +1,15 @@
+{
+  "HEADER": {
+    "HOME": "Homepagina",
+    "CART": "Winkelwagen",
+    "FAVORITES": "Favorieten",
+    "LOGIN": "Inloggen",
+    "LOGOUT": "Uitloggen"
+  },
+  "FOOTER": {
+    "ABOUT_US": "Over Ons",
+    "CONTACT": "Contact",
+    "TERMS": "Algemene Voorwaarden",
+    "PRIVACY": "Privacybeleid"
+  }
+}

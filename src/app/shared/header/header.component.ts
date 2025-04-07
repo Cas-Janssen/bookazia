@@ -19,12 +19,11 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  protected search_query: string = '';
+  protected searchQuery: string = '';
   private router = inject(Router);
-  private destroyRef = inject(DestroyRef);
+  private destroy$: Subject<void> = new Subject<void>();
   public isLoggedIn: boolean = false;
   private authService: AuthService = inject(AuthService);
-  private destroy$ = new Subject<void>();
 
   ngOnInit(): void {
     this.authService.currentLoginStatus
@@ -41,6 +40,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public onLogout(): void {
     this.authService.logout();
+    window.alert('You have been logged out!');
+    this.router.navigate(['/']);
   }
 
   public goToMenu(path: string): void {
@@ -60,6 +61,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     this.goToMenu('search/' + query);
-    this.search_query = '';
+    this.searchQuery = '';
   }
+
+  protected toggleMenu(): void {}
 }

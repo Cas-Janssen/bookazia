@@ -10,10 +10,10 @@
       #search_bar
       type="search"
       name="search_bar"
-      [(ngModel)]="search_query"
+      [(ngModel)]="searchQuery"
       class="nav-search_input"
       placeholder="Search..."
-      (keydown.enter)="navigateFromQuery(search_query, search_bar)"
+      (keydown.enter)="navigateFromQuery(searchQuery, search_bar)"
     />
     <section class="nav-button-section">
       <button class="nav-favorite_menu" (click)="goToMenu('saved')">

@@ -1,0 +1,15 @@
+{
+  "HEADER": {
+    "HOME": "Home",
+    "CART": "Cart",
+    "FAVORITES": "Favorites",
+    "LOGIN": "Login",
+    "LOGOUT": "Logout"
+  },
+  "FOOTER": {
+    "ABOUT_US": "About Us",
+    "CONTACT": "Contact",
+    "TERMS": "Terms of Service",
+    "PRIVACY": "Privacy Policy"
+  }
+}

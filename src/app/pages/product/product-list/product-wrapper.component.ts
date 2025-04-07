@@ -17,7 +17,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class ProductWrapperComponent implements OnInit, OnDestroy {
   public products: Product[] | null = [];
   protected errorMessage: string | null = null;
-  private destroy$ = new Subject<void>();
+  private destroy$: Subject<void> = new Subject<void>();
 
   private productService: ProductService = inject(ProductService);
   private activatedRoute: ActivatedRoute = inject(ActivatedRoute);

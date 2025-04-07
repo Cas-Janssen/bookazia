@@ -19,7 +19,7 @@ export class CartService implements OnDestroy {
   private httpClient: HttpClient = inject(HttpClient);
   private apiLink: String = environment.apiUrl;
   public cartProducts: CartProduct[] = [];
-  private destroy$ = new Subject<void>();
+  private destroy$: Subject<void> = new Subject<void>();
 
   ngOnDestroy(): void {
     this.destroy$.next();

@@ -16,8 +16,8 @@ export class AuthService implements OnDestroy {
     false
   );
   private token: string | null = null;
-  private apiLink: string = environment.apiUrl;
-  public currentLoginStatus = this.loggedIn.asObservable();
+  private apiLink: String = environment.apiUrl;
+  public currentLoginStatus: Observable<boolean> = this.loggedIn.asObservable();
 
   constructor() {
     this.loadTokenFromLocalStorage();

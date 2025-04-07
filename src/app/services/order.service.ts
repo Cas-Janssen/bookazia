@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Order } from '../models/Order';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Injectable({
@@ -13,7 +13,8 @@ export class OrderService implements OnDestroy {
   private router: Router = inject(Router);
   private httpClient: HttpClient = inject(HttpClient);
   private apiLink: String = environment.apiUrl;
-  private destroy$ = new Subject<void>();
+  private destroy$: Subject<void> = new Subject<void>();
+
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();

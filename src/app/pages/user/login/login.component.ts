@@ -1,8 +1,9 @@
-import { Component, DestroyRef, inject } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { NgClass, NgIf, Location } from '@angular/common';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -10,15 +11,21 @@ import { NgClass, NgIf, Location } from '@angular/common';
   styleUrls: ['./login.component.scss'],
   imports: [FormsModule, NgIf, NgClass],
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
   private router: Router = inject(Router);
   private authService: AuthService = inject(AuthService);
-  private destroyRef: DestroyRef = inject(DestroyRef);
+  private destroy$: Subject<void> = new Subject<void>();
   protected email: string = '';
   protected password: string = '';
   protected errorMessage: string | null = null;
   protected isButtonDisabled: boolean = true;
   private location: Location = inject(Location);
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   protected goBack(): void {
     this.location.back();
   }
@@ -37,19 +44,20 @@ export class LoginComponent {
     } else if (this.isButtonDisabled) {
       this.errorMessage = 'Please change a value before submitting again!';
     } else {
-      const subscription = this.authService.login(loginData).subscribe({
-        next: (responseData) => {
-          this.errorMessage = null;
-          this.router.navigate(['/']);
-        },
-        error: (error) => {
-          console.error('Error:', error);
-          this.errorMessage =
-            'The combination of email address and password is not valid!';
-          this.isButtonDisabled = true;
-        },
-      });
-      this.destroyRef.onDestroy(() => subscription.unsubscribe());
+      this.authService
+        .login(loginData)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: () => {
+            this.errorMessage = null;
+            this.router.navigate(['/']);
+          },
+          error: () => {
+            this.errorMessage =
+              'The combination of email address and password is not valid!';
+            this.isButtonDisabled = true;
+          },
+        });
     }
   }
   protected onInputChange(): void {

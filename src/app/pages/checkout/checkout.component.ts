@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { PersonalInfoComponent } from './steps/1-personal-info/personal-info.component';
 import { DeliveryOptionComponent } from './steps/2-delivery-option/delivery-option.component';
 import { PaymentComponent } from './steps/3-payment/payment.component';
@@ -10,6 +10,7 @@ import { OrderService } from '../../services/order.service';
 import { AuthService } from '../../services/auth.service';
 import { CartProductDetailed } from '../../models/CartProductDetailed';
 import { CartProduct } from '../../models/CartProduct';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-checkout',
@@ -22,14 +23,20 @@ import { CartProduct } from '../../models/CartProduct';
     NgIf,
   ],
 })
-export class CheckoutComponent {
+export class CheckoutComponent implements OnDestroy {
   protected currentStep: number = 1;
   protected personalInfo!: UserInfo;
   protected deliveryOption: string = '';
   protected paymentMethod: string = '';
+  private destroy$ = new Subject<void>();
   private cartService: CartService = inject(CartService);
   private orderService: OrderService = inject(OrderService);
   private authService: AuthService = inject(AuthService);
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   protected nextStep(): void {
     if (this.isStepValid()) {
@@ -70,38 +77,42 @@ export class CheckoutComponent {
       return;
     }
     if (!this.authService.isAuthenticated()) {
-      const cartProducts = this.cartService.getCartProductsLocal().subscribe({
-        next: (cartProducts) => {
-          if (!cartProducts || cartProducts.length === 0) {
-            window.alert(
-              'Your cart is empty. Please add items to your cart before placing an order.'
-            );
-            return;
-          }
-          const totalPrice = this.cartService.getTotalPriceOfCart(cartProducts);
-          if (totalPrice <= 0) {
-            window.alert(
-              'Your cart total price is invalid. Please check your cart items.'
-            );
-            return;
-          }
+      const cartProducts = this.cartService
+        .getCartProductsLocal()
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: (cartProducts) => {
+            if (!cartProducts || cartProducts.length === 0) {
+              window.alert(
+                'Your cart is empty. Please add items to your cart before placing an order.'
+              );
+              return;
+            }
+            const totalPrice =
+              this.cartService.getTotalPriceOfCart(cartProducts);
+            if (totalPrice <= 0) {
+              window.alert(
+                'Your cart total price is invalid. Please check your cart items.'
+              );
+              return;
+            }
 
-          const cartProductsList: CartProduct[] = [];
-          cartProducts.forEach((product: CartProductDetailed) => {
-            const cartProduct: CartProduct = {
-              productId: product.id,
-              productPrice: product.price,
-              quantity: product.quantity,
-            };
-            cartProductsList.push(cartProduct);
-          });
-          this.sendOrderToService(cartProductsList, totalPrice);
-        },
-        error: (error) => {
-          console.error('Error fetching cart products:', error);
-          window.alert('An error occurred while fetching cart products.');
-        },
-      });
+            const cartProductsList: CartProduct[] = [];
+            cartProducts.forEach((product: CartProductDetailed) => {
+              const cartProduct: CartProduct = {
+                productId: product.id,
+                productPrice: product.price,
+                quantity: product.quantity,
+              };
+              cartProductsList.push(cartProduct);
+            });
+            this.sendOrderToService(cartProductsList, totalPrice);
+          },
+          error: (error) => {
+            console.error('Error fetching cart products:', error);
+            window.alert('An error occurred while fetching cart products.');
+          },
+        });
     } else {
       // const cartProducts: CartProductDetailed[] =
       // this.cartService.getCartProducts();

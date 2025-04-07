@@ -1,8 +1,10 @@
-import { Component, DestroyRef, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Location, NgIf } from '@angular/common';
 import { Register } from '../../../models/Register';
 import { AuthService } from '../../../services/auth.service';
+import { Subject, takeUntil } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +20,8 @@ export class RegisterComponent {
   protected email: string = '';
   protected errorMessage: string | null = null;
   protected isButtonDisabled: boolean = false;
-  private destroyRef: DestroyRef = inject(DestroyRef);
+  private destroy$: Subject<void> = new Subject<void>();
+  private router: Router = inject(Router);
   private location: Location = inject(Location);
   private authService: AuthService = inject(AuthService);
 
@@ -33,22 +36,26 @@ export class RegisterComponent {
       password: this.password,
       ...(this.middleName && { middleName: this.middleName }),
     };
-    console.log(registerData);
     if (this.isInputFieldEmpty()) {
       return;
     } else if (this.isButtonDisabled) {
       this.errorMessage = 'Please change a value before submitting again!';
     } else {
-      const subscription = this.authService.register(registerData).subscribe({
-        next: (responseData) => {
-          this.errorMessage = null;
-        },
-        error: (error) => {
-          (this.errorMessage = 'Please use valid credentials to register!'),
-            (this.isButtonDisabled = true);
-        },
-      });
-      this.destroyRef.onDestroy(() => subscription.unsubscribe());
+      this.authService
+        .register(registerData)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: () => {
+            this.errorMessage = null;
+            window.alert('Registration successful! You are now logged in.');
+            this.router.navigate(['/']);
+          },
+          error: () => {
+            (this.errorMessage =
+              'Password must be at least 8 characters and contain at least one uppercase letter, one lowercase letter, one number, and one special character!'),
+              (this.isButtonDisabled = true);
+          },
+        });
     }
   }
   protected onInputChange(): void {

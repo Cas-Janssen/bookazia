@@ -17,7 +17,7 @@ export class CartComponent implements OnInit, OnDestroy {
   private cartService: CartService = inject(CartService);
   private authService: AuthService = inject(AuthService);
   private router: Router = inject(Router);
-  private destroy$ = new Subject<void>();
+  private destroy$: Subject<void> = new Subject<void>();
   public cartProducts: CartProductDetailed[] = [];
   public totalPrice: number = 0;
 

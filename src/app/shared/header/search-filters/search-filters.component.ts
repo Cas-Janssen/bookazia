@@ -1,8 +1,9 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { CategoryService } from '../../../services/category.service';
 import { Category } from '../../../models/Category';
 import { Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-search-filters',
@@ -10,23 +11,31 @@ import { Router } from '@angular/router';
   templateUrl: './search-filters.component.html',
   styleUrl: './search-filters.component.scss',
 })
-export class SearchFiltersComponent implements OnInit {
+export class SearchFiltersComponent implements OnInit, OnDestroy {
   private categoryService: CategoryService = inject(CategoryService);
   private router: Router = inject(Router);
-  private destroyRef: DestroyRef = inject(DestroyRef);
+  private destroy$: Subject<void> = new Subject<void>();
   public categories: Category[] = [];
   protected all: string = '';
+  protected menuOpen: boolean = false;
+
+  protected toggleMenu(): void {
+    this.menuOpen = !this.menuOpen;
+    console.log(this.menuOpen);
+  }
 
   public getCategories(): void {
-    const subscription = this.categoryService.getAllCategories().subscribe({
-      next: (data) => {
-        this.categories = data;
-      },
-      error: (err) => {
-        console.error(err);
-      },
-    });
-    this.destroyRef.onDestroy(() => subscription.unsubscribe());
+    this.categoryService
+      .getAllCategories()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (data) => {
+          this.categories = data;
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
   }
   public goToCategory(categoryName: string): void {
     this.router.navigate(['/books/', categoryName.toLowerCase()]);
@@ -34,5 +43,10 @@ export class SearchFiltersComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCategories();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
