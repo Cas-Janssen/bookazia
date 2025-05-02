@@ -1,0 +1,31 @@
+<nav
+  class="profile-options-menu"
+  *ngIf="isOpen"
+  [attr.aria-label]="'PROFILE.MENU_LABEL' | translate"
+>
+  <ul>
+    <li>
+      <button class="menu-item" (click)="goToOrders()">
+        {{ "PROFILE.ORDERS" | translate }}
+      </button>
+    </li>
+
+    <li>
+      <button class="menu-item" (click)="goToProfile()">
+        {{ "PROFILE.INFO" | translate }}
+      </button>
+    </li>
+
+    <li>
+      <button class="menu-item" (click)="goToEditProfile()">
+        {{ "PROFILE.EDIT" | translate }}
+      </button>
+    </li>
+
+    <li>
+      <button class="menu-item" (click)="logout()">
+        {{ "PROFILE.LOGOUT" | translate }}
+      </button>
+    </li>
+  </ul>
+</nav>

@@ -11,6 +11,7 @@ import { AuthService } from '../../services/auth.service';
 import { CartProductDetailed } from '../../models/CartProductDetailed';
 import { CartProduct } from '../../models/CartProduct';
 import { Subject, takeUntil } from 'rxjs';
+import { SimpleCartProduct } from '../../models/SimpleCartProduct';
 
 @Component({
   selector: 'app-checkout',
@@ -77,7 +78,7 @@ export class CheckoutComponent implements OnDestroy {
       return;
     }
     if (!this.authService.isAuthenticated()) {
-      const cartProducts = this.cartService
+      this.cartService
         .getCartProductsLocal()
         .pipe(takeUntil(this.destroy$))
         .subscribe({
@@ -97,11 +98,10 @@ export class CheckoutComponent implements OnDestroy {
               return;
             }
 
-            const cartProductsList: CartProduct[] = [];
+            const cartProductsList: SimpleCartProduct[] = [];
             cartProducts.forEach((product: CartProductDetailed) => {
-              const cartProduct: CartProduct = {
+              const cartProduct: SimpleCartProduct = {
                 productId: product.id,
-                productPrice: product.price,
                 quantity: product.quantity,
               };
               cartProductsList.push(cartProduct);
@@ -114,22 +114,45 @@ export class CheckoutComponent implements OnDestroy {
           },
         });
     } else {
-      // const cartProducts: CartProductDetailed[] =
-      // this.cartService.getCartProducts();
-      // const cartItems: CartProduct[] = [];
-      // cartProducts.forEach((product: CartProductDetailed) => {
-      //   const cartItem: CartProduct = {
-      //     productId: product.id,
-      //     productPrice: product.price,
-      //     quantity: product.quantity,
-      //   };
-      //   cartItems.push(cartItem);
-      // });
+      const cartProducts: SimpleCartProduct[] = [];
+      let totalPrice: number = 0;
+      this.cartService
+        .getShoppingCartFromDatabase()
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: (cart) => {
+            if (!cart || cart.cartItems.length === 0) {
+              window.alert(
+                'Your cart is empty. Please add items to your cart before placing an order.'
+              );
+              return;
+            }
+            if (cart.totalPrice <= 0) {
+              window.alert(
+                'Your cart total price is invalid. Please check your cart items.'
+              );
+              return;
+            }
+            totalPrice = cart.totalPrice;
+            cart.cartItems.forEach((product) => {
+              const cartProduct: SimpleCartProduct = {
+                productId: product.product.id,
+                quantity: product.quantity,
+              };
+              cartProducts.push(cartProduct);
+            });
+            this.sendOrderToService(cartProducts, totalPrice);
+          },
+          error: (error) => {
+            console.error('Error fetching cart products:', error);
+            window.alert('An error occurred while fetching cart products.');
+          },
+        });
     }
   }
 
   private sendOrderToService(
-    cartItems: CartProduct[],
+    cartItems: SimpleCartProduct[],
     totalPrice: number
   ): void {
     const order: Order = {
@@ -145,6 +168,8 @@ export class CheckoutComponent implements OnDestroy {
       phoneNumber: this.personalInfo.phoneNumber,
       cartItems: cartItems,
     };
+    console.log('Order:', order);
     this.orderService.placeOrder(order);
+    //this.cartService.clearCartItems();
   }
 }

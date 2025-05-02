@@ -3,7 +3,7 @@
     <img
       class="nav-logo"
       src="assets/img/bookazia_banner.png"
-      alt="Logo of the store"
+      alt="{{ 'HEADER.LOGO_ALT' | translate }}"
       (click)="goToMenu('home')"
     />
     <input
@@ -12,25 +12,27 @@
       name="search_bar"
       [(ngModel)]="searchQuery"
       class="nav-search_input"
-      placeholder="Search..."
+      placeholder="{{ 'HEADER.SEARCH' | translate }}"
       (keydown.enter)="navigateFromQuery(searchQuery, search_bar)"
     />
+    <app-switch-language></app-switch-language>
+
     <section class="nav-button-section">
       <button class="nav-favorite_menu" (click)="goToMenu('saved')">
         <img
           class="nav-favorite_picture"
           src="assets/img/favorite.svg"
-          alt="Icon of an heart"
+          alt="{{ 'HEADER.FAVORITE_ALT' | translate }}"
         />
-        <p>Favorites</p>
+        <p>{{ "HEADER.FAVORITES" | translate }}</p>
       </button>
       <button class="nav-shopping_menu" (click)="goToMenu('cart')">
         <img
           class="nav-cart_picture"
           src="assets/img/shopping_cart_icon.svg"
-          alt="Icon of a shopping cart"
+          alt="{{ 'HEADER.CART_ALT' | translate }}"
         />
-        <p>Cart</p>
+        <p>{{ "HEADER.CART" | translate }}</p>
       </button>
       <button
         *ngIf="!isLoggedIn"
@@ -40,18 +42,25 @@
         <img
           class="nav-profile_picture"
           src="assets/img/default_profile_picture.svg"
-          alt="Icon of an empty profile picture"
+          alt="{{ 'HEADER.LOGIN_ALT' | translate }}"
         />
-        <p>Login</p>
+        <p>{{ "HEADER.LOGIN" | translate }}</p>
       </button>
-      <button *ngIf="isLoggedIn" class="nav-profile_menu" (click)="onLogout()">
-        <img
-          class="nav-profile_picture"
-          src="assets/img/default_profile_picture.svg"
-          alt="Profile icon"
-        />
-        <p>Account</p>
-      </button>
+      <div class="profile-menu-container" *ngIf="isLoggedIn">
+        <button class="nav-profile_menu" (click)="toggleProfileMenu()">
+          <img
+            class="nav-profile_picture"
+            src="assets/img/default_profile_picture.svg"
+            alt="{{ 'HEADER.ACCOUNT_ALT' | translate }}"
+          />
+          <p>{{ "HEADER.ACCOUNT" | translate }}</p>
+        </button>
+        <app-profile-options
+          [isOpen]="isProfileMenuOpen"
+          (logoutEvent)="onLogout()"
+          (closeMenu)="closeProfileMenu()"
+        ></app-profile-options>
+      </div>
     </section>
   </nav>
   <app-search-filters class="nav-search_options"></app-search-filters>

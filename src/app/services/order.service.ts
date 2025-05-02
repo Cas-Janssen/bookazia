@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { OrderResponse } from '../models/OrderResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +27,6 @@ export class OrderService implements OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (response) => {
-          console.log('Order response:', response);
           this.router.navigate(['/order-success']);
         },
         error: (error) => {
@@ -34,5 +34,11 @@ export class OrderService implements OnDestroy {
           this.router.navigate(['/order-failure']);
         },
       });
+  }
+
+  public getOrders(): Observable<OrderResponse[]> {
+    return this.httpClient
+      .get<OrderResponse[]>(this.apiLink + '/orders')
+      .pipe(takeUntil(this.destroy$));
   }
 }

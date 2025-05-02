@@ -75,7 +75,7 @@
     }
   }
 
-  @media (max-width: vars.$breakpoint-md) {
+  @media (max-width: vars.$breakpoint-sm) {
     .hamburger-menu {
       display: flex;
       margin-left: 10px;

@@ -1,4 +1,4 @@
 export interface SimpleCartProduct {
-  id: number;
+  productId: number;
   quantity: number;
 }

@@ -21,8 +21,10 @@ export class AuthService implements OnDestroy {
 
   constructor() {
     this.loadTokenFromLocalStorage();
-    if (this.token != null) {
+    if (this.token) {
       this.loggedIn.next(true);
+    } else {
+      this.loggedIn.next(false);
     }
   }
 
@@ -30,6 +32,35 @@ export class AuthService implements OnDestroy {
     return this.loggedIn.getValue();
   }
 
+  public isValidToken(): boolean {
+    if (this.checkValidityOfToken(this.token)) {
+      return true;
+    } else {
+      this.loggedIn.next(false);
+      this.token = null;
+      localStorage.removeItem('authToken');
+      this.router.navigate(['/login']);
+      return false;
+    }
+  }
+
+  private checkValidityOfToken(token: string | null): boolean {
+    if (token) {
+      try {
+        const payload = token.split('.')[1];
+        const decodedPayload = JSON.parse(atob(payload));
+        const expirationDate = new Date(decodedPayload.exp * 1000);
+        const currentDate = new Date();
+        return expirationDate > currentDate;
+      } catch (error) {
+        console.error('Error decoding token:', error);
+        console.log('Token is invalid or expired');
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
   public login(login: Login): Observable<ResponseLogin> {
     const subscription = this.httpClient
       .post<ResponseLogin>(this.apiLink + '/auth/login', login)

@@ -47,7 +47,7 @@ export class CartService implements OnDestroy {
       this.getCartItemsFromLocalStorage();
     const cartProducts$ = forkJoin(
       simpleProducts.map((product) =>
-        this.productService.getProductById(product.id).pipe(
+        this.productService.getProductById(product.productId).pipe(
           map((productData) => ({
             id: productData.id,
             name: productData.title,
@@ -103,21 +103,13 @@ export class CartService implements OnDestroy {
   private addCartItemToLocalStorage(product: Product): void {
     const cartItems: SimpleCartProduct[] = this.getCartItemsFromLocalStorage();
     const productAlreadyInCart = cartItems.find(
-      (cartProduct) => cartProduct.id === product.id
+      (cartProduct) => cartProduct.productId === product.id
     );
     if (productAlreadyInCart) {
-      if (productAlreadyInCart.quantity >= product.stock) {
-        window.alert('There are no more items in stock at the moment!');
-        return;
-      }
-      if (productAlreadyInCart.quantity >= 10) {
-        window.alert('You can only order 10 of the same items');
-        return;
-      } else {
-        productAlreadyInCart.quantity += 1;
-      }
+      window.alert('Product already in cart!');
+      return;
     } else {
-      cartItems.push({ id: product.id, quantity: 1 });
+      cartItems.push({ productId: product.id, quantity: 1 });
     }
     localStorage.setItem('CartItems', JSON.stringify(cartItems));
   }
@@ -127,7 +119,7 @@ export class CartService implements OnDestroy {
       const cartItems: SimpleCartProduct[] =
         this.getCartItemsFromLocalStorage();
       const product = cartItems.find(
-        (product) => product.id === productCart.id
+        (product) => product.productId === productCart.id
       );
       if (product) {
         product.quantity = Number(productCart.quantity);
@@ -158,7 +150,7 @@ export class CartService implements OnDestroy {
       const cartItems: SimpleCartProduct[] =
         this.getCartItemsFromLocalStorage();
       const product = cartItems.find(
-        (product) => product.id === cartProduct.id
+        (product) => product.productId === cartProduct.id
       );
       if (product) {
         cartItems.splice(cartItems.indexOf(product), 1);

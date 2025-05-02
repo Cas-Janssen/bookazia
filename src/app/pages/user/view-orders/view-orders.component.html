@@ -1,0 +1,100 @@
+<main class="orders-container">
+  <header class="page-header">
+    <h1>{{ "ORDERS.TITLE" | translate }}</h1>
+  </header>
+
+  <section
+    class="no-orders"
+    *ngIf="orders.length === 0"
+    aria-labelledby="no-orders-heading"
+  >
+    <h2 id="no-orders-heading" class="sr-only">
+      {{ "ORDERS.NO_ORDERS_HEADING" | translate }}
+    </h2>
+    <p>{{ "ORDERS.NO_ORDERS" | translate }}</p>
+    <button type="button" (click)="navigateToShop()">
+      {{ "ORDERS.SHOP_NOW" | translate }}
+    </button>
+  </section>
+
+  <section
+    class="orders-list"
+    *ngIf="orders.length > 0"
+    aria-labelledby="orders-heading"
+  >
+    <article class="order-card" *ngFor="let order of orders; let i = index">
+      <header class="order-header">
+        <section class="order-info">
+          <h3>{{ "ORDERS.ORDER" | translate }} #{{ order.id }}</h3>
+          <div class="order-dates">
+            <time class="order-date" [attr.datetime]="order.createdAt">
+              <span class="date-label"
+                >{{ "ORDERS.CREATED" | translate }}:</span
+              >
+              {{ formatDate(order.createdAt) }}
+            </time>
+            <time
+              class="order-date update-date"
+              [attr.datetime]="order.updatedAt"
+            >
+              <span class="date-label"
+                >{{ "ORDERS.UPDATED" | translate }}:</span
+              >
+              {{ formatDate(order.updatedAt) }}
+            </time>
+          </div>
+        </section>
+        <div class="order-status" [ngClass]="order.orderStatus.toLowerCase()">
+          {{ "ORDERS.STATUS." + order.orderStatus | translate }}
+        </div>
+      </header>
+
+      <section class="order-products">
+        <h4 id="products-heading-{{ order.id }}" class="sr-only">
+          {{ "ORDERS.PRODUCTS_IN_ORDER" | translate }} #{{ order.id }}
+        </h4>
+
+        <ul class="product-list">
+          <li class="product-item" *ngFor="let item of order.orderProducts">
+            <div class="product-image">
+              <img
+                [src]="item.product.coverImgUrl"
+                [alt]="item.product.title"
+              />
+            </div>
+            <div class="product-details">
+              <h5 class="product-title" [title]="item.product.title">
+                {{ item.product.title }}
+              </h5>
+              <p class="product-isbn" *ngIf="item.product.isbn">
+                <span class="sr-only">ISBN:</span>
+                {{ item.product.isbn }}
+              </p>
+              <div class="product-price-info">
+                <span class="product-quantity">
+                  {{ item.quantity }} × {{ item.price | currency }}
+                </span>
+                <span class="product-total">
+                  {{ item.quantity * item.price | currency }}
+                </span>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <footer class="order-footer">
+        <div class="payment-method">
+          <span>{{ "ORDERS.PAYMENT_METHOD" | translate }}:</span>
+          <span class="method-value">
+            {{ "ORDERS.PAYMENT." + order.usedPaymentMethod | translate }}
+          </span>
+        </div>
+        <div class="order-total">
+          <span>{{ "ORDERS.TOTAL" | translate }}:</span>
+          <span class="total-value">{{ order.totalPrice | currency }}</span>
+        </div>
+      </footer>
+    </article>
+  </section>
+</main>

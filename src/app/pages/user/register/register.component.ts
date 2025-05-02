@@ -48,7 +48,7 @@ export class RegisterComponent {
           next: () => {
             this.errorMessage = null;
             window.alert('Registration successful! You are now logged in.');
-            this.router.navigate(['/']);
+            this.router.navigate(['/profile']);
           },
           error: () => {
             (this.errorMessage =

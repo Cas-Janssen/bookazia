@@ -4,7 +4,47 @@
     "CART": "Winkelwagen",
     "FAVORITES": "Favorieten",
     "LOGIN": "Inloggen",
+    "LOGOUT": "Uitloggen",
+    "switchLanguage": "Taal Wisselen",
+    "switchLanguage.EN": "Engels",
+    "switchLanguage.NL": "Nederlands",
+    "SEARCH": "Zoeken...",
+    "LOGO_ALT": "Het logo can Bookazia",
+    "FAVORITE_ALT": "Icoon van een hart",
+    "CART_ALT": "Icoon van een winkelwagen",
+    "LOGIN_ALT": "Icoon van een persoon",
+    "ACCOUNT_ALT": "Icoon van een persoon",
+    "ACCOUNT": "Account"
+  },
+  "PROFILE": {
+    "ORDERS": "Mijn Bestellingen",
+    "INFO": "Profielinformatie",
+    "EDIT": "Profiel Bewerken",
     "LOGOUT": "Uitloggen"
+  },
+  "ORDERS": {
+    "TITLE": "Mijn Bestellingen",
+    "NO_ORDERS_HEADING": "Geen Bestellingen Gevonden",
+    "NO_ORDERS": "Je hebt nog geen bestellingen geplaatst.",
+    "SHOP_NOW": "Nu Winkelen",
+    "ORDER": "Bestelling",
+    "PAYMENT_METHOD": "Betaalmethode",
+    "TOTAL": "Totaal",
+    "CREATED": "Bestelling geplaatst op",
+    "UPDATED": "Bestelling laatst bijgewerkt op",
+    "STATUS": {
+      "PENDING": "In Afwachting",
+      "PROCESSING": "In Behandeling",
+      "SHIPPED": "Verzonden",
+      "DELIVERED": "Afgeleverd",
+      "CANCELLED": "Geannuleerd"
+    },
+    "PAYMENT": {
+      "PAYPAL": "PayPal",
+      "CREDIT_CARD": "Creditcard",
+      "BANK_TRANSFER": "Bankoverschrijving",
+      "IDEAL": "iDEAL"
+    }
   },
   "FOOTER": {
     "ABOUT_US": "Over Ons",

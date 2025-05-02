@@ -1,4 +1,4 @@
-import { CartProduct } from './CartProduct';
+import { SimpleCartProduct } from './SimpleCartProduct';
 
 export interface Order {
   usedPaymentMethod: string;
@@ -10,6 +10,6 @@ export interface Order {
   address: string;
   city: string;
   postalCode: string;
-  cartItems: Array<CartProduct>;
+  cartItems: SimpleCartProduct[];
   phoneNumber?: string;
 }

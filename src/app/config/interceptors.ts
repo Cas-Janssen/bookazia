@@ -8,11 +8,14 @@ export function authInterceptor(
 ) {
   const authService: AuthService = inject(AuthService);
   const authToken: string | null = authService.getToken();
-  if (authToken != null) {
-    const newRequest = req.clone({
-      headers: req.headers.set('Authorization', `Bearer ${authToken}`),
-    });
-    return next(newRequest);
-  }
-  return next(req);
+  if (authToken !== null) {
+    if (authService.isValidToken()) {
+      const newRequest = req.clone({
+        headers: req.headers.set('Authorization', `Bearer ${authToken}`),
+      });
+      return next(newRequest);
+    } else {
+      return next(req);
+    }
+  } else return next(req);
 }

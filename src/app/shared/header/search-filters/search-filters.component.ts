@@ -21,7 +21,6 @@ export class SearchFiltersComponent implements OnInit, OnDestroy {
 
   protected toggleMenu(): void {
     this.menuOpen = !this.menuOpen;
-    console.log(this.menuOpen);
   }
 
   public getCategories(): void {

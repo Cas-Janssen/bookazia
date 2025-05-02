@@ -10,6 +10,8 @@ import { SavedItemsComponent } from './pages/saved-items/saved-items.component';
 import { UserProfileComponent } from './pages/user/user-profile/user-profile.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { ProductWrapperComponent } from './pages/product/product-list/product-wrapper.component';
+import { UserProfileEditComponent } from './pages/user/user-profile-edit/user-profile-edit.component';
+import { ViewOrdersComponent } from './pages/user/view-orders/view-orders.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,8 +22,18 @@ export const routes: Routes = [
   { path: 'checkout', component: CheckoutComponent },
   { path: 'home', redirectTo: '/' },
   {
-    path: 'account',
+    path: 'profile',
     component: UserProfileComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'profile/edit',
+    component: UserProfileEditComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'profile/orders',
+    component: ViewOrdersComponent,
     canActivate: [AuthGuard],
   },
   { path: 'saved', component: SavedItemsComponent, canActivate: [AuthGuard] },

@@ -4,7 +4,48 @@
     "CART": "Cart",
     "FAVORITES": "Favorites",
     "LOGIN": "Login",
+    "LOGOUT": "Logout",
+    "switchLanguage": "Switch Language",
+    "switchLanguage.EN": "English",
+    "switchLanguage.NL": "Dutch",
+    "SEARCH": "Search...",
+    "LOGO_ALT": "Bookazia logo",
+    "FAVORITE_ALT": "Icon of a heart",
+    "CART_ALT": "Icon of a shopping cart",
+    "LOGIN_ALT": "Round icon with a blank silhouette of a person",
+    "ACCOUNT_ALT": "Account icon",
+    "ACCOUNT": "Account"
+  },
+  "PROFILE": {
+    "ORDERS": "My Orders",
+    "INFO": "Profile Information",
+    "EDIT": "Edit Profile",
     "LOGOUT": "Logout"
+  },
+  "ORDERS": {
+    "TITLE": "My Orders",
+    "NO_ORDERS_HEADING": "No Orders Found",
+    "NO_ORDERS": "You haven't placed any orders yet.",
+    "SHOP_NOW": "Shop Now",
+    "ORDER": "Order",
+    "PAYMENT_METHOD": "Payment Method",
+    "TOTAL": "Total",
+    "CREATED": "Order created at",
+    "UPDATED": "Order last updated at",
+    "STATUS": {
+      "PENDING": "Pending",
+      "PROCESSING": "Processing",
+      "SHIPPED": "Shipped",
+      "DELIVERED": "Delivered",
+      "CANCELLED": "Cancelled"
+    },
+
+    "PAYMENT": {
+      "PAYPAL": "PayPal",
+      "CREDIT_CARD": "Credit Card",
+      "BANK_TRANSFER": "Bank Transfer",
+      "IDEAL": "iDEAL"
+    }
   },
   "FOOTER": {
     "ABOUT_US": "About Us",
