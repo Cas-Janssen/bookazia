@@ -1,26 +1,22 @@
 {
   "HEADER": {
-    "HOME": "Home",
-    "CART": "Cart",
+    "LOGO_ALT": "Bookazia logo",
+    "SEARCH": "Search...",
+    "FAVORITE_ALT": "Icon of a heart",
     "FAVORITES": "Favorites",
+    "CART_ALT": "Icon of a shopping cart",
+    "CART": "Cart",
+    "LOGIN_ALT": "Round icon with a blank silhouette of a person",
     "LOGIN": "Login",
+    "ACCOUNT_ALT": "Account icon",
+    "ACCOUNT": "Account",
+    "HOME": "Home",
     "LOGOUT": "Logout",
-    "switchLanguage": "Switch Language",
     "switchLanguage.EN": "English",
     "switchLanguage.NL": "Dutch",
-    "SEARCH": "Search...",
-    "LOGO_ALT": "Bookazia logo",
-    "FAVORITE_ALT": "Icon of a heart",
-    "CART_ALT": "Icon of a shopping cart",
-    "LOGIN_ALT": "Round icon with a blank silhouette of a person",
-    "ACCOUNT_ALT": "Account icon",
-    "ACCOUNT": "Account"
-  },
-  "PROFILE": {
     "ORDERS": "My Orders",
     "INFO": "Profile Information",
-    "EDIT": "Edit Profile",
-    "LOGOUT": "Logout"
+    "EDIT": "Edit Profile"
   },
   "ORDERS": {
     "TITLE": "My Orders",
@@ -47,10 +43,128 @@
       "IDEAL": "iDEAL"
     }
   },
+  "PRODUCTS": {
+    "LOADING_ERROR": "Error loading products!",
+    "PRICE": "Price",
+    "IN_STOCK": "In stock",
+    "OUT_OF_STOCK": "Out of stock",
+    "PUBLICATION_DATE": "Published on",
+    "ORIGINAL_LANGUAGE": "Original language",
+    "PUBLISHER": "Publisher",
+    "CATEGORIES": "Categories",
+    "ADD_TO_CART": "Add to cart",
+    "ADD_TO_FAVORITES": "Add to favorites",
+    "NO_PRODUCTS_FOUND": "No products found. Please try another category or search query!",
+    "NO_PRODUCTS_FOUND_TITLE": "No Books Found",
+    "NO_PRODUCTS_FOUND_MESSAGE": "We couldn't find any books matching your search criteria.",
+    "SEARCH_SUGGESTIONS": "Try these suggestions:",
+    "SUGGESTION_CHECK_SPELLING": "Check the spelling of your search terms",
+    "SUGGESTION_FEWER_KEYWORDS": "Try using fewer or more general keywords",
+    "SUGGESTION_DIFFERENT_KEYWORDS": "Try searching for a different book or author",
+    "CLEAR_FILTERS": "Clear Filters",
+    "BROWSE_ALL": "Browse All Books",
+    "BACK_TO_HOME": "Back to Home"
+  },
+  "CHECKOUT": {
+    "DELIVERY": {
+      "TITLE": "Step 2: Choose Delivery Option",
+      "STANDARD": "Standard Delivery",
+      "EXPRESS": "Express Delivery"
+    },
+    "PAYMENT": {
+      "TITLE": "Step 3: Choose Payment Method",
+      "PAYPAL": "PayPal",
+      "CREDIT_CARD": "Credit Card",
+      "BANK_TRANSFER": "Bank Transfer",
+      "IDEAL": "iDEAL"
+    }
+  },
+  "CART": {
+    "TITLE": "Shopping Cart",
+    "PRICE": "Price",
+    "QUANTITY": "Quantity",
+    "TOTAL": "Total",
+    "REMOVE_ITEM": "Remove item",
+    "CLEAR_CART": "Clear Cart",
+    "PLACE_ORDER": "Place Order",
+    "EMPTY_TITLE": "Your Shopping Cart is Empty",
+    "EMPTY_MESSAGE": "Looks like you haven't added any books to your cart yet. Explore our collection to find your next great read!",
+    "BROWSE_BOOKS": "Browse Books",
+    "SUGGESTIONS_TITLE": "You might want to:",
+    "SUGGESTION_1": "Check out our bestsellers and new releases",
+    "SUGGESTION_2": "Explore books by your favorite authors",
+    "SUGGESTION_3": "View your previously saved items in your wishlist"
+  },
   "FOOTER": {
     "ABOUT_US": "About Us",
-    "CONTACT": "Contact",
+    "ABOUT_TEXT": "Welcome to Bookazia, your go-to online bookstore for the best reads! Created by Cas Janssen a student at Leiden University of Applied Sciences. It is a fullstack application built with Angular, Spring Boot and PostgreSQL.",
+    "QUICK_LINKS": "Quick Links",
+    "FAQ": "FAQ",
     "TERMS": "Terms of Service",
-    "PRIVACY": "Privacy Policy"
+    "PRIVACY": "Privacy Policy",
+    "CONTACT": "Contact",
+    "EMAIL": "Email",
+    "ADDRESS": "Address",
+    "LOCATION": "Zernikedreef 11 Leiden",
+    "COPYRIGHT": "© {{year}} Bookazia. All Rights Reserved."
+  },
+  "USER": {
+    "PROFILE": {
+      "TITLE": "My Profile",
+      "LOADING": "Loading your profile information...",
+      "PERSONAL_INFO": "Personal Information",
+      "ADDRESS_INFO": "Address Information",
+      "NAME": "Name",
+      "EMAIL": "Email",
+      "PHONE": "Phone Number",
+      "ADDRESS": "Address",
+      "POSTAL_CODE": "Postal Code",
+      "CITY": "City",
+      "EDIT_PROFILE": "Edit Profile",
+      "VIEW_ORDERS": "View My Orders"
+    },
+    "EDIT": {
+      "TITLE": "Edit Profile",
+      "DESCRIPTION": "Update your account information below",
+      "LOADING": "Loading your information...",
+      "PERSONAL_INFO": "Personal Information",
+      "ADDRESS_INFO": "Address Information",
+      "FIRST_NAME": "First Name",
+      "FIRST_NAME_PLACEHOLDER": "Enter your first name",
+      "MIDDLE_NAME": "Middle Name",
+      "MIDDLE_NAME_PLACEHOLDER": "Enter your middle name (optional)",
+      "LAST_NAME": "Last Name",
+      "LAST_NAME_PLACEHOLDER": "Enter your last name",
+      "EMAIL": "Email Address",
+      "EMAIL_PLACEHOLDER": "Enter your email address",
+      "PHONE": "Phone Number",
+      "PHONE_PLACEHOLDER": "Enter your phone number (optional)",
+      "ADDRESS": "Street Address",
+      "ADDRESS_PLACEHOLDER": "Enter your street address",
+      "POSTAL_CODE": "Postal Code",
+      "POSTAL_CODE_PLACEHOLDER": "Enter postal code",
+      "CITY": "City",
+      "CITY_PLACEHOLDER": "Enter city",
+      "REQUIRED_FIELD": "This field is required",
+      "CANCEL": "Cancel",
+      "SAVE": "Save Changes",
+      "SUCCESS_MESSAGE": "Your profile has been updated successfully!",
+      "AUTHENTICATION": "Authentication",
+      "AUTH_DESCRIPTION": "Please enter your current password to confirm these changes.",
+      "PASSWORD": "Current Password",
+      "PASSWORD_PLACEHOLDER": "Enter your current password"
+    }
+  },
+  "ERROR": {
+    "NOT_FOUND": {
+      "TITLE": "Page Not Found",
+      "MESSAGE": "Oops! It seems the page you're looking for has been checked out of our library.",
+      "SUGGESTIONS": "You might want to try:",
+      "SUGGESTION1": "Checking the URL for any typos",
+      "SUGGESTION2": "Using the navigation menu to find what you're looking for",
+      "SUGGESTION3": "Browsing our book categories for something interesting to read",
+      "HOME_BUTTON": "Go to Homepage",
+      "BACK_BUTTON": "Go Back"
+    }
   }
 }

@@ -9,7 +9,9 @@
       <button (click)="goToCategory('')">All</button>
     </li>
     <li *ngFor="let category of categories">
-      <button (click)="goToCategory(category.name)">{{ category.name }}</button>
+      <button (click)="goToCategory(category.nameEn)">
+        {{ getLocalizedCategoryName(category) }}
+      </button>
     </li>
   </ul>
 </section>

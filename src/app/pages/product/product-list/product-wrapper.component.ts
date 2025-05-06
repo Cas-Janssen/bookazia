@@ -7,16 +7,16 @@ import { CategoryDetails } from '../../../models/CategoryDetails';
 import { ProductItemComponent } from './product-item/product-item.component';
 import { Subject, takeUntil } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product-wrapper.component.html',
-  styleUrls: ['./product-wrapper.component.css'],
-  imports: [NgFor, ProductItemComponent, NgIf],
+  styleUrls: ['./product-wrapper.component.scss'],
+  imports: [NgFor, ProductItemComponent, NgIf, TranslatePipe],
 })
 export class ProductWrapperComponent implements OnInit, OnDestroy {
   public products: Product[] | null = [];
-  protected errorMessage: string | null = null;
   private destroy$: Subject<void> = new Subject<void>();
 
   private productService: ProductService = inject(ProductService);
@@ -30,6 +30,12 @@ export class ProductWrapperComponent implements OnInit, OnDestroy {
       .subscribe((params) => {
         if (params['categoryname']) {
           this.fetchProductsByCategory(params['categoryname']);
+        } else if (params['searchquery']) {
+          if (params['searchquery'] === '*') {
+            this.fetchAllProducts();
+            return;
+          }
+          this.fetchProductsBySearchQuery(params['searchquery']);
         } else {
           this.fetchAllProducts();
         }
@@ -47,15 +53,26 @@ export class ProductWrapperComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (categoryDetails: CategoryDetails) => {
-          this.errorMessage = null;
           this.products = categoryDetails.products;
         },
         error: (err) => {
-          this.errorMessage = err.message;
+          console.error(err);
         },
       });
   }
-  private fetchProductsBySearchQuery(searchQuery: string): void {}
+  private fetchProductsBySearchQuery(searchQuery: string): void {
+    this.productService
+      .searchProducts(searchQuery)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (data) => {
+          this.products = data;
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
+  }
 
   private fetchAllProducts(): void {
     this.productService
@@ -63,11 +80,10 @@ export class ProductWrapperComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (data) => {
-          this.errorMessage = null;
           this.products = data;
         },
         error: (err) => {
-          this.errorMessage = err.message;
+          console.error(err);
         },
       });
   }
@@ -77,5 +93,13 @@ export class ProductWrapperComponent implements OnInit, OnDestroy {
         .replaceAll(' ', '-')
         .toLowerCase()}-${product.isbn}`,
     ]);
+  }
+
+  protected goToHome(): void {
+    this.router.navigate(['/home']);
+  }
+
+  protected browseAllBooks(): void {
+    this.router.navigate(['/books']);
   }
 }

@@ -1,16 +1,51 @@
-<div *ngIf="errorMessage == null && products != null" class="product-list">
+<section *ngIf="products != null" class="product-list">
   <app-product-item
     *ngFor="let product of products"
     [product]="product"
     (click)="goToProductDetails(product)"
   />
-</div>
-<div *ngIf="products?.length === 0 && errorMessage === null">
-  No products found. Please try another category or add products to this
-  category!
-</div>
-<div *ngIf="errorMessage != null">
-  <h1>There was an error loading the products from the database!</h1>
-  <p>You can provide the following error code to the developer:</p>
-  <p>{{ errorMessage }}</p>
-</div>
+</section>
+<section *ngIf="products?.length === 0" class="no-products-container">
+  <div class="no-products-content">
+    <div class="book-icon">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="64"
+        height="64"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+      </svg>
+    </div>
+    <h2 class="no-products-title">
+      {{ "PRODUCTS.NO_PRODUCTS_FOUND_TITLE" | translate }}
+    </h2>
+    <p class="no-products-message">
+      {{ "PRODUCTS.NO_PRODUCTS_FOUND_MESSAGE" | translate }}
+    </p>
+
+    <div class="search-suggestions">
+      <h3>{{ "PRODUCTS.SEARCH_SUGGESTIONS" | translate }}</h3>
+      <ul>
+        <li>{{ "PRODUCTS.SUGGESTION_CHECK_SPELLING" | translate }}</li>
+        <li>{{ "PRODUCTS.SUGGESTION_FEWER_KEYWORDS" | translate }}</li>
+        <li>{{ "PRODUCTS.SUGGESTION_DIFFERENT_KEYWORDS" | translate }}</li>
+      </ul>
+    </div>
+
+    <div class="action-buttons">
+      <button class="btn-primary" (click)="goToHome()">
+        {{ "PRODUCTS.BACK_TO_HOME" | translate }}
+      </button>
+      <button class="btn-secondary" (click)="browseAllBooks()">
+        {{ "PRODUCTS.BROWSE_ALL" | translate }}
+      </button>
+    </div>
+  </div>
+</section>

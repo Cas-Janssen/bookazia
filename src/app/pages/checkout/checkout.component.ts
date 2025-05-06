@@ -9,7 +9,6 @@ import { UserInfo } from '../../models/UserInfo';
 import { OrderService } from '../../services/order.service';
 import { AuthService } from '../../services/auth.service';
 import { CartProductDetailed } from '../../models/CartProductDetailed';
-import { CartProduct } from '../../models/CartProduct';
 import { Subject, takeUntil } from 'rxjs';
 import { SimpleCartProduct } from '../../models/SimpleCartProduct';
 
@@ -161,9 +160,9 @@ export class CheckoutComponent implements OnDestroy {
       email: this.personalInfo.email,
       firstName: this.personalInfo.firstName,
       lastName: this.personalInfo.lastName,
-      address: this.personalInfo.address,
-      city: this.personalInfo.city,
-      postalCode: this.personalInfo.postalCode,
+      address: this.personalInfo.address!,
+      city: this.personalInfo.city!,
+      postalCode: this.personalInfo.postalCode!,
       middleName: this.personalInfo.middleName,
       phoneNumber: this.personalInfo.phoneNumber,
       cartItems: cartItems,

@@ -64,9 +64,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if (query == '') {
       query = '*';
     }
-    if (query.includes(' ')) {
-      query = query.replaceAll(/\s+/g, '-');
-    }
 
     this.goToMenu('search/' + query);
     this.searchQuery = '';

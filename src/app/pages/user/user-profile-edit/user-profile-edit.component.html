@@ -1,1 +1,171 @@
-<p>user-profile-edit works!</p>
+<main class="edit-profile-container">
+  <header class="page-header">
+    <h1>{{ "USER.EDIT.TITLE" | translate }}</h1>
+    <p class="page-description">{{ "USER.EDIT.DESCRIPTION" | translate }}</p>
+  </header>
+
+  <div class="loading-container" *ngIf="loading">
+    <div class="spinner"></div>
+    <p>{{ "USER.EDIT.LOADING" | translate }}</p>
+  </div>
+
+  <form (ngSubmit)="onSubmit()" *ngIf="!loading" class="edit-form">
+    <div *ngIf="error" class="alert alert-danger">
+      {{ error }}
+    </div>
+    <div *ngIf="success" class="alert alert-success">
+      {{ "USER.EDIT.SUCCESS_MESSAGE" | translate }}
+    </div>
+
+    <section class="form-section">
+      <h2>{{ "USER.EDIT.PERSONAL_INFO" | translate }}</h2>
+
+      <div class="form-group">
+        <label for="firstName"
+          >{{ "USER.EDIT.FIRST_NAME" | translate }} *</label
+        >
+        <input
+          type="text"
+          id="firstName"
+          name="firstName"
+          [(ngModel)]="firstName"
+          [placeholder]="'USER.EDIT.FIRST_NAME_PLACEHOLDER' | translate"
+          required
+          [ngClass]="{ 'is-invalid': submitted && !firstName }"
+        />
+        <div *ngIf="submitted && !firstName" class="invalid-feedback">
+          {{ "USER.EDIT.REQUIRED_FIELD" | translate }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="middleName">{{
+          "USER.EDIT.MIDDLE_NAME" | translate
+        }}</label>
+        <input
+          type="text"
+          id="middleName"
+          name="middleName"
+          [(ngModel)]="middleName"
+          [placeholder]="'USER.EDIT.MIDDLE_NAME_PLACEHOLDER' | translate"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">{{ "USER.EDIT.LAST_NAME" | translate }} *</label>
+        <input
+          type="text"
+          id="lastName"
+          name="lastName"
+          [(ngModel)]="lastName"
+          [placeholder]="'USER.EDIT.LAST_NAME_PLACEHOLDER' | translate"
+          required
+          [ngClass]="{ 'is-invalid': submitted && !lastName }"
+        />
+        <div *ngIf="submitted && !lastName" class="invalid-feedback">
+          {{ "USER.EDIT.REQUIRED_FIELD" | translate }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">{{ "USER.EDIT.EMAIL" | translate }} *</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="email"
+          [placeholder]="'USER.EDIT.EMAIL_PLACEHOLDER' | translate"
+          required
+          [ngClass]="{ 'is-invalid': submitted && !email }"
+        />
+        <div *ngIf="submitted && !email" class="invalid-feedback">
+          {{ "USER.EDIT.REQUIRED_FIELD" | translate }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="phoneNumber">{{ "USER.EDIT.PHONE" | translate }}</label>
+        <input
+          type="tel"
+          id="phoneNumber"
+          name="phoneNumber"
+          [(ngModel)]="phoneNumber"
+          [placeholder]="'USER.EDIT.PHONE_PLACEHOLDER' | translate"
+        />
+      </div>
+    </section>
+
+    <section class="form-section">
+      <h2>{{ "USER.EDIT.ADDRESS_INFO" | translate }}</h2>
+
+      <div class="form-group">
+        <label for="address">{{ "USER.EDIT.ADDRESS" | translate }}</label>
+        <input
+          type="text"
+          id="address"
+          name="address"
+          [(ngModel)]="address"
+          [placeholder]="'USER.EDIT.ADDRESS_PLACEHOLDER' | translate"
+        />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="postalCode">{{
+            "USER.EDIT.POSTAL_CODE" | translate
+          }}</label>
+          <input
+            type="text"
+            id="postalCode"
+            name="postalCode"
+            [(ngModel)]="postalCode"
+            [placeholder]="'USER.EDIT.POSTAL_CODE_PLACEHOLDER' | translate"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="city">{{ "USER.EDIT.CITY" | translate }}</label>
+          <input
+            type="text"
+            id="city"
+            name="city"
+            [(ngModel)]="city"
+            [placeholder]="'USER.EDIT.CITY_PLACEHOLDER' | translate"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="form-section auth-section">
+      <h2>{{ "USER.EDIT.AUTHENTICATION" | translate }}</h2>
+      <p class="auth-description">
+        {{ "USER.EDIT.AUTH_DESCRIPTION" | translate }}
+      </p>
+
+      <div class="form-group">
+        <label for="password">{{ "USER.EDIT.PASSWORD" | translate }} *</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          [(ngModel)]="password"
+          [placeholder]="'USER.EDIT.PASSWORD_PLACEHOLDER' | translate"
+          required
+          [ngClass]="{ 'is-invalid': submitted && !password }"
+        />
+        <div *ngIf="submitted && !password" class="invalid-feedback">
+          {{ "USER.EDIT.REQUIRED_FIELD" | translate }}
+        </div>
+      </div>
+    </section>
+
+    <div class="form-actions">
+      <button type="button" class="btn-secondary" (click)="onCancel()">
+        {{ "USER.EDIT.CANCEL" | translate }}
+      </button>
+      <button type="submit" class="btn-primary">
+        {{ "USER.EDIT.SAVE" | translate }}
+      </button>
+    </div>
+  </form>
+</main>

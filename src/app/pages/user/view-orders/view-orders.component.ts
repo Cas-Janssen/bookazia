@@ -59,7 +59,7 @@ export class ViewOrdersComponent implements OnInit, OnDestroy {
   }
 
   navigateToShop(): void {
-    this.router.navigate(['/']);
+    this.router.navigate(['/books']);
   }
 
   formatDate(dateString: Date | string): string {

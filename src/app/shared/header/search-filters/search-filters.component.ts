@@ -4,6 +4,7 @@ import { CategoryService } from '../../../services/category.service';
 import { Category } from '../../../models/Category';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-search-filters',
@@ -13,6 +14,7 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class SearchFiltersComponent implements OnInit, OnDestroy {
   private categoryService: CategoryService = inject(CategoryService);
+  private translateService: TranslateService = inject(TranslateService);
   private router: Router = inject(Router);
   private destroy$: Subject<void> = new Subject<void>();
   public categories: Category[] = [];
@@ -47,5 +49,14 @@ export class SearchFiltersComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  protected getLocalizedCategoryName(category: Category): string {
+    const currentLang = this.translateService.currentLang;
+    if (currentLang === 'nl' && category.nameNl) {
+      return category.nameNl;
+    } else {
+      return category.nameEn || '';
+    }
   }
 }

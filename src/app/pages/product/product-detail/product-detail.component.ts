@@ -6,10 +6,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from '../../../services/auth.service';
 import { CartService } from '../../../services/cart.service';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { Category } from '../../../models/Category';
 
 @Component({
   selector: 'app-product-detail',
-  imports: [NgFor, NgClass, NgIf],
+  imports: [NgFor, NgClass, NgIf, TranslatePipe],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss',
 })
@@ -25,6 +27,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   private cartService: CartService = inject(CartService);
   private route: ActivatedRoute = inject(ActivatedRoute);
   private router: Router = inject(Router);
+  private translateService: TranslateService = inject(TranslateService);
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -77,5 +80,24 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
       return;
     }
     console.log(`Added ${product.title} to favorites`);
+  }
+  getLocalizedDescription(): string {
+    if (!this.book) return '';
+
+    const currentLang = this.translateService.currentLang;
+
+    if (currentLang === 'nl' && this.book.descriptionNl) {
+      return this.book.descriptionNl;
+    } else {
+      return this.book.descriptionEn || '';
+    }
+  }
+  getLocalizedCategoryName(category: Category): string {
+    const currentLang = this.translateService.currentLang;
+    if (currentLang === 'nl' && category.nameNl) {
+      return category.nameNl;
+    } else {
+      return category.nameEn || '';
+    }
   }
 }

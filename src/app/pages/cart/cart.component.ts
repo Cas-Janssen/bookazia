@@ -6,10 +6,11 @@ import { CartProductDetailed } from '../../models/CartProductDetailed';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-card',
-  imports: [NgIf, NgFor, FormsModule],
+  imports: [NgIf, NgFor, FormsModule, TranslatePipe],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
 })
@@ -74,6 +75,9 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   protected removeCartItem(product: CartProductDetailed): void {
+    if (this.cartProducts.length === 1) {
+      this.cartProducts = [];
+    }
     this.cartService
       .removeCartItem(product)
       .pipe(takeUntil(this.destroy$))
@@ -110,5 +114,9 @@ export class CartComponent implements OnInit, OnDestroy {
       return amount.slice(0, 10);
     }
     return amount;
+  }
+
+  navigateToBooks(): void {
+    this.router.navigate(['/books']);
   }
 }

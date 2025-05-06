@@ -1,1 +1,75 @@
-<p>user-profile works!</p>
+<main class="profile-container">
+  <header class="profile-header">
+    <h1>{{ "USER.PROFILE.TITLE" | translate }}</h1>
+  </header>
+
+  <div class="loading-container" *ngIf="loading">
+    <div class="spinner"></div>
+    <p>{{ "USER.PROFILE.LOADING" | translate }}</p>
+  </div>
+
+  <section class="profile-content" *ngIf="userDetails && !loading">
+    <div class="profile-card personal-info">
+      <h2>{{ "USER.PROFILE.PERSONAL_INFO" | translate }}</h2>
+
+      <div class="info-group">
+        <div class="info-row">
+          <label class="info-label">{{
+            "USER.PROFILE.NAME" | translate
+          }}</label>
+          <p class="info-value">{{ getFullName() }}</p>
+        </div>
+
+        <div class="info-row">
+          <label class="info-label">{{
+            "USER.PROFILE.EMAIL" | translate
+          }}</label>
+          <p class="info-value">{{ userDetails.email }}</p>
+        </div>
+
+        <div class="info-row" *ngIf="userDetails.phoneNumber">
+          <label class="info-label">{{
+            "USER.PROFILE.PHONE" | translate
+          }}</label>
+          <p class="info-value">{{ userDetails.phoneNumber }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-card address-info" *ngIf="hasAddress()">
+      <h2>{{ "USER.PROFILE.ADDRESS_INFO" | translate }}</h2>
+
+      <div class="info-group">
+        <div class="info-row" *ngIf="userDetails?.address">
+          <label class="info-label">{{
+            "USER.PROFILE.ADDRESS" | translate
+          }}</label>
+          <p class="info-value">{{ userDetails.address }}</p>
+        </div>
+
+        <div class="info-row" *ngIf="userDetails?.postalCode">
+          <label class="info-label">{{
+            "USER.PROFILE.POSTAL_CODE" | translate
+          }}</label>
+          <p class="info-value">{{ userDetails.postalCode }}</p>
+        </div>
+
+        <div class="info-row" *ngIf="userDetails?.city">
+          <label class="info-label">{{
+            "USER.PROFILE.CITY" | translate
+          }}</label>
+          <p class="info-value">{{ userDetails.city }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="profile-actions">
+    <button class="edit-button" (click)="navigateToEdit()">
+      {{ "USER.PROFILE.EDIT_PROFILE" | translate }}
+    </button>
+    <button class="orders-button" (click)="navigateToOrders()">
+      {{ "USER.PROFILE.VIEW_ORDERS" | translate }}
+    </button>
+  </footer>
+</main>

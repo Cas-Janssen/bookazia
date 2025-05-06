@@ -1,8 +1,5 @@
 <div *ngIf="book == null">
-  <p>
-    Boek kan niet worden ingeladen. Probeer het later opnieuw of probeer een
-    ander boek.
-  </p>
+  <p>{{ "PRODUCTS.LOADING_ERROR" | translate }}</p>
 </div>
 <div *ngIf="book != null" class="book-card">
   <img
@@ -12,8 +9,12 @@
   />
   <div class="book-details">
     <h2 class="book-title">{{ book.title }}</h2>
-    <p class="book-authors">{{ book.authors }}</p>
-    <p class="book-price">Prijs: &euro;{{ book.price }}</p>
+    <p *ngFor="let author of book.authors" class="book-authors">
+      {{ author.firstName }} {{ author.lastName }}
+    </p>
+    <p class="book-price">
+      {{ "PRODUCTS.PRICE" | translate }}: &euro;{{ book.price }}
+    </p>
     <p
       class="book-stock"
       [ngClass]="{
@@ -21,24 +22,38 @@
         'out-of-stock': book.stock === 0
       }"
     >
-      {{ book.stock > 0 ? "Op voorraad" : "Niet op voorraad" }}
+      {{
+        book.stock > 0
+          ? ("PRODUCTS.IN_STOCK" | translate)
+          : ("PRODUCTS.OUT_OF_STOCK" | translate)
+      }}
     </p>
     <p class="book-isbn">ISBN: {{ book.isbn }}</p>
-    <p class="book-publication">Gepubliceerd op: {{ book.publicationDate }}</p>
-    <p class="book-language">Originele taal: {{ book.originalLanguage }}</p>
+    <p class="book-publication">
+      {{ "PRODUCTS.PUBLICATION_DATE" | translate }}: {{ book.publicationDate }}
+    </p>
+    <p class="book-language">
+      {{ "PRODUCTS.ORIGINAL_LANGUAGE" | translate }}:
+      {{ book.originalLanguage }}
+    </p>
     <p class="book-publisher">
-      Uitgever: {{ book.publisher.firstName }} {{ book.publisher.lastName }}
+      {{ "PRODUCTS.PUBLISHER" | translate }}: {{ book.publisher.firstName }}
+      {{ book.publisher.lastName }}
     </p>
     <div class="book-categories">
-      Categorieën:
+      {{ "PRODUCTS.CATEGORIES" | translate }}:
       <span *ngFor="let category of book.categories" class="category">{{
-        category.name
+        getLocalizedCategoryName(category)
       }}</span>
     </div>
-    <p class="book-description">{{ book.description }}</p>
-    <button class="add-to-cart" (click)="addToCart(book)">Add to cart</button>
+
+    <p class="book-description">{{ getLocalizedDescription() }}</p>
+
+    <button class="add-to-cart" (click)="addToCart(book)">
+      {{ "PRODUCTS.ADD_TO_CART" | translate }}
+    </button>
     <button class="add-to-favorites" (click)="addToFavorites(book)">
-      Add to favorites
+      {{ "PRODUCTS.ADD_TO_FAVORITES" | translate }}
     </button>
   </div>
 </div>

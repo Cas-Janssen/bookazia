@@ -1,30 +1,26 @@
-<nav
-  class="profile-options-menu"
-  *ngIf="isOpen"
-  [attr.aria-label]="'PROFILE.MENU_LABEL' | translate"
->
+<nav class="profile-options-menu" *ngIf="isOpen">
   <ul>
     <li>
       <button class="menu-item" (click)="goToOrders()">
-        {{ "PROFILE.ORDERS" | translate }}
+        {{ "HEADER.ORDERS" | translate }}
       </button>
     </li>
 
     <li>
       <button class="menu-item" (click)="goToProfile()">
-        {{ "PROFILE.INFO" | translate }}
+        {{ "HEADER.INFO" | translate }}
       </button>
     </li>
 
     <li>
       <button class="menu-item" (click)="goToEditProfile()">
-        {{ "PROFILE.EDIT" | translate }}
+        {{ "HEADER.EDIT" | translate }}
       </button>
     </li>
 
     <li>
       <button class="menu-item" (click)="logout()">
-        {{ "PROFILE.LOGOUT" | translate }}
+        {{ "HEADER.LOGOUT" | translate }}
       </button>
     </li>
   </ul>

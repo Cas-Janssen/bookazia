@@ -20,4 +20,10 @@ export class ProductService {
       this.apiLink + `/products/${productId}`
     );
   }
+
+  public searchProducts(searchTerm: string): Observable<Product[]> {
+    return this.httpClient.get<Product[]>(
+      this.apiLink + `/products/search/${searchTerm}`
+    );
+  }
 }

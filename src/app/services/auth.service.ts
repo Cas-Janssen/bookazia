@@ -90,6 +90,13 @@ export class AuthService implements OnDestroy {
     return subscription;
   }
 
+  public changeLogin(responseLogin: ResponseLogin): void {
+    this.logout();
+    this.loggedIn.next(true);
+    this.token = responseLogin.token;
+    this.saveTokenInLocalStorage(responseLogin.token);
+  }
+
   public getToken(): string | null {
     return this.token;
   }

@@ -9,7 +9,8 @@ export interface Product extends Author, Publisher, Category {
   stock: number;
   isbn: string;
   publicationDate: string;
-  description: string;
+  descriptionEn: string;
+  descriptionNl: string;
   originalLanguage: string;
   authors: Author[];
   categories: Category[];

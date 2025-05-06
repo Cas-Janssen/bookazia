@@ -1,20 +1,23 @@
 {
   "HEADER": {
-    "HOME": "Homepagina",
+    "HOME": "Home",
     "CART": "Winkelwagen",
     "FAVORITES": "Favorieten",
     "LOGIN": "Inloggen",
     "LOGOUT": "Uitloggen",
-    "switchLanguage": "Taal Wisselen",
+    "switchLanguage": "Taal wijzigen",
     "switchLanguage.EN": "Engels",
     "switchLanguage.NL": "Nederlands",
     "SEARCH": "Zoeken...",
-    "LOGO_ALT": "Het logo can Bookazia",
+    "LOGO_ALT": "Bookazia logo",
     "FAVORITE_ALT": "Icoon van een hart",
     "CART_ALT": "Icoon van een winkelwagen",
-    "LOGIN_ALT": "Icoon van een persoon",
-    "ACCOUNT_ALT": "Icoon van een persoon",
-    "ACCOUNT": "Account"
+    "LOGIN_ALT": "Rond icoon met een silhouet van een persoon",
+    "ACCOUNT_ALT": "Account icoon",
+    "ACCOUNT": "Account",
+    "ORDERS": "Mijn Bestellingen",
+    "INFO": "Profielinformatie",
+    "EDIT": "Profiel Bewerken"
   },
   "PROFILE": {
     "ORDERS": "Mijn Bestellingen",
@@ -46,10 +49,129 @@
       "IDEAL": "iDEAL"
     }
   },
+  "PRODUCTS": {
+    "NO_PRODUCTS_FOUND": "Geen producten gevonden. Probeer een andere categorie of zoekopdracht!",
+    "ERROR_LOADING": "Er is een fout opgetreden bij het laden van de producten uit de database!",
+    "ERROR_CODE": "Je kunt de volgende foutcode aan de ontwikkelaar doorgeven:",
+    "PUBLICATION_DATE": "Gepubliceerd op",
+    "ORIGINAL_LANGUAGE": "Originele taal",
+    "PUBLISHER": "Uitgever",
+    "CATEGORIES": "Categorieën",
+    "ADD_TO_CART": "Toevoegen aan winkelwagen",
+    "ADD_TO_FAVORITES": "Toevoegen aan favorieten",
+    "OUT_OF_STOCK": "Niet op voorraad",
+    "IN_STOCK": "Op voorraad",
+    "PRICE": "Prijs",
+    "NO_PRODUCTS_FOUND_TITLE": "Geen Boeken Gevonden",
+    "NO_PRODUCTS_FOUND_MESSAGE": "We konden geen boeken vinden die aan je zoekcriteria voldoen.",
+    "SEARCH_SUGGESTIONS": "Probeer deze suggesties:",
+    "SUGGESTION_CHECK_SPELLING": "Controleer de spelling van je zoektermen",
+    "SUGGESTION_FEWER_KEYWORDS": "Probeer minder of meer algemene trefwoorden te gebruiken",
+    "SUGGESTION_DIFFERENT_KEYWORDS": "Probeer te zoeken naar een ander boek of auteur",
+    "CLEAR_FILTERS": "Filters Wissen",
+    "BROWSE_ALL": "Alle Boeken Bekijken",
+    "BACK_TO_HOME": "Terug naar Home"
+  },
+  "CART": {
+    "TITLE": "Winkelwagen",
+    "PRICE": "Prijs",
+    "QUANTITY": "Aantal",
+    "TOTAL": "Totaal",
+    "REMOVE_ITEM": "Verwijderen",
+    "CLEAR_CART": "Winkelwagen Leegmaken",
+    "PLACE_ORDER": "Bestelling Plaatsen",
+    "EMPTY_TITLE": "Je Winkelwagen is Leeg",
+    "EMPTY_MESSAGE": "Het lijkt erop dat je nog geen boeken aan je winkelwagen hebt toegevoegd. Verken onze collectie om je volgende geweldige boek te vinden!",
+    "BROWSE_BOOKS": "Boeken Bekijken",
+    "SUGGESTIONS_TITLE": "Je kunt ook:",
+    "SUGGESTION_1": "Onze bestsellers en nieuwe uitgaven bekijken",
+    "SUGGESTION_2": "Boeken van je favoriete auteurs verkennen",
+    "SUGGESTION_3": "Items bekijken die je eerder hebt opgeslagen in je verlanglijstje"
+  },
+  "CHECKOUT": {
+    "DELIVERY": {
+      "TITLE": "Stap 2: Kies Bezorgoptie",
+      "STANDARD": "Standaard Bezorging",
+      "EXPRESS": "Express Bezorging"
+    },
+    "PAYMENT": {
+      "TITLE": "Stap 3: Kies Betaalmethode",
+      "PAYPAL": "PayPal",
+      "CREDIT_CARD": "Creditcard",
+      "BANK_TRANSFER": "Bankoverschrijving",
+      "IDEAL": "iDEAL"
+    }
+  },
   "FOOTER": {
     "ABOUT_US": "Over Ons",
+    "ABOUT_TEXT": "Welkom bij Bookazia, jouw online boekhandel voor de beste boeken! Gemaakt door Cas Janssen, student aan de Hogeschool Leiden. Het is een fullstack applicatie gebouwd met Angular, Spring Boot en PostgreSQL.",
+    "QUICK_LINKS": "Snelle Links",
+    "FAQ": "Veelgestelde Vragen",
+    "TERMS": "Gebruiksvoorwaarden",
+    "PRIVACY": "Privacybeleid",
     "CONTACT": "Contact",
-    "TERMS": "Algemene Voorwaarden",
-    "PRIVACY": "Privacybeleid"
+    "EMAIL": "E-mail",
+    "ADDRESS": "Adres",
+    "LOCATION": "Zernikedreef 11 Leiden",
+    "COPYRIGHT": "© {{year}} Bookazia. Alle Rechten Voorbehouden."
+  },
+  "USER": {
+    "PROFILE": {
+      "TITLE": "Mijn Profiel",
+      "LOADING": "Profielinformatie wordt geladen...",
+      "PERSONAL_INFO": "Persoonlijke Gegevens",
+      "ADDRESS_INFO": "Adresgegevens",
+      "NAME": "Naam",
+      "EMAIL": "E-mail",
+      "PHONE": "Telefoonnummer",
+      "ADDRESS": "Adres",
+      "POSTAL_CODE": "Postcode",
+      "CITY": "Plaats",
+      "EDIT_PROFILE": "Profiel Bewerken",
+      "VIEW_ORDERS": "Mijn Bestellingen Bekijken"
+    },
+    "EDIT": {
+      "TITLE": "Profiel Bewerken",
+      "DESCRIPTION": "Werk je accountgegevens hieronder bij",
+      "LOADING": "Je gegevens worden geladen...",
+      "PERSONAL_INFO": "Persoonlijke Gegevens",
+      "ADDRESS_INFO": "Adresgegevens",
+      "FIRST_NAME": "Voornaam",
+      "FIRST_NAME_PLACEHOLDER": "Voer je voornaam in",
+      "MIDDLE_NAME": "Tussenvoegsel",
+      "MIDDLE_NAME_PLACEHOLDER": "Voer je tussenvoegsel in (optioneel)",
+      "LAST_NAME": "Achternaam",
+      "LAST_NAME_PLACEHOLDER": "Voer je achternaam in",
+      "EMAIL": "E-mailadres",
+      "EMAIL_PLACEHOLDER": "Voer je e-mailadres in",
+      "PHONE": "Telefoonnummer",
+      "PHONE_PLACEHOLDER": "Voer je telefoonnummer in (optioneel)",
+      "ADDRESS": "Adres",
+      "ADDRESS_PLACEHOLDER": "Voer je adres in",
+      "POSTAL_CODE": "Postcode",
+      "POSTAL_CODE_PLACEHOLDER": "Voer postcode in",
+      "CITY": "Plaats",
+      "CITY_PLACEHOLDER": "Voer plaats in",
+      "REQUIRED_FIELD": "Dit veld is verplicht",
+      "CANCEL": "Annuleren",
+      "SAVE": "Wijzigingen Opslaan",
+      "SUCCESS_MESSAGE": "Je profiel is succesvol bijgewerkt!",
+      "AUTHENTICATION": "Authenticatie",
+      "AUTH_DESCRIPTION": "Voer je huidige wachtwoord in om deze wijzigingen te bevestigen.",
+      "PASSWORD": "Huidig Wachtwoord",
+      "PASSWORD_PLACEHOLDER": "Voer je huidige wachtwoord in"
+    }
+  },
+  "ERROR": {
+    "NOT_FOUND": {
+      "TITLE": "Pagina Niet Gevonden",
+      "MESSAGE": "Oeps! Het lijkt erop dat de pagina die je zoekt is uitgecheckt uit onze bibliotheek.",
+      "SUGGESTIONS": "Je kunt proberen:",
+      "SUGGESTION1": "De URL te controleren op typefouten",
+      "SUGGESTION2": "Het navigatiemenu te gebruiken om te vinden wat je zoekt",
+      "SUGGESTION3": "Door onze boekcategorieën te bladeren voor iets interessants om te lezen",
+      "HOME_BUTTON": "Naar Homepage",
+      "BACK_BUTTON": "Ga Terug"
+    }
   }
 }

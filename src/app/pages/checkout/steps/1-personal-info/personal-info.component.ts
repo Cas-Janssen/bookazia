@@ -1,5 +1,15 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { UserService } from '../../../../services/user.service';
+import { Subject, takeUntil } from 'rxjs';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-personal-info',
@@ -8,7 +18,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [FormsModule],
 })
-export class PersonalInfoComponent {
+export class PersonalInfoComponent implements OnInit, OnDestroy {
   @Output() personalInfoChange = new EventEmitter<any>();
   firstName: string = '';
   middleName?: string;
@@ -18,8 +28,43 @@ export class PersonalInfoComponent {
   postalCode: string = '';
   email: string = '';
   phoneNumber?: string;
+  private destroy$: Subject<void> = new Subject<void>();
+  private userService: UserService = inject(UserService);
+  private authService: AuthService = inject(AuthService);
+  private token: string | null = null;
 
-  onInputChange(): void {
+  ngOnInit(): void {
+    this.token = this.authService.getToken();
+    if (this.token) {
+      const payload = JSON.parse(atob(this.token.split('.')[1]));
+      this.email = payload.email || '';
+    }
+    this.userService
+      .getUserDetails()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (userInfo) => {
+          this.firstName = userInfo.firstName || '';
+          this.middleName = userInfo.middleName || undefined;
+          this.lastName = userInfo.lastName || '';
+          this.address = userInfo.address || '';
+          this.city = userInfo.city || '';
+          this.postalCode = userInfo.postalCode || '';
+          this.phoneNumber = userInfo.phoneNumber || undefined;
+          this.onInputChange();
+        },
+        error: (error) => {
+          console.error('Error fetching user details:', error);
+        },
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  protected onInputChange(): void {
     const personalInfo = {
       firstName: this.firstName,
       middleName: this.middleName,
