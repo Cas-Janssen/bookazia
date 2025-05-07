@@ -1,9 +1,14 @@
 <section class="search-wrapper">
-  <button class="hamburger-menu" (click)="toggleMenu()">
+  <button
+    class="hamburger-menu"
+    [class.active]="menuOpen"
+    (click)="toggleMenu()"
+  >
     <span></span>
     <span></span>
     <span></span>
   </button>
+
   <ul [class.open]="menuOpen">
     <li>
       <button (click)="goToCategory('')">{{ "HEADER.ALL" | translate }}</button>

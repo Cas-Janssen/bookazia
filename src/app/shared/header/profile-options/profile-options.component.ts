@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AuthService } from '../../../services/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-profile-options',
@@ -15,6 +16,8 @@ export class ProfileOptionsComponent {
   @Output() closeMenu = new EventEmitter<void>();
   private router: Router = inject(Router);
   private authService: AuthService = inject(AuthService);
+  protected isAdmin: boolean = false; // TODO: Implement admin check logic
+  //Observable<boolean> = this.authService.isAdmin();
 
   protected goToAdminMenu(): void {
     this.router.navigate(['/admin']);
@@ -38,11 +41,8 @@ export class ProfileOptionsComponent {
 
   protected logout(): void {
     this.authService.logout();
-
+    window.alert('You have been logged out!');
+    this.router.navigate(['/']);
     this.closeMenu.emit();
-  }
-
-  isAdmin(): boolean {
-    return true;
   }
 }

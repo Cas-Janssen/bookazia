@@ -1,4 +1,10 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  inject,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { NgFor } from '@angular/common';
 import { CategoryService } from '../../../services/category.service';
 import { Category } from '../../../models/Category';
@@ -20,6 +26,8 @@ export class SearchFiltersComponent implements OnInit, OnDestroy {
   public categories: Category[] = [];
   protected all: string = '';
   protected menuOpen: boolean = false;
+
+  protected isMobileView: boolean = false;
 
   protected toggleMenu(): void {
     this.menuOpen = !this.menuOpen;
@@ -46,20 +54,23 @@ export class SearchFiltersComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getCategories();
     this.menuOpen = false;
-
-    this.handleResize = this.handleResize.bind(this);
-    window.addEventListener('resize', this.handleResize);
+    this.checkViewport();
   }
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
-
-  private handleResize(): void {
-    if (this.menuOpen && window.innerWidth > 768) {
+  @HostListener('window:resize')
+  onResize(): void {
+    this.checkViewport();
+    if (!this.isMobileView) {
       this.menuOpen = false;
     }
+  }
+
+  private checkViewport(): void {
+    this.isMobileView = window.innerWidth <= 576;
   }
 
   protected getLocalizedCategoryName(category: Category): string {

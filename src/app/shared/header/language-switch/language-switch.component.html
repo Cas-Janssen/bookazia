@@ -10,10 +10,14 @@
         [src]="'assets/img/flag-' + currentLang() + '.png'"
         [alt]="currentLang() === 'en' ? 'English flag' : 'Nederlandse vlag'"
       />
-      <span class="current-language">{{
-        currentLang() === "en" ? "EN" : "NL"
-      }}</span>
+      <span class="current-language">
+        {{ currentLang() === "en" ? "English" : "Nederlands" }}
+      </span>
       <span class="dropdown-arrow">&#9662;</span>
+      <span class="smaller-language">
+        {{ currentLang() === "en" ? "EN" : "NL" }}
+        <span class="arrow">&#9662;</span>
+      </span>
     </button>
 
     <div class="language-options" [class.open]="isOpen">
