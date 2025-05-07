@@ -32,6 +32,10 @@ export class AuthService implements OnDestroy {
     return this.loggedIn.getValue();
   }
 
+  public isAdmin(): boolean {
+    return true; // TODO: Implement admin check logic
+  }
+
   public isValidToken(): boolean {
     if (this.checkValidityOfToken(this.token)) {
       return true;

@@ -4,6 +4,7 @@ import {
   EventEmitter,
   HostListener,
   Input,
+  inject,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
@@ -19,8 +20,12 @@ export class ProfileOptionsComponent {
   @Input() isOpen: boolean = false;
   @Output() logoutEvent = new EventEmitter<void>();
   @Output() closeMenu = new EventEmitter<void>();
+  private router: Router = inject(Router);
 
-  constructor(private router: Router) {}
+  goToAdminMenu(): void {
+    this.router.navigate(['/admin']);
+    this.closeMenu.emit();
+  }
 
   goToOrders(): void {
     this.router.navigate(['/profile/orders']);

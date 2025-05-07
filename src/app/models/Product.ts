@@ -16,4 +16,5 @@ export interface Product extends Author, Publisher, Category {
   categories: Category[];
   publisher: Publisher;
   coverImgUrl: string;
+  enabled: boolean;
 }

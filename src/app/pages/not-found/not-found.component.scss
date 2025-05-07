@@ -82,7 +82,7 @@
       border: none;
 
       &:hover {
-        background-color: darken(vars.$primary-bg, 10%);
+        background-color: 10%;
       }
     }
 
@@ -137,7 +137,7 @@
 .book-cover {
   width: 150px;
   height: 120px;
-  background: lighten(vars.$primary-bg, 20%);
+  background: 20%;
   display: flex;
   justify-content: center;
   align-items: center;

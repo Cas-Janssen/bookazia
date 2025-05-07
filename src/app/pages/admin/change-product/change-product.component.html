@@ -1,0 +1,475 @@
+<main class="admin-container">
+  <header class="admin-header">
+    <h1>{{ "ADMIN.CHANGE_PRODUCT.TITLE" | translate }}</h1>
+    <p class="description">
+      {{ "ADMIN.CHANGE_PRODUCT.DESCRIPTION" | translate }}
+    </p>
+  </header>
+
+  <article *ngIf="loading" class="loading-spinner" role="status">
+    <span class="spinner" aria-hidden="true"></span>
+    <p>{{ "ADMIN.LOADING" | translate }}</p>
+  </article>
+
+  <article *ngIf="success" class="alert alert-success" role="alert">
+    {{ "ADMIN.CHANGE_PRODUCT.SUCCESS" | translate }}
+  </article>
+
+  <article *ngIf="error" class="alert alert-danger" role="alert">
+    {{ error }}
+  </article>
+
+  <form
+    *ngIf="!loading && product"
+    [formGroup]="productForm"
+    (ngSubmit)="onSubmit()"
+    class="product-form"
+    novalidate
+  >
+    <fieldset class="form-section">
+      <legend>{{ "ADMIN.ADD_PRODUCT.BASIC_INFO" | translate }}</legend>
+
+      <figure class="form-group">
+        <label for="title"
+          >{{ "ADMIN.ADD_PRODUCT.TITLE_LABEL" | translate }}
+          <span class="required-indicator">*</span></label
+        >
+        <input
+          type="text"
+          id="title"
+          formControlName="title"
+          [placeholder]="'ADMIN.ADD_PRODUCT.TITLE_PLACEHOLDER' | translate"
+          [ngClass]="{ 'is-invalid': submitted && f['title'].errors }"
+          aria-required="true"
+        />
+        <figcaption
+          *ngIf="submitted && f['title'].errors"
+          class="invalid-feedback"
+          role="alert"
+        >
+          <span *ngIf="f['title'].errors['required']">
+            {{ "ADMIN.FORM.REQUIRED" | translate }}
+          </span>
+          <span *ngIf="f['title'].errors['minlength']">
+            {{ "ADMIN.FORM.MIN_LENGTH" | translate : { length: 3 } }}
+          </span>
+        </figcaption>
+      </figure>
+
+      <section class="form-row">
+        <figure class="form-group">
+          <label for="price"
+            >{{ "ADMIN.ADD_PRODUCT.PRICE" | translate }}
+            <span class="required-indicator">*</span></label
+          >
+          <fieldset class="input-group">
+            <span class="input-prefix" aria-hidden="true">€</span>
+            <input
+              type="number"
+              id="price"
+              formControlName="price"
+              step="0.01"
+              min="0.01"
+              [placeholder]="'ADMIN.ADD_PRODUCT.PRICE_PLACEHOLDER' | translate"
+              [ngClass]="{ 'is-invalid': submitted && f['price'].errors }"
+              aria-required="true"
+            />
+          </fieldset>
+          <figcaption
+            *ngIf="submitted && f['price'].errors"
+            class="invalid-feedback"
+            role="alert"
+          >
+            <span *ngIf="f['price'].errors['required']">
+              {{ "ADMIN.FORM.REQUIRED" | translate }}
+            </span>
+            <span *ngIf="f['price'].errors['min']">
+              {{ "ADMIN.FORM.MIN_VALUE" | translate : { value: 0.01 } }}
+            </span>
+          </figcaption>
+        </figure>
+
+        <figure class="form-group">
+          <label for="stock"
+            >{{ "ADMIN.ADD_PRODUCT.STOCK" | translate }}
+            <span class="required-indicator">*</span></label
+          >
+          <input
+            type="number"
+            id="stock"
+            formControlName="stock"
+            min="0"
+            [placeholder]="'ADMIN.ADD_PRODUCT.STOCK_PLACEHOLDER' | translate"
+            [ngClass]="{ 'is-invalid': submitted && f['stock'].errors }"
+            aria-required="true"
+          />
+          <figcaption
+            *ngIf="submitted && f['stock'].errors"
+            class="invalid-feedback"
+            role="alert"
+          >
+            <span *ngIf="f['stock'].errors['required']">
+              {{ "ADMIN.FORM.REQUIRED" | translate }}
+            </span>
+            <span *ngIf="f['stock'].errors['min']">
+              {{ "ADMIN.FORM.MIN_VALUE" | translate : { value: 0 } }}
+            </span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <figure class="form-group">
+        <label for="isbn"
+          >{{ "ADMIN.ADD_PRODUCT.ISBN" | translate }}
+          <span class="required-indicator">*</span></label
+        >
+        <input
+          type="text"
+          id="isbn"
+          formControlName="isbn"
+          [placeholder]="'ADMIN.ADD_PRODUCT.ISBN_PLACEHOLDER' | translate"
+          [ngClass]="{ 'is-invalid': submitted && f['isbn'].errors }"
+          aria-required="true"
+        />
+        <figcaption
+          *ngIf="submitted && f['isbn'].errors"
+          class="invalid-feedback"
+          role="alert"
+        >
+          <span *ngIf="f['isbn'].errors['required']">
+            {{ "ADMIN.FORM.REQUIRED" | translate }}
+          </span>
+          <span *ngIf="f['isbn'].errors['pattern']">
+            {{ "ADMIN.ADD_PRODUCT.ISBN_INVALID" | translate }}
+          </span>
+        </figcaption>
+      </figure>
+
+      <section class="form-row">
+        <figure class="form-group">
+          <label for="publicationDate">
+            {{ "ADMIN.ADD_PRODUCT.PUBLICATION_DATE" | translate }}
+            <span class="required-indicator">*</span>
+          </label>
+          <input
+            type="date"
+            id="publicationDate"
+            formControlName="publicationDate"
+            [max]="maxDate"
+            [ngClass]="{
+              'is-invalid': submitted && f['publicationDate'].errors
+            }"
+            aria-required="true"
+          />
+          <figcaption
+            *ngIf="submitted && f['publicationDate'].errors"
+            class="invalid-feedback"
+            role="alert"
+          >
+            <span *ngIf="f['publicationDate'].errors['required']">
+              {{ "ADMIN.FORM.REQUIRED" | translate }}
+            </span>
+            <span *ngIf="f['publicationDate'].errors['futureDate']">
+              {{ "ADMIN.FORM.FUTURE_DATE_NOT_ALLOWED" | translate }}
+            </span>
+          </figcaption>
+        </figure>
+
+        <figure class="form-group">
+          <label for="originalLanguage">
+            {{ "ADMIN.ADD_PRODUCT.LANGUAGE" | translate }}
+            <span class="required-indicator">*</span>
+          </label>
+          <select
+            id="originalLanguage"
+            formControlName="originalLanguage"
+            [ngClass]="{
+              'is-invalid': submitted && f['originalLanguage'].errors
+            }"
+            aria-required="true"
+          >
+            <option value="" disabled>
+              {{ "ADMIN.ADD_PRODUCT.SELECT_LANGUAGE" | translate }}
+            </option>
+            <option *ngFor="let language of languages" [value]="language">
+              {{ language }}
+            </option>
+          </select>
+          <figcaption
+            *ngIf="submitted && f['originalLanguage'].errors"
+            class="invalid-feedback"
+            role="alert"
+          >
+            <span *ngIf="f['originalLanguage'].errors['required']">
+              {{ "ADMIN.FORM.REQUIRED" | translate }}
+            </span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <figure class="form-group">
+        <label for="isEnabled">
+          {{ "ADMIN.PRODUCT.STATUS" | translate }}
+        </label>
+        <section class="status-toggle">
+          <input type="checkbox" id="isEnabled" formControlName="isEnabled" />
+          <label for="isEnabled" class="toggle-label">
+            <span *ngIf="productForm.value.isEnabled">{{
+              "ADMIN.PRODUCT.STATUS_ENABLED" | translate
+            }}</span>
+            <span *ngIf="!productForm.value.isEnabled">{{
+              "ADMIN.PRODUCT.STATUS_DISABLED" | translate
+            }}</span>
+          </label>
+        </section>
+      </figure>
+    </fieldset>
+
+    <fieldset class="form-section">
+      <legend>{{ "ADMIN.ADD_PRODUCT.COVER_IMAGE" | translate }}</legend>
+
+      <figure class="form-group">
+        <label for="coverImgUrl"
+          >{{ "ADMIN.ADD_PRODUCT.COVER_IMAGE_LABEL" | translate }}
+          <span class="required-indicator">*</span></label
+        >
+        <section class="cover-image-container">
+          <figure class="cover-image-preview" *ngIf="coverImagePreview">
+            <img [src]="coverImagePreview" alt="Cover preview" />
+          </figure>
+          <fieldset class="cover-image-upload">
+            <input
+              type="text"
+              id="coverImgUrl"
+              formControlName="coverImgUrl"
+              [placeholder]="
+                'ADMIN.ADD_PRODUCT.IMAGE_URL_PLACEHOLDER' | translate
+              "
+              [ngClass]="{ 'is-invalid': submitted && f['coverImgUrl'].errors }"
+            />
+            <figcaption class="hint-text">
+              {{ "ADMIN.ADD_PRODUCT.IMAGE_URL_HINT" | translate }}
+            </figcaption>
+          </fieldset>
+        </section>
+        <figcaption
+          *ngIf="submitted && f['coverImgUrl'].errors"
+          class="invalid-feedback"
+          role="alert"
+        >
+          <span *ngIf="f['coverImgUrl'].errors['required']">
+            {{ "ADMIN.FORM.REQUIRED" | translate }}
+          </span>
+          <span *ngIf="f['coverImgUrl'].errors['pattern']">
+            {{ "ADMIN.ADD_PRODUCT.IMAGE_URL_INVALID" | translate }}
+          </span>
+        </figcaption>
+      </figure>
+    </fieldset>
+
+    <fieldset class="form-section">
+      <legend>{{ "ADMIN.ADD_PRODUCT.DESCRIPTION_TITLE" | translate }}</legend>
+
+      <figure class="form-group">
+        <label for="descriptionEn">
+          <img
+            src="assets/img/flag-en.png"
+            class="flag-icon"
+            alt="English flag"
+          />
+          {{ "ADMIN.ADD_PRODUCT.DESCRIPTION_LABEL_EN" | translate }}
+          <span class="required-indicator">*</span>
+        </label>
+        <textarea
+          id="descriptionEn"
+          formControlName="descriptionEn"
+          [placeholder]="
+            'ADMIN.ADD_PRODUCT.DESCRIPTION_PLACEHOLDER_EN' | translate
+          "
+          rows="4"
+          [ngClass]="{ 'is-invalid': submitted && f['descriptionEn'].errors }"
+        ></textarea>
+        <figcaption
+          *ngIf="submitted && f['descriptionEn'].errors"
+          class="invalid-feedback"
+          role="alert"
+        >
+          <span *ngIf="f['descriptionEn'].errors['required']">
+            {{ "ADMIN.FORM.REQUIRED" | translate }}
+          </span>
+          <span *ngIf="f['descriptionEn'].errors['minlength']">
+            {{ "ADMIN.FORM.MIN_LENGTH" | translate : { length: 20 } }}
+          </span>
+        </figcaption>
+      </figure>
+
+      <figure class="form-group">
+        <label for="descriptionNl">
+          <img
+            src="assets/img/flag-nl.png"
+            class="flag-icon"
+            alt="Dutch flag"
+          />
+          {{ "ADMIN.ADD_PRODUCT.DESCRIPTION_LABEL_NL" | translate }}
+          <span class="required-indicator">*</span>
+        </label>
+        <textarea
+          id="descriptionNl"
+          formControlName="descriptionNl"
+          [placeholder]="
+            'ADMIN.ADD_PRODUCT.DESCRIPTION_PLACEHOLDER_NL' | translate
+          "
+          rows="4"
+          [ngClass]="{ 'is-invalid': submitted && f['descriptionNl'].errors }"
+        ></textarea>
+        <figcaption
+          *ngIf="submitted && f['descriptionNl'].errors"
+          class="invalid-feedback"
+          role="alert"
+        >
+          <span *ngIf="f['descriptionNl'].errors['required']">
+            {{ "ADMIN.FORM.REQUIRED" | translate }}
+          </span>
+          <span *ngIf="f['descriptionNl'].errors['minlength']">
+            {{ "ADMIN.FORM.MIN_LENGTH" | translate : { length: 20 } }}
+          </span>
+        </figcaption>
+      </figure>
+    </fieldset>
+
+    <fieldset class="form-section">
+      <legend>{{ "ADMIN.ADD_PRODUCT.CATEGORIES" | translate }}</legend>
+
+      <figure class="form-group">
+        <label
+          >{{ "ADMIN.ADD_PRODUCT.SELECT_CATEGORIES" | translate }}
+          <span class="required-indicator">*</span></label
+        >
+
+        <fieldset class="search-filter">
+          <legend class="sr-only">
+            {{ "ADMIN.ADD_PRODUCT.SEARCH_CATEGORIES" | translate }}
+          </legend>
+          <input
+            type="text"
+            [placeholder]="'ADMIN.ADD_PRODUCT.SEARCH_CATEGORIES' | translate"
+            [(ngModel)]="categorySearchQuery"
+            [ngModelOptions]="{ standalone: true }"
+            (input)="filterCategories()"
+          />
+        </fieldset>
+
+        <menu class="categories-grid">
+          <li
+            *ngFor="let category of filteredCategories"
+            class="category-checkbox"
+          >
+            <input
+              type="checkbox"
+              [id]="'category-' + category.id"
+              [value]="category.id"
+              (change)="onCategoryChange($event)"
+              [checked]="selectedCategories.includes(category.id)"
+            />
+            <label [for]="'category-' + category.id">{{
+              category.nameEn
+            }}</label>
+          </li>
+        </menu>
+        <figcaption
+          *ngIf="submitted && !selectedCategories.length"
+          class="invalid-feedback d-block"
+          role="alert"
+        >
+          {{ "ADMIN.ADD_PRODUCT.CATEGORY_REQUIRED" | translate }}
+        </figcaption>
+      </figure>
+    </fieldset>
+
+    <fieldset class="form-section">
+      <legend>{{ "ADMIN.ADD_PRODUCT.AUTHORS" | translate }}</legend>
+
+      <figure class="form-group">
+        <label
+          >{{ "ADMIN.ADD_PRODUCT.SELECT_AUTHORS" | translate }}
+          <span class="required-indicator">*</span></label
+        >
+        <fieldset class="search-filter">
+          <legend class="sr-only">
+            {{ "ADMIN.ADD_PRODUCT.SEARCH_AUTHORS" | translate }}
+          </legend>
+          <input
+            type="text"
+            [placeholder]="'ADMIN.ADD_PRODUCT.SEARCH_AUTHORS' | translate"
+            [(ngModel)]="authorSearchQuery"
+            [ngModelOptions]="{ standalone: true }"
+            (input)="filterAuthors()"
+          />
+        </fieldset>
+
+        <menu class="authors-grid">
+          <li *ngFor="let author of filteredAuthors" class="author-checkbox">
+            <input
+              type="checkbox"
+              [id]="'author-' + author.id"
+              [value]="author.id"
+              (change)="onAuthorChange($event)"
+              [checked]="selectedAuthors.includes(author.id)"
+            />
+            <label [for]="'author-' + author.id"
+              >{{ author.firstName }} {{ author.lastName }}</label
+            >
+          </li>
+        </menu>
+        <figcaption
+          *ngIf="submitted && !selectedAuthors.length"
+          class="invalid-feedback d-block"
+          role="alert"
+        >
+          {{ "ADMIN.ADD_PRODUCT.AUTHOR_REQUIRED" | translate }}
+        </figcaption>
+      </figure>
+    </fieldset>
+
+    <fieldset class="form-section">
+      <legend>{{ "ADMIN.ADD_PRODUCT.PUBLISHER" | translate }}</legend>
+
+      <figure class="form-group">
+        <label for="publisher"
+          >{{ "ADMIN.ADD_PRODUCT.SELECT_PUBLISHER" | translate }}
+          <span class="required-indicator">*</span></label
+        >
+        <select
+          id="publisher"
+          formControlName="publisherId"
+          [ngClass]="{ 'is-invalid': submitted && f['publisherId'].errors }"
+        >
+          <option value="" disabled>
+            {{ "ADMIN.ADD_PRODUCT.SELECT_PUBLISHER_PLACEHOLDER" | translate }}
+          </option>
+          <option *ngFor="let publisher of publishers" [value]="publisher.id">
+            {{ publisher.firstName }} {{ publisher.lastName }}
+          </option>
+        </select>
+        <figcaption
+          *ngIf="submitted && f['publisherId'].errors"
+          class="invalid-feedback"
+          role="alert"
+        >
+          <span *ngIf="f['publisherId'].errors['required']">
+            {{ "ADMIN.FORM.REQUIRED" | translate }}
+          </span>
+        </figcaption>
+      </figure>
+    </fieldset>
+
+    <footer class="form-actions">
+      <button type="button" class="btn btn-secondary" (click)="goBack()">
+        {{ "ADMIN.BUTTON.CANCEL" | translate }}
+      </button>
+      <button type="submit" class="btn btn-primary" [disabled]="loading">
+        {{ "ADMIN.CHANGE_PRODUCT.SUBMIT" | translate }}
+      </button>
+    </footer>
+  </form>
+</main>
