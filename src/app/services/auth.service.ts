@@ -33,7 +33,7 @@ export class AuthService implements OnDestroy {
   }
 
   public isAdmin(): boolean {
-    return true; // TODO: Implement admin check logic
+    return false; // TODO: Implement admin check logic
   }
 
   public isValidToken(): boolean {

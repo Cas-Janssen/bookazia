@@ -4,11 +4,11 @@ import { CategoryService } from '../../../services/category.service';
 import { Category } from '../../../models/Category';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-search-filters',
-  imports: [NgFor],
+  imports: [NgFor, TranslatePipe],
   templateUrl: './search-filters.component.html',
   styleUrl: './search-filters.component.scss',
 })
@@ -39,16 +39,27 @@ export class SearchFiltersComponent implements OnInit, OnDestroy {
       });
   }
   public goToCategory(categoryName: string): void {
+    this.menuOpen = false;
     this.router.navigate(['/books/', categoryName.toLowerCase()]);
   }
 
   ngOnInit(): void {
     this.getCategories();
+    this.menuOpen = false;
+
+    this.handleResize = this.handleResize.bind(this);
+    window.addEventListener('resize', this.handleResize);
   }
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  private handleResize(): void {
+    if (this.menuOpen && window.innerWidth > 768) {
+      this.menuOpen = false;
+    }
   }
 
   protected getLocalizedCategoryName(category: Category): string {

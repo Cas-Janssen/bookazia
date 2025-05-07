@@ -7,8 +7,11 @@
   justify-content: center;
   align-items: center;
   background-color: vars.$primary-bg;
-  margin-top: 23px;
-  padding: 5px 0;
+  padding: 10px 5%;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+  margin: 0;
 
   .hamburger-menu {
     display: none;
@@ -22,6 +25,7 @@
     cursor: pointer;
     padding: 0;
     box-sizing: border-box;
+    margin-left: 15px;
 
     span {
       display: block;
@@ -37,6 +41,9 @@
     display: flex;
     list-style: none;
     flex-wrap: wrap;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
 
     li {
       margin: 5px;
@@ -49,11 +56,12 @@
         padding: 8px 15px;
         font-size: 14px;
         cursor: pointer;
-        transition: background-color 0.3s, color 0.3s;
+        transition: all 0.2s ease;
 
         &:hover {
           background-color: vars.$text-color;
           color: vars.$primary-bg;
+          transform: translateY(-2px);
         }
 
         &:focus {
@@ -72,10 +80,13 @@
       background-color: vars.$primary-bg;
       padding: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      z-index: 20;
     }
   }
 
   @media (max-width: vars.$breakpoint-sm) {
+    padding: 8px 0;
+
     .hamburger-menu {
       display: flex;
       margin-left: 10px;
@@ -87,10 +98,24 @@
 
       &.open {
         display: flex;
+        max-height: 70vh;
+        overflow-y: auto;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
       }
 
       li {
         margin: 5px 0;
+        width: 100%;
+
+        button {
+          width: 100%;
+          text-align: left;
+          padding: 12px 15px;
+        }
       }
     }
   }

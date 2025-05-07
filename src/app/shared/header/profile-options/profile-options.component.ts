@@ -1,14 +1,8 @@
-import {
-  Component,
-  Output,
-  EventEmitter,
-  HostListener,
-  Input,
-  inject,
-} from '@angular/core';
+import { Component, Output, EventEmitter, Input, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-profile-options',
@@ -18,39 +12,37 @@ import { TranslatePipe } from '@ngx-translate/core';
 })
 export class ProfileOptionsComponent {
   @Input() isOpen: boolean = false;
-  @Output() logoutEvent = new EventEmitter<void>();
   @Output() closeMenu = new EventEmitter<void>();
   private router: Router = inject(Router);
+  private authService: AuthService = inject(AuthService);
 
-  goToAdminMenu(): void {
+  protected goToAdminMenu(): void {
     this.router.navigate(['/admin']);
     this.closeMenu.emit();
   }
 
-  goToOrders(): void {
+  protected goToOrders(): void {
     this.router.navigate(['/profile/orders']);
     this.closeMenu.emit();
   }
 
-  goToProfile(): void {
+  protected goToProfile(): void {
     this.router.navigate(['/profile']);
     this.closeMenu.emit();
   }
 
-  goToEditProfile(): void {
+  protected goToEditProfile(): void {
     this.router.navigate(['/profile/edit']);
     this.closeMenu.emit();
   }
 
-  logout(): void {
-    this.logoutEvent.emit();
+  protected logout(): void {
+    this.authService.logout();
+
     this.closeMenu.emit();
   }
 
-  @HostListener('document:click', ['$event'])
-  clickOutside(event: Event): void {
-    if (!(event.target as HTMLElement).closest('.profile-menu-container')) {
-      this.closeMenu.emit();
-    }
+  isAdmin(): boolean {
+    return true;
   }
 }

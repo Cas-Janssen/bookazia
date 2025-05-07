@@ -1,8 +1,39 @@
 <section class="language-switch">
-  <button (click)="switchLanguage('en')">
-    {{ "HEADER.switchLanguage.EN" | translate }}
-  </button>
-  <button (click)="switchLanguage('nl')">
-    {{ "HEADER.switchLanguage.NL" | translate }}
-  </button>
+  <div class="language-dropdown">
+    <button
+      class="language-toggle"
+      (click)="toggleDropdown($event)"
+      aria-label="Change language"
+    >
+      <img
+        class="current-flag"
+        [src]="'assets/img/flag-' + currentLang() + '.png'"
+        [alt]="currentLang() === 'en' ? 'English flag' : 'Nederlandse vlag'"
+      />
+      <span class="current-language">{{
+        currentLang() === "en" ? "EN" : "NL"
+      }}</span>
+      <span class="dropdown-arrow">&#9662;</span>
+    </button>
+
+    <div class="language-options" [class.open]="isOpen">
+      <button
+        class="language-option"
+        [class.active]="currentLang() === 'en'"
+        (click)="switchLanguage('en')"
+      >
+        <img src="assets/img/flag-en.png" alt="English flag" />
+        <span>{{ "HEADER.switchLanguage.EN" | translate }}</span>
+      </button>
+
+      <button
+        class="language-option"
+        [class.active]="currentLang() === 'nl'"
+        (click)="switchLanguage('nl')"
+      >
+        <img src="assets/img/flag-nl.png" alt="Nederlandse vlag" />
+        <span>{{ "HEADER.switchLanguage.NL" | translate }}</span>
+      </button>
+    </div>
+  </div>
 </section>

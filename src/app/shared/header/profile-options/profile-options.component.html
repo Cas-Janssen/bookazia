@@ -1,7 +1,7 @@
 <nav class="profile-options-menu" *ngIf="isOpen">
   <ul>
     <li>
-      <button class="menu-item" (click)="goToAdminMenu()">
+      <button *ngIf="isAdmin()" class="menu-item" (click)="goToAdminMenu()">
         {{ "HEADER.ADMIN_MENU" | translate }}
       </button>
     </li>

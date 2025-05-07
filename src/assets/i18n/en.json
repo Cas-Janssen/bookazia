@@ -17,7 +17,8 @@
     "ADMIN_MENU": "Admin Menu",
     "ORDERS": "My Orders",
     "INFO": "Profile Information",
-    "EDIT": "Edit Profile"
+    "EDIT": "Edit Profile",
+    "ALL": "All products"
   },
   "ORDERS": {
     "TITLE": "My Orders",

@@ -245,6 +245,7 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
     this.showConfirmDialog = true;
   }
 
+  //TODO add translations for the menu.
   updateProductStatus(productId: number, isEnabled: boolean): void {
     if (isEnabled) {
       this.productService

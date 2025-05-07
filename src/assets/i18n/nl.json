@@ -17,7 +17,8 @@
     "ADMIN_MENU": "Admin Menu",
     "ORDERS": "Mijn Bestellingen",
     "INFO": "Profielinformatie",
-    "EDIT": "Profiel Bewerken"
+    "EDIT": "Profiel Bewerken",
+    "ALL": "Alle producten"
   },
   "ORDERS": {
     "TITLE": "Mijn Bestellingen",

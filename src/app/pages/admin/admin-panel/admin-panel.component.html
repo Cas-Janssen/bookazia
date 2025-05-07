@@ -40,6 +40,7 @@
         <legend class="sr-only">{{ "ADMIN.PANEL.SEARCH" | translate }}</legend>
         <input
           type="text"
+          name="searchBox"
           [(ngModel)]="searchTerm"
           (input)="onSearch()"
           [placeholder]="'ADMIN.PANEL.SEARCH_PLACEHOLDER' | translate"
@@ -50,7 +51,11 @@
         <legend class="sr-only">
           {{ "ADMIN.PANEL.FILTER_STATUS" | translate }}
         </legend>
-        <select [(ngModel)]="filterStatus" (change)="onFilterChange()">
+        <select
+          name="statusFilter"
+          [(ngModel)]="filterStatus"
+          (change)="onFilterChange()"
+        >
           <option value="all">
             {{ "ADMIN.PANEL.ALL_PRODUCTS" | translate }}
           </option>

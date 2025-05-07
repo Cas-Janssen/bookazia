@@ -71,6 +71,10 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   }
 
   protected addToCart(product: Product): void {
+    if (!product.enabled) {
+      window.alert('This product is not available for purchase!');
+      return;
+    }
     this.cartService.addCartItem(product);
   }
 
