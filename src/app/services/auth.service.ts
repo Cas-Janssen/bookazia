@@ -95,10 +95,13 @@ export class AuthService implements OnDestroy {
   }
 
   public changeLogin(responseLogin: ResponseLogin): void {
-    this.logout();
+    this.loggedIn.next(false);
+    this.token = null;
+    localStorage.removeItem('authToken');
     this.loggedIn.next(true);
     this.token = responseLogin.token;
     this.saveTokenInLocalStorage(responseLogin.token);
+    this.router.navigate(['/profile']);
   }
 
   public getToken(): string | null {

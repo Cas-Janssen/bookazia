@@ -73,6 +73,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
       this.router.navigate(['/']);
       return;
     }
+
     const today = new Date();
     this.maxDate = today.toISOString().split('T')[0];
     this.initForm();

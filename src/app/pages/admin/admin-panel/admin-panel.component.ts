@@ -54,6 +54,10 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    if (!this.authService.isAdmin()) {
+      this.router.navigate(['/']);
+      return;
+    }
     this.loadProducts();
   }
 
@@ -62,7 +66,7 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  loadProducts(): void {
+  private loadProducts(): void {
     this.loading = true;
     this.error = null;
 
@@ -85,7 +89,7 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
       });
   }
 
-  applyFilters(): void {
+  private applyFilters(): void {
     let filtered = [...this.products];
 
     if (this.searchTerm.trim()) {
@@ -113,7 +117,7 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
     this.calculateTotalPages();
   }
 
-  sortProducts(products: Product[]): Product[] {
+  private sortProducts(products: Product[]): Product[] {
     return products.sort((a, b) => {
       let comparison = 0;
 
@@ -140,7 +144,7 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
     });
   }
 
-  onSort(field: string): void {
+  protected onSort(field: string): void {
     if (this.sortField === field) {
       this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
     } else {
@@ -151,54 +155,54 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
     this.applyFilters();
   }
 
-  getSortIcon(field: string): string {
+  protected getSortIcon(field: string): string {
     if (this.sortField !== field) {
       return 'fa-sort';
     }
     return this.sortDirection === 'asc' ? 'fa-sort-up' : 'fa-sort-down';
   }
 
-  calculateTotalPages(): void {
+  private calculateTotalPages(): void {
     this.totalPages = Math.ceil(this.filteredProducts.length / this.pageSize);
     if (this.currentPage > this.totalPages) {
       this.currentPage = Math.max(1, this.totalPages);
     }
   }
 
-  getCurrentPageProducts(): Product[] {
+  protected getCurrentPageProducts(): Product[] {
     const startIndex = (this.currentPage - 1) * this.pageSize;
     return this.filteredProducts.slice(startIndex, startIndex + this.pageSize);
   }
 
-  onSearch(): void {
+  protected onSearch(): void {
     this.currentPage = 1;
     this.applyFilters();
   }
 
-  onFilterChange(): void {
+  protected onFilterChange(): void {
     this.currentPage = 1;
     this.applyFilters();
   }
 
-  previousPage(): void {
+  protected previousPage(): void {
     if (this.currentPage > 1) {
       this.currentPage--;
     }
   }
 
-  nextPage(): void {
+  protected nextPage(): void {
     if (this.currentPage < this.totalPages) {
       this.currentPage++;
     }
   }
 
-  goToPage(page: number): void {
+  protected goToPage(page: number): void {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
     }
   }
 
-  getPageNumbers(): number[] {
+  protected getPageNumbers(): number[] {
     const pages = [];
     const maxPagesToShow = 5;
 
@@ -220,15 +224,15 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
     return pages;
   }
 
-  addProduct(): void {
+  protected addProduct(): void {
     this.router.navigate(['/admin/add-product']);
   }
 
-  editProduct(product: Product): void {
+  protected editProduct(product: Product): void {
     this.router.navigate(['/admin/edit-product', product.id]);
   }
 
-  toggleProductStatus(product: Product): void {
+  protected toggleProductStatus(product: Product): void {
     const newStatus = !product.enabled;
     const action = newStatus ? 'activate' : 'deactivate';
 
@@ -246,7 +250,7 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
   }
 
   //TODO add translations for the menu.
-  updateProductStatus(productId: number, isEnabled: boolean): void {
+  private updateProductStatus(productId: number, isEnabled: boolean): void {
     if (isEnabled) {
       this.productService
         .reactivateProduct(productId)
@@ -282,7 +286,7 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
     }
   }
 
-  closeConfirmDialog(confirmed: boolean): void {
+  protected closeConfirmDialog(confirmed: boolean): void {
     this.showConfirmDialog = false;
 
     if (confirmed) {
@@ -292,7 +296,7 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
     this.selectedProduct = null;
   }
 
-  navigateToUserManagement(): void {
+  protected navigateToUserManagement(): void {
     this.router.navigate(['/admin/users']);
   }
 }

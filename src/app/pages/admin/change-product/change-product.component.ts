@@ -78,6 +78,7 @@ export class ChangeProductComponent implements OnInit, OnDestroy {
       this.router.navigate(['/']);
       return;
     }
+
     const today = new Date();
     this.maxDate = today.toISOString().split('T')[0];
 
@@ -113,7 +114,7 @@ export class ChangeProductComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  initForm(): void {
+  private initForm(): void {
     this.productForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(3)]],
       price: ['', [Validators.required, Validators.min(0.01)]],
@@ -142,7 +143,7 @@ export class ChangeProductComponent implements OnInit, OnDestroy {
     return this.productForm.controls;
   }
 
-  loadProduct(): void {
+  private loadProduct(): void {
     this.productService
       .getProductById(this.productId)
       .pipe(
@@ -162,7 +163,7 @@ export class ChangeProductComponent implements OnInit, OnDestroy {
       });
   }
 
-  populateForm(product: Product): void {
+  private populateForm(product: Product): void {
     const publicationDate = product.publicationDate
       ? product.publicationDate.split('T')[0]
       : '';
@@ -185,7 +186,7 @@ export class ChangeProductComponent implements OnInit, OnDestroy {
     this.selectedAuthors = product.authors.map((author) => author.id);
   }
 
-  loadCategories(): void {
+  private loadCategories(): void {
     this.categoryService
       .getAllCategories()
       .pipe(takeUntil(this.destroy$))
@@ -201,7 +202,7 @@ export class ChangeProductComponent implements OnInit, OnDestroy {
       });
   }
 
-  loadAuthors(): void {
+  private loadAuthors(): void {
     this.authorService
       .getAllAuthors()
       .pipe(takeUntil(this.destroy$))
@@ -217,7 +218,7 @@ export class ChangeProductComponent implements OnInit, OnDestroy {
       });
   }
 
-  loadPublishers(): void {
+  private loadPublishers(): void {
     this.publisherService
       .getAllPublishers()
       .pipe(takeUntil(this.destroy$))
@@ -232,7 +233,7 @@ export class ChangeProductComponent implements OnInit, OnDestroy {
       });
   }
 
-  filterAuthors(): void {
+  protected filterAuthors(): void {
     const query = this.authorSearchQuery.toLowerCase();
     if (!query) {
       this.filteredAuthors = this.authors;
@@ -246,7 +247,7 @@ export class ChangeProductComponent implements OnInit, OnDestroy {
     );
   }
 
-  filterCategories(): void {
+  protected filterCategories(): void {
     const query = this.categorySearchQuery.toLowerCase();
     if (!query) {
       this.filteredCategories = this.categories;
@@ -260,7 +261,7 @@ export class ChangeProductComponent implements OnInit, OnDestroy {
     );
   }
 
-  onCategoryChange(event: Event): void {
+  protected onCategoryChange(event: Event): void {
     const checkbox = event.target as HTMLInputElement;
     const categoryId = Number(checkbox.value);
 
@@ -273,7 +274,7 @@ export class ChangeProductComponent implements OnInit, OnDestroy {
     }
   }
 
-  onAuthorChange(event: Event): void {
+  protected onAuthorChange(event: Event): void {
     const checkbox = event.target as HTMLInputElement;
     const authorId = Number(checkbox.value);
 
@@ -286,7 +287,7 @@ export class ChangeProductComponent implements OnInit, OnDestroy {
     }
   }
 
-  isValidUrl(url: string): boolean {
+  private isValidUrl(url: string): boolean {
     try {
       new URL(url);
       return true;
@@ -295,7 +296,7 @@ export class ChangeProductComponent implements OnInit, OnDestroy {
     }
   }
 
-  onSubmit(): void {
+  protected onSubmit(): void {
     this.submitted = true;
     this.error = null;
 
@@ -366,11 +367,13 @@ export class ChangeProductComponent implements OnInit, OnDestroy {
     }
   }
 
-  goBack(): void {
+  protected goBack(): void {
     this.router.navigate(['/admin']);
   }
 
-  noFutureDateValidator(control: AbstractControl): ValidationErrors | null {
+  private noFutureDateValidator(
+    control: AbstractControl
+  ): ValidationErrors | null {
     if (!control.value) {
       return null;
     }

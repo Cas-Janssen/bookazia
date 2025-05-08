@@ -46,6 +46,12 @@
     }
   },
   "PRODUCTS": {
+    "GO_BACK": "Go Back",
+    "STOCK": "Stock",
+    "ISBN": "ISBN",
+    "AUTHOR": "Author",
+    "PAGES": "Pages",
+    "DESCRIPTION": "Description",
     "LOADING_ERROR": "Error loading products!",
     "PRICE": "Price",
     "IN_STOCK": "In stock",

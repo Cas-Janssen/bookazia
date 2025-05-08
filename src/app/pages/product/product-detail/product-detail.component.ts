@@ -1,7 +1,7 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Product } from '../../../models/Product';
 import { ProductService } from '../../../services/product.service';
-import { NgClass, NgFor, NgIf } from '@angular/common';
+import { NgClass, NgFor, NgIf, Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from '../../../services/auth.service';
@@ -11,7 +11,7 @@ import { Category } from '../../../models/Category';
 
 @Component({
   selector: 'app-product-detail',
-  imports: [NgFor, NgClass, NgIf, TranslatePipe],
+  imports: [NgFor, NgIf, TranslatePipe],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss',
 })
@@ -28,6 +28,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   private route: ActivatedRoute = inject(ActivatedRoute);
   private router: Router = inject(Router);
   private translateService: TranslateService = inject(TranslateService);
+  private location: Location = inject(Location);
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -103,5 +104,8 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     } else {
       return category.nameEn || '';
     }
+  }
+  protected goBack(): void {
+    this.location.back();
   }
 }
