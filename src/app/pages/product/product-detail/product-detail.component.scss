@@ -128,5 +128,11 @@
         margin-right: 10px;
       }
     }
+
+    .add-to-cart:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+      color: #666;
+    }
   }
 }

@@ -4,17 +4,19 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { NgClass, NgIf, Location } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  imports: [FormsModule, NgIf, NgClass],
+  imports: [FormsModule, NgIf, NgClass, TranslatePipe],
 })
 export class LoginComponent implements OnDestroy {
   private router: Router = inject(Router);
   private authService: AuthService = inject(AuthService);
   private destroy$: Subject<void> = new Subject<void>();
+  private translate: TranslateService = inject(TranslateService);
   protected email: string = '';
   protected password: string = '';
   protected errorMessage: string | null = null;
@@ -42,7 +44,7 @@ export class LoginComponent implements OnDestroy {
     if (this.isInputFieldEmpty()) {
       return;
     } else if (this.isButtonDisabled) {
-      this.errorMessage = 'Please change a value before submitting again!';
+      this.errorMessage = this.translate.instant('LOGIN.ERROR_CHANGE_VALUE');
     } else {
       this.authService
         .login(loginData)
@@ -50,16 +52,18 @@ export class LoginComponent implements OnDestroy {
         .subscribe({
           next: () => {
             this.errorMessage = null;
-            this.router.navigate(['/']);
+            this.router.navigate(['/profile']);
           },
           error: () => {
-            this.errorMessage =
-              'The combination of email address and password is not valid!';
+            this.errorMessage = this.translate.instant(
+              'LOGIN.ERROR_INVALID_COMBINATION'
+            );
             this.isButtonDisabled = true;
           },
         });
     }
   }
+
   protected onInputChange(): void {
     this.errorMessage = null;
     this.isButtonDisabled = false;
@@ -69,7 +73,7 @@ export class LoginComponent implements OnDestroy {
   private isInputFieldEmpty(): boolean {
     if (this.email == '' || this.password == '') {
       this.isButtonDisabled = true;
-      this.errorMessage = 'Please fill in all fields';
+      this.errorMessage = this.translate.instant('LOGIN.ERROR_FILL_FIELDS');
       return true;
     } else {
       this.isButtonDisabled = false;

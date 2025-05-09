@@ -4,7 +4,7 @@ import { NgIf } from '@angular/common';
 import { SearchFiltersComponent } from './search-filters/search-filters.component';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
 import { LanguageSwitchComponent } from './language-switch/language-switch.component';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ProfileOptionsComponent } from './profile-options/profile-options.component';
@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
   public isLoggedIn: boolean = false;
   protected isProfileMenuOpen: boolean = false;
-  private authService: AuthService = inject(AuthService);
+  private authService = inject(AuthService);
 
   ngOnInit(): void {
     this.authService.currentLoginStatus

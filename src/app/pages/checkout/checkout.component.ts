@@ -11,6 +11,8 @@ import { AuthService } from '../../services/auth.service';
 import { CartProductDetailed } from '../../models/CartProductDetailed';
 import { Subject, takeUntil } from 'rxjs';
 import { SimpleCartProduct } from '../../models/SimpleCartProduct';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-checkout',
@@ -21,6 +23,7 @@ import { SimpleCartProduct } from '../../models/SimpleCartProduct';
     DeliveryOptionComponent,
     PaymentComponent,
     NgIf,
+    TranslatePipe,
   ],
 })
 export class CheckoutComponent implements OnDestroy {
@@ -32,6 +35,8 @@ export class CheckoutComponent implements OnDestroy {
   private cartService: CartService = inject(CartService);
   private orderService: OrderService = inject(OrderService);
   private authService: AuthService = inject(AuthService);
+  private snackBar: MatSnackBar = inject(MatSnackBar);
+  private translate: TranslateService = inject(TranslateService);
 
   ngOnDestroy(): void {
     this.destroy$.next();
@@ -42,7 +47,10 @@ export class CheckoutComponent implements OnDestroy {
     if (this.isStepValid()) {
       this.currentStep++;
     } else {
-      window.alert('Please fill out all required fields before proceeding.');
+      this.showSnackBar(
+        this.translate.instant('CHECKOUT.VALIDATION.FILL_REQUIRED_FIELDS'),
+        'error-snackbar'
+      );
     }
   }
 
@@ -73,7 +81,10 @@ export class CheckoutComponent implements OnDestroy {
 
   protected submitOrder(): void {
     if (!this.isStepValid()) {
-      window.alert('Please fill out all required fields before proceeding.');
+      this.showSnackBar(
+        this.translate.instant('CHECKOUT.VALIDATION.FILL_REQUIRED_FIELDS'),
+        'error-snackbar'
+      );
       return;
     }
     if (!this.authService.isAuthenticated()) {
@@ -83,16 +94,20 @@ export class CheckoutComponent implements OnDestroy {
         .subscribe({
           next: (cartProducts) => {
             if (!cartProducts || cartProducts.length === 0) {
-              window.alert(
-                'Your cart is empty. Please add items to your cart before placing an order.'
+              this.showSnackBar(
+                this.translate.instant('CHECKOUT.VALIDATION.EMPTY_CART'),
+                'error-snackbar'
               );
               return;
             }
             const totalPrice =
               this.cartService.getTotalPriceOfCart(cartProducts);
             if (totalPrice <= 0) {
-              window.alert(
-                'Your cart total price is invalid. Please check your cart items.'
+              this.showSnackBar(
+                this.translate.instant(
+                  'CHECKOUT.VALIDATION.INVALID_TOTAL_PRICE'
+                ),
+                'error-snackbar'
               );
               return;
             }
@@ -109,7 +124,10 @@ export class CheckoutComponent implements OnDestroy {
           },
           error: (error) => {
             console.error('Error fetching cart products:', error);
-            window.alert('An error occurred while fetching cart products.');
+            this.showSnackBar(
+              this.translate.instant('CHECKOUT.VALIDATION.FETCH_CART_ERROR'),
+              'error-snackbar'
+            );
           },
         });
     } else {
@@ -121,14 +139,18 @@ export class CheckoutComponent implements OnDestroy {
         .subscribe({
           next: (cart) => {
             if (!cart || cart.cartItems.length === 0) {
-              window.alert(
-                'Your cart is empty. Please add items to your cart before placing an order.'
+              this.showSnackBar(
+                this.translate.instant('CHECKOUT.VALIDATION.EMPTY_CART'),
+                'error-snackbar'
               );
               return;
             }
             if (cart.totalPrice <= 0) {
-              window.alert(
-                'Your cart total price is invalid. Please check your cart items.'
+              this.showSnackBar(
+                this.translate.instant(
+                  'CHECKOUT.VALIDATION.INVALID_TOTAL_PRICE'
+                ),
+                'error-snackbar'
               );
               return;
             }
@@ -144,7 +166,10 @@ export class CheckoutComponent implements OnDestroy {
           },
           error: (error) => {
             console.error('Error fetching cart products:', error);
-            window.alert('An error occurred while fetching cart products.');
+            this.showSnackBar(
+              this.translate.instant('CHECKOUT.VALIDATION.FETCH_CART_ERROR'),
+              'error-snackbar'
+            );
           },
         });
     }
@@ -167,8 +192,19 @@ export class CheckoutComponent implements OnDestroy {
       phoneNumber: this.personalInfo.phoneNumber,
       cartItems: cartItems,
     };
-    console.log('Order:', order);
     this.orderService.placeOrder(order);
-    //this.cartService.clearCartItems();
+    this.cartService.clearCartItems();
+  }
+
+  private showSnackBar(
+    message: string,
+    panelClass: string = 'info-snackbar'
+  ): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000,
+      verticalPosition: 'top',
+      horizontalPosition: 'center',
+      panelClass: [panelClass],
+    });
   }
 }

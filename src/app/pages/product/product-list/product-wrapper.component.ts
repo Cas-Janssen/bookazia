@@ -87,13 +87,6 @@ export class ProductWrapperComponent implements OnInit, OnDestroy {
         },
       });
   }
-  public goToProductDetails(product: Product): void {
-    this.router.navigate([
-      `/products/${product.id}/${product.title
-        .replaceAll(' ', '-')
-        .toLowerCase()}-${product.isbn}`,
-    ]);
-  }
 
   protected goToHome(): void {
     this.router.navigate(['/home']);

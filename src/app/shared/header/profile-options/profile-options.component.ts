@@ -1,9 +1,16 @@
-import { Component, Output, EventEmitter, Input, inject } from '@angular/core';
+import {
+  Component,
+  Output,
+  EventEmitter,
+  Input,
+  inject,
+  HostListener,
+  ElementRef,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AuthService } from '../../../services/auth.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-profile-options',
@@ -16,8 +23,21 @@ export class ProfileOptionsComponent {
   @Output() closeMenu = new EventEmitter<void>();
   private router: Router = inject(Router);
   private authService: AuthService = inject(AuthService);
-  protected isAdmin: boolean = false; // TODO: Implement admin check logic
-  //Observable<boolean> = this.authService.isAdmin();
+  private elementRef: ElementRef = inject(ElementRef);
+  protected isAdmin: boolean = false;
+
+  constructor() {
+    this.authService.isAdminUser().subscribe((isAdmin) => {
+      this.isAdmin = isAdmin;
+    });
+  }
+
+  @HostListener('document:click', ['$event'])
+  public onClickOutside(event: MouseEvent): void {
+    if (this.isOpen && !this.elementRef.nativeElement.contains(event.target)) {
+      this.closeMenu.emit();
+    }
+  }
 
   protected goToAdminMenu(): void {
     this.router.navigate(['/admin']);

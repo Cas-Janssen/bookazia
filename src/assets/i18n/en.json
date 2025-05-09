@@ -74,25 +74,42 @@
     "BACK_TO_HOME": "Back to Home"
   },
   "CHECKOUT": {
+    "TITLE": "Checkout",
+    "PERSONAL_INFO": {
+      "TITLE": "Step 1: Personal Information",
+      "FIRST_NAME": "First Name",
+      "MIDDLE_NAME": "Middle Name (Optional)",
+      "LAST_NAME": "Last Name",
+      "ADDRESS": "Address",
+      "CITY": "City",
+      "POSTAL_CODE": "Postal Code",
+      "EMAIL": "Email",
+      "PHONE_NUMBER": "Phone Number (Optional)"
+    },
     "DELIVERY": {
-      "TITLE": "Step 2: Choose Delivery Option",
+      "TITLE": "Step 2: Delivery Option",
       "STANDARD": "Standard Delivery",
       "EXPRESS": "Express Delivery"
     },
     "PAYMENT": {
-      "TITLE": "Step 3: Choose Payment Method",
-      "PAYPAL": "PayPal",
+      "TITLE": "Step 3: Payment Method",
       "CREDIT_CARD": "Credit Card",
-      "BANK_TRANSFER": "Bank Transfer",
-      "IDEAL": "iDEAL"
+      "PAYPAL": "PayPal",
+      "IDEAL": "Ideal",
+      "BANK_TRANSFER": "Bank Transfer"
+    },
+    "BUTTONS": {
+      "BACK": "Back",
+      "NEXT": "Next",
+      "BUY": "Buy"
     }
   },
   "CART": {
-    "TITLE": "Shopping Cart",
     "PRICE": "Price",
     "QUANTITY": "Quantity",
     "TOTAL": "Total",
     "REMOVE_ITEM": "Remove item",
+    "TOTAL_PRICE": "Total Price",
     "CLEAR_CART": "Clear Cart",
     "PLACE_ORDER": "Place Order",
     "EMPTY_TITLE": "Your Shopping Cart is Empty",
@@ -101,7 +118,18 @@
     "SUGGESTIONS_TITLE": "You might want to:",
     "SUGGESTION_1": "Check out our bestsellers and new releases",
     "SUGGESTION_2": "Explore books by your favorite authors",
-    "SUGGESTION_3": "View your previously saved items in your wishlist"
+    "SUGGESTION_3": "View your previously saved items in your wishlist",
+    "ITEM_ADDED": "Product added to cart!",
+    "ITEM_ALREADY_IN_CART": "Product already in cart!",
+    "ITEM_REMOVED": "Product removed from cart!",
+    "ITEM_NOT_FOUND": "Product not found in cart!",
+    "ITEM_QUANTITY_UPDATED": "Cart item quantity updated!",
+    "CART_CLEARED": "Cart cleared!",
+    "ERROR_ADDING_ITEM": "Error adding product to cart. Please try again later.",
+    "ERROR_REMOVING_ITEM": "Error removing product from cart. Please try again later.",
+    "ERROR_UPDATING_ITEM": "Error updating cart item. Please try again later.",
+    "ERROR_FETCHING_CART": "Error fetching shopping cart. Please try again later.",
+    "ITEM_NOT_AVAILABLE": "Product is not available. Try again later."
   },
   "FOOTER": {
     "ABOUT_US": "About Us",
@@ -274,5 +302,41 @@
       "DESCRIPTION": "Update book details",
       "SUBMIT": "Update book"
     }
+  },
+  "REGISTER": {
+    "GO_BACK": "Go back",
+    "LOGIN_DETAILS": "Login details:",
+    "USER_DETAILS": "User details:",
+    "EMAIL": "Email",
+    "EMAIL_PLACEHOLDER": "example@email.com",
+    "EMAIL_REQUIRED": "Email is required.",
+    "EMAIL_INVALID": "Please enter a valid email address.",
+    "PASSWORD": "Password",
+    "PASSWORD_PLACEHOLDER": "Password123!",
+    "FIRST_NAME": "First name",
+    "FIRST_NAME_PLACEHOLDER": "John",
+    "MIDDLE_NAME": "Middle name",
+    "MIDDLE_NAME_PLACEHOLDER": "William",
+    "LAST_NAME": "Last name",
+    "LAST_NAME_PLACEHOLDER": "Doe",
+    "SUBMIT": "Submit",
+    "ERROR_FILL_FIELDS": "Please fill in all fields.",
+    "ERROR_INVALID_EMAIL": "Please enter a valid email address.",
+    "ERROR_PASSWORD_REQUIREMENTS": "Password must be at least 8 characters and contain at least one uppercase letter, one lowercase letter, one number, and one special character!",
+    "SUCCESS": "Registration successful! You are now logged in."
+  },
+  "LOGIN": {
+    "GO_BACK": "Go back",
+    "TITLE": "Login",
+    "REGISTER": "Register",
+    "EMAIL": "Email",
+    "EMAIL_PLACEHOLDER": "example@email.com",
+    "PASSWORD": "Password",
+    "PASSWORD_PLACEHOLDER": "Password123!",
+    "FORGOT_PASSWORD": "Forgot password?",
+    "BUTTON": "Login",
+    "ERROR_FILL_FIELDS": "Please fill in all fields.",
+    "ERROR_CHANGE_VALUE": "Please change a value before submitting again!",
+    "ERROR_INVALID_COMBINATION": "The combination of email address and password is not valid!"
   }
 }

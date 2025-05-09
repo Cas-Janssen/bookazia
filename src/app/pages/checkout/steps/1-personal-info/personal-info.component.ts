@@ -10,13 +10,13 @@ import { FormsModule } from '@angular/forms';
 import { UserService } from '../../../../services/user.service';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from '../../../../services/auth.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-personal-info',
   templateUrl: './personal-info.component.html',
   styleUrls: ['./personal-info.component.scss'],
-  standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, TranslatePipe],
 })
 export class PersonalInfoComponent implements OnInit, OnDestroy {
   @Output() personalInfoChange = new EventEmitter<any>();

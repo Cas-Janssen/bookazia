@@ -1,5 +1,3 @@
-<h1 class="cart-title">{{ "CART.TITLE" | translate }}</h1>
-
 <div class="cart-container" *ngIf="cartProducts.length >= 1">
   <section class="cart-item" *ngFor="let product of cartProducts">
     <img
@@ -38,6 +36,11 @@
       </p>
     </div>
   </section>
+
+  <div class="cart-total" *ngIf="cartProducts.length >= 1">
+    <h3 class="cart-total__label">{{ "CART.TOTAL_PRICE" | translate }}:</h3>
+    <p class="cart-total__value">€{{ totalPrice.toFixed(2) }}</p>
+  </div>
 
   <div class="cart-actions">
     <button class="cart-clear-btn" (click)="clearCartItems()">

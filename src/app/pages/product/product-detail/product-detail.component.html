@@ -64,7 +64,11 @@
         {{ getLocalizedCategoryName(category) }}
       </span>
     </div>
-    <button class="add-to-cart" (click)="addToCart(book)">
+    <button
+      class="add-to-cart"
+      (click)="addToCart(book)"
+      [disabled]="!book.enabled || book.stock <= 0"
+    >
       {{ "PRODUCTS.ADD_TO_CART" | translate }}
     </button>
     <button class="add-to-favorites" (click)="addToFavorites(book)">

@@ -1,7 +1,9 @@
 <div class="step">
-  <h3>Step 1: Personal Information</h3>
+  <h3>{{ "CHECKOUT.PERSONAL_INFO.TITLE" | translate }}</h3>
   <form>
-    <label for="firstName">First Name *</label>
+    <label for="firstName"
+      >{{ "CHECKOUT.PERSONAL_INFO.FIRST_NAME" | translate }} *</label
+    >
     <input
       type="text"
       id="firstName"
@@ -10,7 +12,9 @@
       (ngModelChange)="onInputChange()"
     />
 
-    <label for="middleName">Middle Name (Optional)</label>
+    <label for="middleName">{{
+      "CHECKOUT.PERSONAL_INFO.MIDDLE_NAME" | translate
+    }}</label>
     <input
       type="text"
       id="middleName"
@@ -19,7 +23,9 @@
       (ngModelChange)="onInputChange()"
     />
 
-    <label for="lastName">Last Name *</label>
+    <label for="lastName"
+      >{{ "CHECKOUT.PERSONAL_INFO.LAST_NAME" | translate }} *</label
+    >
     <input
       type="text"
       id="lastName"
@@ -28,7 +34,9 @@
       (ngModelChange)="onInputChange()"
     />
 
-    <label for="address">Address *</label>
+    <label for="address"
+      >{{ "CHECKOUT.PERSONAL_INFO.ADDRESS" | translate }} *</label
+    >
     <input
       type="text"
       id="address"
@@ -37,7 +45,7 @@
       (ngModelChange)="onInputChange()"
     />
 
-    <label for="city">City *</label>
+    <label for="city">{{ "CHECKOUT.PERSONAL_INFO.CITY" | translate }} *</label>
     <input
       type="text"
       id="city"
@@ -46,7 +54,9 @@
       (ngModelChange)="onInputChange()"
     />
 
-    <label for="postalCode">Postal Code *</label>
+    <label for="postalCode"
+      >{{ "CHECKOUT.PERSONAL_INFO.POSTAL_CODE" | translate }} *</label
+    >
     <input
       type="text"
       id="postalCode"
@@ -55,7 +65,9 @@
       (ngModelChange)="onInputChange()"
     />
 
-    <label for="email">Email *</label>
+    <label for="email"
+      >{{ "CHECKOUT.PERSONAL_INFO.EMAIL" | translate }} *</label
+    >
     <input
       type="email"
       id="email"
@@ -64,7 +76,9 @@
       (ngModelChange)="onInputChange()"
     />
 
-    <label for="phoneNumber">Phone Number (Optional)</label>
+    <label for="phoneNumber">{{
+      "CHECKOUT.PERSONAL_INFO.PHONE_NUMBER" | translate
+    }}</label>
     <input
       type="text"
       id="phoneNumber"

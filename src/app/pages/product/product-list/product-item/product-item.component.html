@@ -1,4 +1,8 @@
-<section *ngIf="product != null" class="product-item">
+<section
+  *ngIf="product != null"
+  class="product-item"
+  (click)="goToProductDetails(product)"
+>
   <div class="product-image">
     <img [src]="product.coverImgUrl" alt="{{ product.title }}" />
   </div>
@@ -6,33 +10,50 @@
     <h2 class="product-title">{{ product.title }}</h2>
     <ul class="product-info">
       <li *ngFor="let author of product.authors">
-        <strong>Author:</strong> {{ author.firstName }} {{ author.lastName }}
+        <strong>{{ "PRODUCTS.AUTHOR" | translate }}:</strong>
+        {{ author.firstName }} {{ author.lastName }}
       </li>
-      <li><strong>Language:</strong> {{ product.originalLanguage }}</li>
-      <li><strong>ISBN:</strong> {{ product.isbn }}</li>
-      <li><strong>Publication Date:</strong> {{ product.publicationDate }}</li>
-      <li><strong>Pages:</strong> {{ product.pages }}</li>
       <li>
-        <strong>Stock: </strong>
+        <strong>{{ "PRODUCTS.ORIGINAL_LANGUAGE" | translate }}:</strong>
+        {{ product.originalLanguage }}
+      </li>
+      <li>
+        <strong>{{ "PRODUCTS.ISBN" | translate }}:</strong> {{ product.isbn }}
+      </li>
+      <li>
+        <strong>{{ "PRODUCTS.PUBLICATION_DATE" | translate }}:</strong>
+        {{ product.publicationDate }}
+      </li>
+      <li>
+        <strong>{{ "PRODUCTS.PAGES" | translate }}:</strong> {{ product.pages }}
+      </li>
+      <li>
+        <strong>{{ "PRODUCTS.STOCK" | translate }}: </strong>
         <span *ngIf="product.stock > 0; else outOfStock">{{
           product.stock
         }}</span>
-        <ng-template #outOfStock
-          ><span class="out-of-stock">Out of Stock</span></ng-template
-        >
+        <ng-template #outOfStock>
+          <span class="out-of-stock">{{
+            "PRODUCTS.OUT_OF_STOCK" | translate
+          }}</span>
+        </ng-template>
       </li>
-      <li><strong>Price:</strong> ${{ product.price }}</li>
+      <li>
+        <strong>{{ "PRODUCTS.PRICE" | translate }}:</strong> ${{
+          product.price
+        }}
+      </li>
     </ul>
     <button
       class="add-to-cart-btn"
       [disabled]="product.stock === 0"
       [ngClass]="{ disabled: product.stock === 0 }"
-      (click)="addToCart(product)"
+      (click)="addToCart(product); $event.stopPropagation()"
     >
-      Add to Cart
+      {{ "PRODUCTS.ADD_TO_CART" | translate }}
     </button>
   </div>
 </section>
 <div *ngIf="product == null">
-  <h1>No products found!</h1>
+  <h1>{{ "PRODUCTS.NO_PRODUCTS_FOUND" | translate }}</h1>
 </div>

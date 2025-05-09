@@ -1,9 +1,5 @@
 <section *ngIf="products != null" class="product-list">
-  <app-product-item
-    *ngFor="let product of products"
-    [product]="product"
-    (click)="goToProductDetails(product)"
-  />
+  <app-product-item *ngFor="let product of products" [product]="product" />
 </section>
 <section *ngIf="products?.length === 0" class="no-products-container">
   <div class="no-products-content">

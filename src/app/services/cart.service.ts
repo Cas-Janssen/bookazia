@@ -9,6 +9,8 @@ import { CartProduct } from '../models/CartProduct';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { ShoppingCart } from '../models/ShoppingCart';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root',
@@ -17,13 +19,27 @@ export class CartService implements OnDestroy {
   private authService: AuthService = inject(AuthService);
   private productService: ProductService = inject(ProductService);
   private httpClient: HttpClient = inject(HttpClient);
+  private snackBar: MatSnackBar = inject(MatSnackBar);
+  private translate: TranslateService = inject(TranslateService);
   private apiLink: String = environment.apiUrl;
-  public cartProducts: CartProduct[] = [];
   private destroy$: Subject<void> = new Subject<void>();
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  private showSnackBar(
+    messageKey: string,
+    panelClass: string = 'info-snackbar'
+  ): void {
+    const message = this.translate.instant(messageKey);
+    this.snackBar.open(message, 'Close', {
+      verticalPosition: 'top',
+      horizontalPosition: 'center',
+      duration: 3000,
+      panelClass: [panelClass],
+    });
   }
 
   public getShoppingCartFromDatabase(): Observable<ShoppingCart> {
@@ -65,7 +81,7 @@ export class CartService implements OnDestroy {
 
   public addCartItem(product: Product): void {
     if (product.stock < 1) {
-      window.alert('Product is not available. Try again later.');
+      this.showSnackBar('CART.ITEM_NOT_AVAILABLE', 'error-snackbar');
       return;
     }
     if (!this.authService.isAuthenticated()) {
@@ -83,7 +99,7 @@ export class CartService implements OnDestroy {
       next: (cart) => {
         const cartItems = cart.cartItems.map((item) => item.product.id);
         if (cartItems.includes(product.id)) {
-          window.alert('Product already in cart!');
+          this.showSnackBar('CART.ITEM_ALREADY_IN_CART', 'info-snackbar');
           return;
         }
         this.httpClient
@@ -92,10 +108,17 @@ export class CartService implements OnDestroy {
             quantity: 1,
           })
           .pipe(takeUntil(this.destroy$))
-          .subscribe({});
+          .subscribe({
+            next: () => {
+              this.showSnackBar('CART.ITEM_ADDED', 'success-snackbar');
+            },
+            error: () => {
+              this.showSnackBar('CART.ERROR_ADDING_ITEM', 'error-snackbar');
+            },
+          });
       },
-      error: (error) => {
-        console.error('Error fetching shopping cart:', error);
+      error: () => {
+        this.showSnackBar('CART.ERROR_FETCHING_CART', 'error-snackbar');
       },
     });
   }
@@ -106,12 +129,13 @@ export class CartService implements OnDestroy {
       (cartProduct) => cartProduct.productId === product.id
     );
     if (productAlreadyInCart) {
-      window.alert('Product already in cart!');
+      this.showSnackBar('Product already in cart!', 'info-snackbar');
       return;
     } else {
       cartItems.push({ productId: product.id, quantity: 1 });
     }
     localStorage.setItem('CartItems', JSON.stringify(cartItems));
+    this.showSnackBar('Product added to cart!', 'success-snackbar');
   }
 
   public changeCartItemQuantity(productCart: CartProductDetailed): void {
@@ -124,8 +148,9 @@ export class CartService implements OnDestroy {
       if (product) {
         product.quantity = Number(productCart.quantity);
         localStorage.setItem('CartItems', JSON.stringify(cartItems));
+        this.showSnackBar('CART.ITEM_QUANTITY_UPDATED', 'success-snackbar');
       } else {
-        window.alert('Product not found in cart!');
+        this.showSnackBar('CART.ITEM_NOT_FOUND', 'error-snackbar');
       }
     } else {
       this.httpClient
@@ -135,17 +160,17 @@ export class CartService implements OnDestroy {
         })
         .pipe(takeUntil(this.destroy$))
         .subscribe({
-          next: (response) => {
-            window.alert('Cart item updated:');
+          next: () => {
+            this.showSnackBar('CART.ITEM_QUANTITY_UPDATED', 'success-snackbar');
           },
-          error: (error) => {
-            window.alert('Error updating cart item. Please try again later.');
+          error: () => {
+            this.showSnackBar('CART.ERROR_UPDATING_ITEM', 'error-snackbar');
           },
         });
     }
   }
 
-  public removeCartItem(cartProduct: CartProductDetailed): Observable<void> {
+  public removeCartItem(cartProduct: CartProductDetailed): void {
     if (!this.authService.isAuthenticated()) {
       const cartItems: SimpleCartProduct[] =
         this.getCartItemsFromLocalStorage();
@@ -155,25 +180,43 @@ export class CartService implements OnDestroy {
       if (product) {
         cartItems.splice(cartItems.indexOf(product), 1);
         localStorage.setItem('CartItems', JSON.stringify(cartItems));
+        this.showSnackBar('CART.ITEM_REMOVED', 'success-snackbar');
       } else {
-        window.alert('Product not found in cart!');
+        this.showSnackBar('CART.ITEM_NOT_FOUND', 'error-snackbar');
       }
-      return of();
+      return;
     } else {
-      return this.httpClient.delete<void>(
-        `${this.apiLink}/user/cart/remove/${cartProduct.id}`
-      );
+      this.httpClient
+        .delete<void>(`${this.apiLink}/user/cart/remove/${cartProduct.id}`)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: () => {
+            this.showSnackBar('CART.ITEM_REMOVED', 'success-snackbar');
+          },
+          error: () => {
+            this.showSnackBar('CART.ERROR_REMOVING_ITEM', 'error-snackbar');
+          },
+        });
+      return;
     }
   }
 
   public clearCartItems(): void {
     if (!this.authService.isAuthenticated()) {
       localStorage.removeItem('CartItems');
+      this.showSnackBar('CART.CART_CLEARED', 'success-snackbar');
     } else {
       this.httpClient
         .delete<void>(this.apiLink + '/user/cart/clear')
         .pipe(takeUntil(this.destroy$))
-        .subscribe({});
+        .subscribe({
+          next: () => {
+            this.showSnackBar('CART.CART_CLEARED', 'success-snackbar');
+          },
+          error: () => {
+            this.showSnackBar('CART.ERROR_REMOVING_ITEM', 'error-snackbar');
+          },
+        });
     }
   }
 

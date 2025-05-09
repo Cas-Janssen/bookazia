@@ -8,7 +8,7 @@
       [(ngModel)]="selectedPaymentMethod"
       (ngModelChange)="onPaymentMethodChange()"
     />
-    Credit Card
+    {{ "CHECKOUT.PAYMENT.CREDIT_CARD" | translate }}
   </label>
   <label>
     <input
@@ -18,7 +18,7 @@
       [(ngModel)]="selectedPaymentMethod"
       (ngModelChange)="onPaymentMethodChange()"
     />
-    PayPal
+    {{ "CHECKOUT.PAYMENT.PAYPAL" | translate }}
   </label>
   <label>
     <input
@@ -28,7 +28,7 @@
       [(ngModel)]="selectedPaymentMethod"
       (ngModelChange)="onPaymentMethodChange()"
     />
-    Ideal
+    {{ "CHECKOUT.PAYMENT.IDEAL" | translate }}
   </label>
   <label>
     <input
@@ -38,6 +38,6 @@
       [(ngModel)]="selectedPaymentMethod"
       (ngModelChange)="onPaymentMethodChange()"
     />
-    Bank Transfer
+    {{ "CHECKOUT.PAYMENT.BANK_TRANSFER" | translate }}
   </label>
 </div>

@@ -1,11 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../../services/product.service';
 import { AuthService } from '../../../services/auth.service';
-import { UserService } from '../../../services/user.service';
 import { Product } from '../../../models/Product';
 import { Subject, takeUntil, finalize } from 'rxjs';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
@@ -43,21 +42,17 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
   confirmTitle = '';
 
   selectedProduct: Product | null = null;
-
+  private productService: ProductService = inject(ProductService);
+  private authService: AuthService = inject(AuthService);
+  private router: Router = inject(Router);
   private destroy$ = new Subject<void>();
 
-  constructor(
-    private productService: ProductService,
-    private authService: AuthService,
-    private userService: UserService,
-    private router: Router
-  ) {}
-
   ngOnInit(): void {
-    if (!this.authService.isAdmin()) {
-      this.router.navigate(['/']);
-      return;
-    }
+    this.authService.isAdminUser().subscribe((isAdmin) => {
+      if (!isAdmin) {
+        this.router.navigate(['/']);
+      }
+    });
     this.loadProducts();
   }
 

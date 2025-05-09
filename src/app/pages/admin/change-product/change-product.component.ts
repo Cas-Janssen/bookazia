@@ -74,10 +74,11 @@ export class ChangeProductComponent implements OnInit, OnDestroy {
   private authService: AuthService = inject(AuthService);
 
   ngOnInit(): void {
-    if (!this.authService.isAdmin()) {
-      this.router.navigate(['/']);
-      return;
-    }
+    this.authService.isAdminUser().subscribe((isAdmin) => {
+      if (!isAdmin) {
+        this.router.navigate(['/']);
+      }
+    });
 
     const today = new Date();
     this.maxDate = today.toISOString().split('T')[0];
@@ -345,7 +346,7 @@ export class ChangeProductComponent implements OnInit, OnDestroy {
           this.success = true;
 
           setTimeout(() => {
-            this.router.navigate(['/admin/products']);
+            this.router.navigate(['/admin']);
           }, 1500);
         },
         error: (err) => {

@@ -252,6 +252,29 @@
   }
 }
 
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+
+  &__label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+  }
+
+  &__value {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #007bff;
+  }
+}
+
 @keyframes float1 {
   0%,
   100% {

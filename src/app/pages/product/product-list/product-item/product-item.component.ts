@@ -1,18 +1,29 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { Product } from '../../../../models/Product';
 import { NgClass, NgFor, NgIf } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
+import { Router } from '@angular/router';
+import { CartService } from '../../../../services/cart.service';
 
 @Component({
   selector: 'app-product-item',
   templateUrl: './product-item.component.html',
   styleUrl: './product-item.component.scss',
-  imports: [NgIf, NgFor, NgClass],
+  imports: [NgIf, NgFor, NgClass, TranslatePipe],
 })
 export class ProductItemComponent {
   @Input() product!: Product;
+  private router: Router = inject(Router);
+  private cartService: CartService = inject(CartService);
 
   addToCart(product: Product): void {
-    console.log(`Product added to cart: ${product.title}`);
-    // Add logic to add the product to the shopping cart
+    this.cartService.addCartItem(product);
+  }
+  protected goToProductDetails(product: Product): void {
+    this.router.navigate([
+      `/products/${product.id}/${product.title
+        .replaceAll(' ', '-')
+        .toLowerCase()}-${product.isbn}`,
+    ]);
   }
 }

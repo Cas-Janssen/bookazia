@@ -34,6 +34,8 @@ export class CartComponent implements OnInit, OnDestroy {
         .subscribe({
           next: (productItems: CartProductDetailed[]) => {
             this.cartProducts = productItems;
+            this.totalPrice =
+              this.cartService.getTotalPriceOfCart(productItems);
           },
           error: (err) => {
             console.error('Error loading cart products:', err);
@@ -72,27 +74,21 @@ export class CartComponent implements OnInit, OnDestroy {
   protected updateTotalPrice(product: CartProductDetailed): void {
     product.totalPrice = (product.quantity * product.price).toFixed(2);
     this.cartService.changeCartItemQuantity(product);
+    this.totalPrice = 0;
+    for (product of this.cartProducts) {
+      this.totalPrice += product.price * product.quantity;
+    }
   }
 
   protected removeCartItem(product: CartProductDetailed): void {
-    if (this.cartProducts.length === 1) {
-      this.cartProducts = [];
-    }
-    this.cartService
-      .removeCartItem(product)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: () => {},
-        error: (err) => {
-          console.error('Error removing cart item:', err);
-          window.alert('Failed to remove the item. Please try again.');
-        },
-        complete: () => {
-          {
-            this.loadProducts();
-          }
-        },
-      });
+    this.cartService.removeCartItem(product);
+    this.cartProducts = this.cartProducts.filter(
+      (item) => item.id !== product.id
+    );
+    this.totalPrice = this.cartProducts.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
   }
 
   protected clearCartItems(): void {
@@ -116,7 +112,7 @@ export class CartComponent implements OnInit, OnDestroy {
     return amount;
   }
 
-  navigateToBooks(): void {
+  protected navigateToBooks(): void {
     this.router.navigate(['/books']);
   }
 }
