@@ -6,6 +6,7 @@ import { AuthService } from '../../../services/auth.service';
 import { Subject, takeUntil } from 'rxjs';
 import { Router } from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register',
@@ -26,6 +27,7 @@ export class RegisterComponent {
   private location: Location = inject(Location);
   private authService: AuthService = inject(AuthService);
   private translate: TranslateService = inject(TranslateService);
+  private snackBar: MatSnackBar = inject(MatSnackBar);
 
   public goBack(): void {
     this.location.back();
@@ -58,7 +60,7 @@ export class RegisterComponent {
         .subscribe({
           next: () => {
             this.errorMessage = null;
-            window.alert(this.translate.instant('REGISTER.SUCCESS'));
+            this.showSnackBar('REGISTER.SUCCESS', 'success-snackbar');
             this.router.navigate(['/profile']);
           },
           error: () => {
@@ -102,5 +104,18 @@ export class RegisterComponent {
 
   private scrollToTop(): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  private showSnackBar(
+    messageKey: string,
+    panelClass: string = 'info-snackbar'
+  ): void {
+    const message = this.translate.instant(messageKey);
+    this.snackBar.open(message, this.translate.instant('SNACKBAR.CLOSE'), {
+      duration: 3000,
+      verticalPosition: 'top',
+      horizontalPosition: 'center',
+      panelClass: [panelClass],
+    });
   }
 }

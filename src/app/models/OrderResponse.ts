@@ -1,4 +1,4 @@
-interface OrderProducts {
+export interface OrderProduct {
   quantity: number;
   product: {
     id: number;
@@ -12,7 +12,7 @@ export interface OrderResponse {
   id: number;
   usedPaymentMethod: string;
   totalPrice: number;
-  orderProducts: OrderProducts[];
+  orderProducts: OrderProduct[];
   orderStatus: string;
   createdAt: Date;
   updatedAt: Date;

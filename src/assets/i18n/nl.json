@@ -4,14 +4,15 @@
     "SEARCH": "Zoeken...",
     "FAVORITE_ALT": "Icoon van een hart",
     "FAVORITES": "Favorieten",
-    "CART_ALT": "Icoon van een winkelwagentje",
+    "CART_ALT": "Icoon van een winkelwagen",
     "CART": "Winkelwagen",
     "LOGIN_ALT": "Rond icoon met een leeg silhouet van een persoon",
-    "LOGIN": "Aanmelden",
+    "LOGIN": "Inloggen",
     "ACCOUNT_ALT": "Account icoon",
     "ACCOUNT": "Account",
     "HOME": "Home",
-    "LOGOUT": "Afmelden",
+    "LOGOUT": "Uitloggen",
+    "LOGOUT_SUCCESS": "U bent succesvol uitgelogd.",
     "switchLanguage.EN": "English",
     "switchLanguage.NL": "Dutch",
     "ADMIN_MENU": "Admin Menu",
@@ -20,15 +21,15 @@
     "EDIT": "Profiel bewerken",
     "ALL": "Alle producten",
     "switchLanguage": {
-      "EN": "English",
+      "EN": "Engels",
       "NL": "Nederlands"
     }
   },
   "ORDERS": {
     "TITLE": "Mijn Bestellingen",
-    "NO_ORDERS_HEADING": "Geen bestellingen gevonden",
-    "NO_ORDERS": "U heeft nog geen bestellingen geplaatst.",
-    "SHOP_NOW": "Nu winkelen",
+    "NO_ORDERS_HEADING": "Geen Bestellingen Gevonden",
+    "NO_ORDERS": "Je hebt nog geen bestellingen geplaatst.",
+    "SHOP_NOW": "Nu Winkelen",
     "ORDER": "Bestelling",
     "PAYMENT_METHOD": "Betaalmethode",
     "TOTAL": "Totaal",
@@ -55,7 +56,7 @@
     "AUTHOR": "Auteur",
     "PAGES": "Pagina's",
     "DESCRIPTION": "Beschrijving",
-    "LOADING_ERROR": "Fout bij het laden van producten!",
+    "LOADING_ERROR": "Producten laden mislukt!",
     "PRICE": "Prijs",
     "IN_STOCK": "Op voorraad",
     "OUT_OF_STOCK": "Niet op voorraad",
@@ -63,8 +64,10 @@
     "ORIGINAL_LANGUAGE": "Oorspronkelijke taal",
     "PUBLISHER": "Uitgever",
     "CATEGORIES": "Categorieën",
-    "ADD_TO_CART": "Toevoegen aan winkelwagen",
+    "ADD_TO_CART": "Toevoegen aan winkelmandje",
     "ADD_TO_FAVORITES": "Toevoegen aan favorieten",
+    "NOT_AVAILABLE": "Niet beschikbaar",
+    "LOGIN_TO_SAVE": "Log in om items op te slaan",
     "NO_PRODUCTS_FOUND": "Geen producten gevonden. Probeer een andere categorie of zoekopdracht!",
     "NO_PRODUCTS_FOUND_TITLE": "Geen boeken gevonden",
     "NO_PRODUCTS_FOUND_MESSAGE": "We konden geen boeken vinden die overeenkomen met uw zoekcriteria.",
@@ -74,25 +77,26 @@
     "SUGGESTION_DIFFERENT_KEYWORDS": "Probeer te zoeken naar een ander boek of auteur",
     "CLEAR_FILTERS": "Filters wissen",
     "BROWSE_ALL": "Alle boeken bekijken",
-    "BACK_TO_HOME": "Terug naar huis"
+    "BACK_TO_HOME": "Terug naar Home",
+    "LOADING": "Boeken worden geladen..."
   },
   "CHECKOUT": {
     "TITLE": "Afrekenen",
     "PERSONAL_INFO": {
       "TITLE": "Stap 1: Persoonlijke gegevens",
       "FIRST_NAME": "Voornaam",
-      "MIDDLE_NAME": "Tussenvoegsel (optioneel)",
+      "MIDDLE_NAME": "Tussenvoegsel (Optioneel)",
       "LAST_NAME": "Achternaam",
       "ADDRESS": "Adres",
-      "CITY": "Stad",
+      "CITY": "Plaats",
       "POSTAL_CODE": "Postcode",
       "EMAIL": "E-mail",
-      "PHONE_NUMBER": "Telefoonnummer (optioneel)"
+      "PHONE_NUMBER": "Telefoonnummer (Optioneel)"
     },
     "DELIVERY": {
-      "TITLE": "Stap 2: Verzendoptie",
+      "TITLE": "Stap 2: Bezorgoptie",
       "STANDARD": "Standaard verzending",
-      "EXPRESS": "Express verzending"
+      "EXPRESS": "Expressverzending"
     },
     "PAYMENT": {
       "TITLE": "Stap 3: Betaalmethode",
@@ -104,31 +108,47 @@
     "BUTTONS": {
       "BACK": "Terug",
       "NEXT": "Volgende",
-      "BUY": "Koop"
+      "BUY": "Kopen"
+    },
+    "VALIDATION": {
+      "EMPTY_CART": "Uw winkelwagen is leeg. Voeg items toe aan uw winkelwagen voordat u verdergaat naar de kassa.",
+      "FETCH_CART_ERROR": "Fout bij het ophalen van winkelwagenitems. Probeer het later opnieuw."
     }
   },
   "CART": {
     "PRICE": "Prijs",
     "QUANTITY": "Aantal",
     "TOTAL": "Totaal",
-    "REMOVE_ITEM": "Verwijder item",
-    "TOTAL_PRICE": "Totaalprijs",
+    "REMOVE_ITEM": "Item verwijderen",
+    "TOTAL_PRICE": "Totale prijs",
     "CLEAR_CART": "Winkelwagen legen",
     "PLACE_ORDER": "Bestelling plaatsen",
     "EMPTY_TITLE": "Uw winkelwagen is leeg",
     "EMPTY_MESSAGE": "Het lijkt erop dat u nog geen boeken aan uw winkelwagen hebt toegevoegd. Blader door onze collectie om uw volgende geweldige leeservaring te vinden!",
     "BROWSE_BOOKS": "Boeken bekijken",
     "SUGGESTIONS_TITLE": "Misschien wilt u:",
-    "SUGGESTION_1": "Bekijk onze bestsellers en nieuwe releases",
+    "SUGGESTION_1": "Bekijk onze bestsellers en nieuwste releases",
     "SUGGESTION_2": "Blader door boeken van uw favoriete auteurs",
-    "SUGGESTION_3": "Bekijk uw eerder opgeslagen items in uw verlanglijstje"
+    "SUGGESTION_3": "Bekijk uw eerder opgeslagen items in uw verlanglijstje",
+    "ITEM_ADDED": "Product toegevoegd aan winkelwagen!",
+    "ITEM_ALREADY_IN_CART": "Product zit al in de winkelwagen!",
+    "ITEM_REMOVED": "Product verwijderd uit winkelwagen!",
+    "ITEM_NOT_FOUND": "Product niet gevonden in winkelwagen!",
+    "ITEM_QUANTITY_UPDATED": "Aantal winkelwagenitems bijgewerkt!",
+    "CART_CLEARED": "Winkelwagen geleegd!",
+    "ERROR_ADDING_ITEM": "Fout bij het toevoegen van het product aan de winkelwagen. Probeer het later opnieuw.",
+    "ERROR_REMOVING_ITEM": "Fout bij het verwijderen van het product uit de winkelwagen. Probeer het later opnieuw.",
+    "ERROR_UPDATING_ITEM": "Fout bij het bijwerken van het winkelwagenitem. Probeer het later opnieuw.",
+    "ERROR_FETCHING_CART": "Fout bij het ophalen van de winkelwagen. Probeer het later opnieuw.",
+    "ITEM_NOT_AVAILABLE": "Product is niet beschikbaar. Probeer het later opnieuw.",
+    "LOADING_CART": "Uw winkelwagen wordt geladen..."
   },
   "FOOTER": {
-    "ABOUT_US": "Over ons",
-    "ABOUT_TEXT": "Welkom bij Bookazia, jouw online boekhandel voor de beste boeken! Gemaakt door Cas Janssen, student aan de Hogeschool Leiden. Het is een fullstack applicatie gebouwd met Angular, Spring Boot en PostgreSQL.",
+    "ABOUT_US": "Over Ons",
+    "ABOUT_TEXT": "Welkom bij Bookazia, uw online boekhandel voor de beste boeken! Gemaakt door Cas Janssen, student aan de Hogeschool Leiden. Het is een fullstack applicatie gebouwd met Angular, Spring Boot en PostgreSQL.",
     "QUICK_LINKS": "Snelle links",
-    "FAQ": "FAQ",
-    "TERMS": "Voorwaarden",
+    "FAQ": "Veelgestelde vragen",
+    "TERMS": "Servicevoorwaarden",
     "PRIVACY": "Privacybeleid",
     "CONTACT": "Contact",
     "EMAIL": "E-mail",
@@ -147,14 +167,14 @@
       "PHONE": "Telefoonnummer",
       "ADDRESS": "Adres",
       "POSTAL_CODE": "Postcode",
-      "CITY": "Stad",
+      "CITY": "Plaats",
       "EDIT_PROFILE": "Profiel bewerken",
       "VIEW_ORDERS": "Mijn bestellingen bekijken"
     },
     "EDIT": {
       "TITLE": "Profiel bewerken",
       "DESCRIPTION": "Werk hieronder je accountgegevens bij",
-      "LOADING": "Je gegevens worden geladen...",
+      "LOADING": "Bezig met laden van je gegevens...",
       "PERSONAL_INFO": "Persoonlijke gegevens",
       "ADDRESS_INFO": "Adresgegevens",
       "FIRST_NAME": "Voornaam",
@@ -170,9 +190,9 @@
       "ADDRESS": "Straatnaam en huisnummer",
       "ADDRESS_PLACEHOLDER": "Voer je straatnaam en huisnummer in",
       "POSTAL_CODE": "Postcode",
-      "POSTAL_CODE_PLACEHOLDER": "Postcode invoeren",
-      "CITY": "Stad",
-      "CITY_PLACEHOLDER": "Stad invoeren",
+      "POSTAL_CODE_PLACEHOLDER": "Voer je postcode in",
+      "CITY": "Plaats",
+      "CITY_PLACEHOLDER": "Voer je plaats in",
       "REQUIRED_FIELD": "Dit veld is verplicht",
       "CANCEL": "Annuleren",
       "SAVE": "Wijzigingen opslaan",
@@ -186,13 +206,13 @@
   "ERROR": {
     "NOT_FOUND": {
       "TITLE": "Pagina niet gevonden",
-      "MESSAGE": "Oeps! De pagina die u zoekt, lijkt te zijn verwijderd.",
+      "MESSAGE": "Oeps! Het lijkt erop dat de pagina die u zoekt niet meer beschikbaar is.",
       "SUGGESTIONS": "U kunt proberen:",
       "SUGGESTION1": "De URL op typefouten te controleren",
       "SUGGESTION2": "Het navigatiemenu te gebruiken om te vinden wat u zoekt",
       "SUGGESTION3": "Door onze boekencategorieën te bladeren voor iets interessants om te lezen",
-      "HOME_BUTTON": "Naar Homepage",
-      "BACK_BUTTON": "Terug"
+      "HOME_BUTTON": "Ga naar Homepage",
+      "BACK_BUTTON": "Ga terug"
     }
   },
   "ADMIN": {
@@ -201,15 +221,16 @@
       "TITLE": "Admin Dashboard",
       "DESCRIPTION": "Beheer uw boekwinkelvoorraad en gebruikers",
       "PRODUCTS": "Boeken",
-      "USERS": "Admin Gebruikers",
+      "USERS": "Beheerders",
       "ADD_PRODUCT": "Nieuw boek toevoegen",
       "SEARCH": "Boeken zoeken",
-      "SEARCH_PLACEHOLDER": "Zoek op titel, ISBN, of auteur...",
+      "SEARCH_PLACEHOLDER": "Zoek op titel, ISBN of auteur...",
       "FILTER_STATUS": "Filter op status",
-      "ALL_PRODUCTS": "Alle Boeken",
-      "ACTIVE_PRODUCTS": "Actieve Boeken",
-      "INACTIVE_PRODUCTS": "Inactieve Boeken",
+      "ALL_PRODUCTS": "Alle boeken",
+      "ACTIVE_PRODUCTS": "Actieve boeken",
+      "INACTIVE_PRODUCTS": "Inactieve boeken",
       "COVER": "Kaft",
+      "TITLE_BOOK": "Titel",
       "PRICE": "Prijs",
       "STOCK": "Voorraad",
       "AUTHORS": "Auteurs",
@@ -220,69 +241,70 @@
       "DELETE": "Verwijderen",
       "STATUS_ACTIVE": "Actief",
       "STATUS_INACTIVE": "Inactief",
+      "EDIT_PRODUCT": "Boek bewerken",
       "NO_PRODUCTS_FOUND": "Geen boeken gevonden die overeenkomen met uw zoekcriteria.",
-      "SHOW_PRODUCT": "Zichtbaar maken",
-      "HIDE_PRODUCT": "Verbergen in de winkel",
-      "EDIT": "Details bewerken",
-      "LOADING_ERROR": "Het laden van producten is mislukt. Probeer het opnieuw.",
       "MAKE_VISIBLE_TITLE": "Product zichtbaar maken",
-      "HIDE_PRODUCT_TITLE": "Product verbergen in de winkel",
+      "HIDE_PRODUCT_TITLE": "Product verbergen uit de winkel",
       "MAKE_VISIBLE_MESSAGE": "Dit maakt \"{{title}}\" zichtbaar voor klanten. Wilt u doorgaan?",
-      "HIDE_PRODUCT_MESSAGE": "Dit verbergt \"{{title}}\" in de winkel. Klanten kunnen dit boek niet meer zien of kopen. Wilt u doorgaan?",
+      "HIDE_PRODUCT_MESSAGE": "Dit verbergt \"{{title}}\" uit de winkel. Klanten kunnen dit boek niet meer zien of kopen. Wilt u doorgaan?",
       "PRODUCT_ACTIVATED": "Product succesvol geactiveerd.",
       "PRODUCT_DEACTIVATED": "Product succesvol verborgen.",
-      "STATUS_UPDATE_ERROR": "Het bijwerken van de productstatus is mislukt. Probeer het opnieuw."
+      "STATUS_UPDATE_ERROR": "Productstatus kon niet worden bijgewerkt. Probeer het opnieuw.",
+      "CANCEL": "Annuleren",
+      "CONFIRM": "Bevestigen"
     },
     "BUTTON": {
       "CANCEL": "Annuleren"
     },
     "PRODUCT": {
       "STATUS": "Status",
-      "STATUS_ENABLED": "Aangezet",
+      "STATUS_ENABLED": "Ingeschakeld",
       "STATUS_DISABLED": "Uitgeschakeld"
     },
     "FORM": {
       "REQUIRED": "Dit veld is verplicht",
       "MIN_LENGTH": "Minimale lengte is {{length}} tekens",
-      "MIN_VALUE": "Minimum waarde is {{value}}",
-      "FUTURE_DATE_NOT_ALLOWED": "Publicatiedatum mag niet in de toekomst liggen"
+      "MIN_VALUE": "Minimale waarde is {{value}}",
+      "FUTURE_DATE_NOT_ALLOWED": "Publicatiedatum kan niet in de toekomst liggen"
     },
     "ADD_PRODUCT": {
       "TITLE": "Nieuw boek toevoegen",
       "DESCRIPTION": "Maak een nieuwe boekvermelding aan met details",
       "BASIC_INFO": "Basisgegevens",
       "TITLE_LABEL": "Boektitel",
-      "TITLE_PLACEHOLDER": "Boektitel invoeren",
+      "TITLE_PLACEHOLDER": "Voer boektitel in",
       "PRICE": "Prijs",
       "PRICE_PLACEHOLDER": "0,00",
       "STOCK": "Voorraad",
-      "STOCK_PLACEHOLDER": "Voorraad aantal invoeren",
+      "STOCK_PLACEHOLDER": "Voer voorraadhoeveelheid in",
       "ISBN": "ISBN",
       "ISBN_PLACEHOLDER": "Voer een 10- of 13-cijferige ISBN in",
       "ISBN_INVALID": "Voer een geldige 10- of 13-cijferige ISBN in",
       "PUBLICATION_DATE": "Publicatiedatum",
       "LANGUAGE": "Oorspronkelijke taal",
       "SELECT_LANGUAGE": "Selecteer een taal",
-      "COVER_IMAGE": "Omslag afbeelding",
+      "COVER_IMAGE": "Omslagfoto",
       "COVER_IMAGE_LABEL": "Boekomslag",
-      "IMAGE_URL_PLACEHOLDER": "Afbeeldings-URL invoeren",
-      "IMAGE_URL_HINT": "URL moet eindigen op .jpg, .jpeg, .png of .webp",
+      "IMAGE_URL_PLACEHOLDER": "Voer afbeeldings-URL in",
+      "IMAGE_URL_HINT": "URL moet eindigen op .jpg, .jpeg, .png of .webp of kan een Google Books-link zijn",
       "IMAGE_URL_INVALID": "Voer een geldige afbeeldings-URL in",
       "DESCRIPTION_TITLE": "Boekbeschrijving",
       "DESCRIPTION_LABEL": "Beschrijving",
       "DESCRIPTION_LABEL_EN": "Engelse beschrijving",
       "DESCRIPTION_LABEL_NL": "Nederlandse beschrijving",
-      "DESCRIPTION_PLACEHOLDER": "Voer een gedetailleerde boekbeschrijving in",
-      "DESCRIPTION_PLACEHOLDER_EN": "Voer een gedetailleerde boekbeschrijving in het Engels in",
-      "DESCRIPTION_PLACEHOLDER_NL": "Voer gedetailleerde boekbeschrijving in het Nederlands in",
+      "DESCRIPTION_PLACEHOLDER": "Gedetailleerde boekbeschrijving invoeren",
+      "DESCRIPTION_PLACEHOLDER_EN": "Gedetailleerde boekbeschrijving in het Engels invoeren",
+      "DESCRIPTION_PLACEHOLDER_NL": "Gedetailleerde boekbeschrijving in het Nederlands invoeren",
+      "PAGES": "Aantal pagina's",
+      "PAGES_PLACEHOLDER": "Aantal pagina's invoeren",
       "CATEGORIES": "Boekcategorieën",
-      "SELECT_CATEGORIES": "Selecteer categorieën",
-      "SEARCH_CATEGORIES": "Zoek categorieën",
-      "CATEGORY_REQUIRED": "Selecteer minstens één categorie",
+      "SELECT_CATEGORIES": "Categorieën selecteren",
+      "SEARCH_CATEGORIES": "Categorieën zoeken",
+      "CATEGORY_REQUIRED": "Selecteer ten minste één categorie",
       "AUTHORS": "Auteurgegevens",
-      "SELECT_AUTHORS": "Selecteer auteurs",
-      "SEARCH_AUTHORS": "Zoek auteurs",
-      "AUTHOR_REQUIRED": "Selecteer minstens één auteur",
+      "SELECT_AUTHORS": "Auteurs selecteren",
+      "SEARCH_AUTHORS": "Auteurs zoeken",
+      "AUTHOR_REQUIRED": "Selecteer ten minste één auteur",
       "PUBLISHER": "Uitgevergegevens",
       "SELECT_PUBLISHER": "Uitgever",
       "SELECT_PUBLISHER_PLACEHOLDER": "Selecteer een uitgever",
@@ -296,7 +318,7 @@
     }
   },
   "REGISTER": {
-    "GO_BACK": "Ga terug",
+    "GO_BACK": "Terug",
     "LOGIN_DETAILS": "Inloggegevens:",
     "USER_DETAILS": "Gebruikersgegevens:",
     "EMAIL": "E-mail",
@@ -315,6 +337,181 @@
     "ERROR_FILL_FIELDS": "Vul alle velden in.",
     "ERROR_INVALID_EMAIL": "Voer een geldig e-mailadres in.",
     "ERROR_PASSWORD_REQUIREMENTS": "Het wachtwoord moet minimaal 8 tekens bevatten en ten minste één hoofdletter, één kleine letter, één cijfer en één speciaal teken!",
-    "SUCCESS": "Registratie succesvol! U bent nu ingelogd."
+    "SUCCESS": "Registratie geslaagd! U bent nu ingelogd."
+  },
+  "LOGIN": {
+    "GO_BACK": "Ga terug",
+    "TITLE": "Inloggen",
+    "REGISTER": "Registreren",
+    "EMAIL": "E-mail",
+    "EMAIL_PLACEHOLDER": "example@email.com",
+    "PASSWORD": "Wachtwoord",
+    "PASSWORD_PLACEHOLDER": "Wachtwoord123!",
+    "FORGOT_PASSWORD": "Wachtwoord vergeten?",
+    "BUTTON": "Inloggen",
+    "ERROR_FILL_FIELDS": "Vul alle velden in.",
+    "ERROR_CHANGE_VALUE": "Wijzig een waarde voordat u opnieuw verzendt!",
+    "ERROR_INVALID_COMBINATION": "De combinatie van e-mailadres en wachtwoord is niet geldig!"
+  },
+  "SNACKBAR": {
+    "CLOSE": "Sluiten"
+  },
+  "SAVED_ITEMS": {
+    "TITLE": "Opgeslagen items",
+    "DESCRIPTION": "Hier zijn de items die u voor later heeft opgeslagen.",
+    "PRICE": "Prijs",
+    "REMOVE": "Verwijderen",
+    "CLEAR_ALL": "Alles wissen",
+    "EMPTY_TITLE": "Geen opgeslagen items",
+    "EMPTY_MESSAGE": "Je hebt nog geen items opgeslagen.",
+    "ITEM_ADDED": "Item toegevoegd aan opgeslagen items!",
+    "ITEM_REMOVED": "Item verwijderd uit opgeslagen items!",
+    "CLEARED": "Alle opgeslagen items gewist!",
+    "ITEM_ALREADY_SAVED": "Dit product staat al in je opgeslagen items!",
+    "ERROR_ADDING_ITEM": "Fout bij het toevoegen van item aan opgeslagen items.",
+    "ERROR_REMOVING_ITEM": "Fout bij het verwijderen van item uit opgeslagen items.",
+    "ERROR_CLEARING_ITEMS": "Fout bij het wissen van opgeslagen items.",
+    "MOVE_TO_CART": "Beschikbare items naar winkelwagen verplaatsen",
+    "MOVED_TO_CART": "Beschikbare items zijn naar je winkelwagen verplaatst!",
+    "NO_AVAILABLE_ITEMS": "Geen beschikbare items om naar de winkelwagen te verplaatsen.",
+    "STOCK": "Voorraad",
+    "OUT_OF_STOCK": "Niet op voorraad",
+    "ENABLED": "Status",
+    "AVAILABLE": "Beschikbaar",
+    "NOT_AVAILABLE": "Niet beschikbaar"
+  },
+  "ORDER_SUCCESS": {
+    "THANK_YOU": "Bedankt voor uw bestelling!",
+    "ORDER_CONFIRMED": "Uw bestelling is succesvol geplaatst en bevestigd.",
+    "ORDER_DETAILS": "Bestelgegevens",
+    "ORDER_NUMBER": "Bestelnummer",
+    "DATE": "Datum",
+    "TOTAL": "Totaalbedrag",
+    "EMAIL_SENT": "Een bevestigingsmail is verstuurd naar uw e-mailadres.",
+    "ORDER_SUMMARY": "Besteloverzicht",
+    "QUANTITY": "Aantal",
+    "PRICE": "Prijs",
+    "WHATS_NEXT": "Wat gebeurt er nu?",
+    "PROCESSING": "We beginnen meteen met de verwerking van uw bestelling.",
+    "SHIPPING": "U ontvangt een verzendbevestiging met track-and-trace informatie zodra uw boeken onderweg zijn.",
+    "CONTINUE_SHOPPING": "Doorgaan met winkelen",
+    "VIEW_ORDERS": "Mijn bestellingen bekijken",
+    "LOADING": "Bestelgegevens worden geladen...",
+    "ERROR_TITLE": "Er is iets misgegaan",
+    "RETURN_HOME": "Terug naar de homepage"
+  },
+  "ORDER_FAILED": {
+    "TITLE": "Bestelverwerking mislukt",
+    "MESSAGE": "We konden uw bestelling niet voltooien. Onze excuses voor het ongemak.",
+    "DETAILS": "Dit kan te wijten zijn aan een van de volgende redenen:",
+    "REASON_PAYMENT": "Probleem met betalingsproces of onvoldoende saldo",
+    "REASON_CONNECTION": "Verbindingsfout tijdens het afrekenen",
+    "REASON_SYSTEM": "Systeem tijdelijk niet beschikbaar",
+    "WHAT_NEXT": "Wat kun je nu doen?",
+    "TRY_AGAIN": "Probeer je bestelling opnieuw te plaatsen",
+    "CHECK_CART": "Controleer de artikelen in je winkelmandje en je betalingsgegevens",
+    "CONTACT_SUPPORT": "Neem contact op met onze klantenservice als het probleem aanhoudt",
+    "TRY_AGAIN_BUTTON": "Opnieuw proberen",
+    "RETURN_TO_CART": "Terug naar winkelmandje"
+  },
+  "HOME": {
+    "WELCOME": "Jouw literaire reis begint hier",
+    "TAGLINE": "Ontdek een wereld vol verhalen, kennis en avontuur bij Bookazia - jouw toonaangevende online boekhandel.",
+    "BROWSE_BOOKS": "Blader door boeken",
+    "FEATURED_CATEGORIES": "Aanbevolen categorieën",
+    "CATEGORY": {
+      "FICTION": "Fictie",
+      "FANTASY": "Fantasie",
+      "CLASSICS": "Klassiekers"
+    },
+    "NEW_ARRIVALS": "Nieuwe aanwinsten",
+    "VIEW_ALL": "Alles bekijken",
+    "WHY_READING": "Waarom lezen belangrijk is",
+    "BENEFITS": {
+      "KNOWLEDGE": "Kennis verbreden",
+      "KNOWLEDGE_DESC": "Boeken zijn toegangspoorten tot nieuwe informatie, ideeën en perspectieven.",
+      "STRESS": "Stress verminderen",
+      "STRESS_DESC": "Lezen kan stress met wel 68% verlagen en bevordert een betere slaap.",
+      "IMAGINATION": "Fantasie stimuleren",
+      "IMAGINATION_DESC": "Verhalen nemen je mee naar nieuwe werelden en ontsteken je creativiteit.",
+      "FOCUS": "Focus verbeteren",
+      "FOCUS_DESC": "Regelmatig lezen verbetert de concentratie en cognitieve vaardigheden."
+    },
+    "NEWSLETTER": {
+      "TITLE": "Blijf op de hoogte",
+      "SUBTITLE": "Schrijf je in voor onze nieuwsbrief voor exclusieve aanbiedingen, nieuwe releases en literaire inzichten.",
+      "EMAIL_PLACEHOLDER": "Uw e-mailadres",
+      "SUBSCRIBE": "Abonneren"
+    }
+  },
+  "FAQ": {
+    "TITLE": "Veelgestelde Vragen",
+    "SUBTITLE": "Vind antwoorden op de meest voorkomende vragen over Bookazia's diensten, producten en beleid.",
+    "SEARCH_PLACEHOLDER": "Zoek vragen...",
+    "CATEGORIES": {
+      "ALL": "Alle",
+      "ORDERS": "Bestellingen",
+      "SHIPPING": "Verzending",
+      "RETURNS": "Retourneren",
+      "ACCOUNT": "Account",
+      "PRODUCTS": "Producten"
+    },
+    "NO_RESULTS": {
+      "TITLE": "Geen passende vragen gevonden",
+      "SUBTITLE": "Probeer andere zoekwoorden of blader per categorie",
+      "CLEAR_BUTTON": "Zoekopdracht wissen"
+    },
+    "ADDITIONAL_HELP": {
+      "TITLE": "Nog vragen?",
+      "CONTENT": "Als je het antwoord niet kunt vinden, neem dan contact op met ons klantenserviceteam.",
+      "EMAIL": "E-mail ondersteuning",
+      "CALL": "Bel ons"
+    },
+    "ITEMS": {
+      "SHIPPING_NORMAL": {
+        "QUESTION": "Hoe lang duurt normale verzending?",
+        "ANSWER": "Standaard verzending duurt 2-5 werkdagen binnen Nederland. Internationale verzending duurt meestal 7-14 werkdagen, afhankelijk van het land van bestemming."
+      },
+      "SHIPPING_EXPRESS": {
+        "QUESTION": "Hoe lang duurt expresverzending?",
+        "ANSWER": "Expresverzending duurt 1-2 werkdagen binnen Nederland. Voor internationale expresverzending kunnen de levertijden variëren afhankelijk van de bestemming."
+      },
+      "TRACK_ORDER": {
+        "QUESTION": "Hoe kan ik mijn bestelling volgen?",
+        "ANSWER": "Zodra je bestelling is verzonden, ontvang je een bevestigingsmail met trackinginformatie. Je kunt ook je bestelstatus en trackinginformatie bekijken in je accountdashboard onder \"Mijn bestellingen\"."
+      },
+      "CHANGE_ORDER": {
+        "QUESTION": "Kan ik mijn bestelling wijzigen of annuleren?",
+        "ANSWER": "Bestellingen kunnen nog niet worden gewijzigd of geannuleerd. Als er een probleem is met je bestelling, neem dan zo snel mogelijk contact op met ons klantenserviceteam. We zullen ons best doen om je te helpen."
+      },
+      "GIFT_WRAPPING": {
+        "QUESTION": "Bieden jullie cadeauverpakking aan?",
+        "ANSWER": "Helaas bieden we op dit moment geen cadeauverpakking aan. We werken er echter aan! Kom later nog eens terug."
+      },
+      "EBOOKS": {
+        "QUESTION": "Zijn e-books beschikbaar voor alle titels?",
+        "ANSWER": "De meeste nieuwe uitgaven en bestsellers zijn beschikbaar in e-book formaat, maar onze hele catalogus is niet gedigitaliseerd. Voornamelijk omdat e-books nog niet worden aangeboden!"
+      },
+      "RESET_PASSWORD": {
+        "QUESTION": "Hoe reset ik mijn wachtwoord?",
+        "ANSWER": "Klik op de link \"Wachtwoord vergeten\" op de inlogpagina. Voer je e-mailadres in, en we sturen je instructies om je wachtwoord te resetten. Om veiligheidsredenen zijn wachtwoord-resetlinks slechts 24 uur geldig."
+      },
+      "INTERNATIONAL_SHIPPING": {
+        "QUESTION": "Verzenden jullie internationaal?",
+        "ANSWER": "Ja, we verzenden naar de meeste landen wereldwijd. Verzendkosten en levertijden variëren per locatie. Internationale verzendopties worden bij het afrekenen getoond op basis van je afleveradres."
+      },
+      "REQUEST_BOOK": {
+        "QUESTION": "Kan ik een boek aanvragen dat niet in jullie inventaris staat?",
+        "ANSWER": "Ja! We accepteren speciale bestellingen voor boeken die momenteel niet in onze catalogus staan. Neem contact op met ons personeel met details over het boek, inclusief ISBN indien beschikbaar. Speciale bestellingen duren meestal 1-3 weken om te vervullen."
+      },
+      "PAYMENT_METHODS": {
+        "QUESTION": "Welke betaalmethoden accepteren jullie?",
+        "ANSWER": "We accepteren alle grote creditcards (Visa, Mastercard, American Express), PayPal, iDEAL, en bankoverschrijvingen."
+      },
+      "UPDATE_ACCOUNT": {
+        "QUESTION": "Hoe update ik mijn accountgegevens?",
+        "ANSWER": "Log in op je account en klik op \"Account\". In het dropdown menu zie je de optie \"Profiel bewerken\". Daar kun je je persoonlijke gegevens bijwerken en je communicatievoorkeuren beheren."
+      }
+    }
   }
 }

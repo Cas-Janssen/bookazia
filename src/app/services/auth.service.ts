@@ -55,33 +55,35 @@ export class AuthService implements OnDestroy {
             this.httpClient
               .get<ResponseLogin>(this.apiLink + '/auth/admin')
               .pipe(takeUntil(this.destroy$))
-              .subscribe(
-                (ResponseData) => {
-                  if (ResponseData.token) {
-                    const payload = ResponseData.token.split('.')[1];
+              .subscribe({
+                next: (response) => {
+                  if (response.token) {
+                    const payload = response.token.split('.')[1];
                     const decodedPayload = JSON.parse(atob(payload));
                     if (decodedPayload.role === 'ROLE_ADMIN') {
-                      this.token = ResponseData.token;
-                      this.saveTokenInLocalStorage(ResponseData.token);
+                      this.token = response.token;
+                      this.saveTokenInLocalStorage(response.token);
                       this.isAdmin.next(true);
                       observer.next(true);
+                      observer.complete();
                     } else {
                       this.isAdmin.next(false);
                       observer.next(false);
+                      observer.complete();
                     }
                   } else {
                     this.isAdmin.next(false);
                     observer.next(false);
+                    observer.complete();
                   }
-                  observer.complete();
                 },
-                (error) => {
-                  console.error('Error during admin check:', error);
+                error: (error) => {
+                  console.error('Error checking admin status:', error);
                   this.isAdmin.next(false);
                   observer.next(false);
                   observer.complete();
-                }
-              );
+                },
+              });
           } else {
             this.isAdmin.next(false);
             observer.next(false);

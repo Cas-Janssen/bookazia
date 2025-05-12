@@ -15,9 +15,10 @@ import { ViewOrdersComponent } from './pages/user/view-orders/view-orders.compon
 import { AdminPanelComponent } from './pages/admin/admin-panel/admin-panel.component';
 import { AddProductComponent } from './pages/admin/add-product/add-product.component';
 import { ChangeProductComponent } from './pages/admin/change-product/change-product.component';
-import { PrivacyComponent } from './pages/legal/privacy/privacy.component';
-import { TermsComponent } from './pages/legal/terms/terms.component';
+import { PrivacyComponent } from './pages/legal/privacy/privacy-wrapper.component';
 import { FaqComponent } from './pages/legal/faq/faq.component';
+import { OrderSuccessComponent } from './pages/checkout/order-success/order-success.component';
+import { OrderFailedComponent } from './pages/checkout/order-failed/order-failed.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -26,6 +27,8 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'products/:id/:details', component: ProductDetailComponent },
   { path: 'checkout', component: CheckoutComponent },
+  { path: 'order/success', component: OrderSuccessComponent },
+  { path: 'order/failure', component: OrderFailedComponent },
   { path: 'home', redirectTo: '/' },
   {
     path: 'profile',
@@ -50,7 +53,6 @@ export const routes: Routes = [
   { path: 'admin/add-product', component: AddProductComponent },
   { path: 'admin/edit-product/:id', component: ChangeProductComponent },
   { path: 'faq', component: FaqComponent },
-  { path: 'legal/terms', component: TermsComponent },
   { path: 'legal/privacy', component: PrivacyComponent },
   { path: '**', component: NotFoundComponent },
 ];

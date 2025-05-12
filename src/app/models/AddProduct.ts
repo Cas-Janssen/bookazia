@@ -8,6 +8,7 @@ export interface AddProduct {
   coverImgUrl: string;
   publicationDate: string;
   originalLanguage: string;
+  pages: number;
   categoryIds: number[];
   authorIds: number[];
   publisherId: number;

@@ -5,7 +5,6 @@ import { SimpleCartProduct } from '../models/SimpleCartProduct';
 import { Product } from '../models/Product';
 import { ProductService } from './product.service';
 import { forkJoin, map, Observable, Subject, takeUntil, of } from 'rxjs';
-import { CartProduct } from '../models/CartProduct';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { ShoppingCart } from '../models/ShoppingCart';
@@ -34,11 +33,11 @@ export class CartService implements OnDestroy {
     panelClass: string = 'info-snackbar'
   ): void {
     const message = this.translate.instant(messageKey);
-    this.snackBar.open(message, 'Close', {
+    this.snackBar.open(message, this.translate.instant('SNACKBAR.CLOSE'), {
       verticalPosition: 'top',
       horizontalPosition: 'center',
       duration: 3000,
-      panelClass: [panelClass],
+      panelClass: [`${panelClass}`],
     });
   }
 
@@ -48,7 +47,7 @@ export class CartService implements OnDestroy {
     return shoppingCart;
   }
 
-  private getCartItemsFromLocalStorage(): SimpleCartProduct[] {
+  public getCartItemsFromLocalStorage(): SimpleCartProduct[] {
     const optionalProducts: any = localStorage.getItem('CartItems');
     if (optionalProducts == null) {
       return [];
@@ -103,7 +102,7 @@ export class CartService implements OnDestroy {
           return;
         }
         this.httpClient
-          .put(this.apiLink + '/user/cart/update', {
+          .post(this.apiLink + '/user/cart/update', {
             productId: product.id,
             quantity: 1,
           })
@@ -154,7 +153,7 @@ export class CartService implements OnDestroy {
       }
     } else {
       this.httpClient
-        .put(this.apiLink + '/user/cart/update', {
+        .post(this.apiLink + '/user/cart/update', {
           productId: productCart.id,
           quantity: productCart.quantity,
         })

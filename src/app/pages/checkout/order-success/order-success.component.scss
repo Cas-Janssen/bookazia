@@ -1,0 +1,269 @@
+@use "variables" as vars;
+
+.order-success-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+  background-color: #f9f9f9;
+}
+
+.success-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  max-width: 800px;
+  width: 100%;
+}
+
+.success-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+
+  h1 {
+    color: vars.$primary-bg;
+    margin: 1rem 0 0.5rem;
+    font-size: 2rem;
+  }
+
+  .success-message {
+    font-size: 1.2rem;
+    color: #666;
+  }
+}
+
+.success-icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+
+  i {
+    font-size: 5rem;
+    color: #4caf50;
+  }
+}
+
+.order-details {
+  margin-bottom: 2rem;
+
+  h2 {
+    color: vars.$primary-bg;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .order-info {
+    background-color: #f9f9f9;
+    padding: 1rem;
+    border-radius: 8px;
+
+    p {
+      margin: 0.5rem 0;
+    }
+  }
+
+  .confirmation-message {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #e8f5e9;
+    border-radius: 8px;
+    color: #2e7d32;
+    font-weight: 600;
+  }
+}
+
+.order-summary {
+  margin-bottom: 2rem;
+
+  h2 {
+    color: vars.$primary-bg;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .order-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .order-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+
+    .item-image {
+      width: 80px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .item-details {
+      flex: 1;
+
+      h3 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.1rem;
+      }
+
+      p {
+        margin: 0.2rem 0;
+        color: #666;
+      }
+    }
+  }
+}
+
+.next-steps {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: #f0f4f8;
+  border-radius: 8px;
+
+  h2 {
+    color: vars.$primary-bg;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    margin: 0.5rem 0;
+    line-height: 1.5;
+  }
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+
+  button {
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+
+    &.continue-shopping {
+      background-color: vars.$primary-bg;
+      color: white;
+
+      &:hover {
+        background-color: #004a5a;
+      }
+    }
+
+    &.view-orders {
+      background-color: white;
+      color: vars.$primary-bg;
+      border: 2px solid vars.$primary-bg;
+
+      &:hover {
+        background-color: #e6f0f2;
+      }
+    }
+  }
+}
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid vars.$primary-bg;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: #666;
+  }
+}
+
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+  .error-icon {
+    font-size: 5rem;
+    color: #f44336;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    color: #f44336;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 2rem;
+  }
+
+  .return-home {
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    background-color: vars.$primary-bg;
+    color: white;
+
+    &:hover {
+      background-color: #004a5a;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .success-card {
+    padding: 1.5rem;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .order-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}

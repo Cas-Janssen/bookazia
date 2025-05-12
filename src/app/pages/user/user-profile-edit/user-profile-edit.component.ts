@@ -1,4 +1,12 @@
-import { Component, OnInit, inject, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  inject,
+  OnDestroy,
+  ViewChild,
+  ElementRef,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -12,7 +20,6 @@ import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-user-profile-edit',
-  standalone: true,
   imports: [CommonModule, FormsModule, TranslatePipe],
   templateUrl: './user-profile-edit.component.html',
   styleUrl: './user-profile-edit.component.scss',
@@ -39,6 +46,10 @@ export class UserProfileEditComponent implements OnInit, OnDestroy {
   private userService: UserService = inject(UserService);
   private router: Router = inject(Router);
   private authService: AuthService = inject(AuthService);
+  private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
+
+  @ViewChild('errorMessage', { static: false })
+  errorMessageElement!: ElementRef;
 
   ngOnInit() {
     this.token = this.authService.getToken();
@@ -73,6 +84,7 @@ export class UserProfileEditComponent implements OnInit, OnDestroy {
           console.error('Error loading user data', err);
           this.error = 'Failed to load user data. Please try again.';
           this.loading = false;
+          this.scrollToError();
         },
       });
   }
@@ -83,6 +95,7 @@ export class UserProfileEditComponent implements OnInit, OnDestroy {
     this.error = null;
 
     if (!this.validateForm()) {
+      this.scrollToError();
       return;
     }
 
@@ -92,14 +105,13 @@ export class UserProfileEditComponent implements OnInit, OnDestroy {
       firstName: this.firstName,
       middleName: this.middleName,
       lastName: this.lastName,
-      email: this.email,
+      email: this.email.toLowerCase(),
       password: this.password,
       phoneNumber: this.phoneNumber,
       address: this.address,
       city: this.city,
       postalCode: this.postalCode,
     };
-    console.log('User data to be updated:', user);
     this.userService
       .updateUserProfile(user)
       .pipe(takeUntil(this.destroy$))
@@ -113,6 +125,7 @@ export class UserProfileEditComponent implements OnInit, OnDestroy {
           console.error('Error updating user data', err);
           this.error = 'Failed to update profile. Please try again.';
           this.loading = false;
+          this.scrollToError();
         },
       });
   }
@@ -133,6 +146,16 @@ export class UserProfileEditComponent implements OnInit, OnDestroy {
       return false;
     }
     return true;
+  }
+
+  private scrollToError(): void {
+    this.cdr.detectChanges();
+    if (this.errorMessageElement) {
+      this.errorMessageElement.nativeElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
+    }
   }
 
   protected onCancel() {

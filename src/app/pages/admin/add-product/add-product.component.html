@@ -137,6 +137,34 @@
         </figcaption>
       </figure>
 
+      <figure class="form-group">
+        <label for="pages">
+          {{ "ADMIN.ADD_PRODUCT.PAGES" | translate }}
+          <span class="required-indicator">*</span>
+        </label>
+        <input
+          type="number"
+          id="pages"
+          formControlName="pages"
+          min="1"
+          [placeholder]="'ADMIN.ADD_PRODUCT.PAGES_PLACEHOLDER' | translate"
+          [ngClass]="{ 'is-invalid': submitted && f['pages'].errors }"
+          aria-required="true"
+        />
+        <figcaption
+          *ngIf="submitted && f['pages'].errors"
+          class="invalid-feedback"
+          role="alert"
+        >
+          <span *ngIf="f['pages'].errors['required']">
+            {{ "ADMIN.FORM.REQUIRED" | translate }}
+          </span>
+          <span *ngIf="f['pages'].errors['min']">
+            {{ "ADMIN.FORM.MIN_VALUE" | translate : { value: 1 } }}
+          </span>
+        </figcaption>
+      </figure>
+
       <section class="form-row">
         <figure class="form-group">
           <label for="publicationDate">

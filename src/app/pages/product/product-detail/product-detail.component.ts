@@ -8,6 +8,8 @@ import { AuthService } from '../../../services/auth.service';
 import { CartService } from '../../../services/cart.service';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Category } from '../../../models/Category';
+import { SavedItemsService } from '../../../services/saved-items.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-detail',
@@ -25,10 +27,12 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   private authService: AuthService = inject(AuthService);
   private productService: ProductService = inject(ProductService);
   private cartService: CartService = inject(CartService);
+  private savedItemsService: SavedItemsService = inject(SavedItemsService);
   private route: ActivatedRoute = inject(ActivatedRoute);
   private router: Router = inject(Router);
   private translateService: TranslateService = inject(TranslateService);
   private location: Location = inject(Location);
+  private snackBar: MatSnackBar = inject(MatSnackBar);
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -65,15 +69,9 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
       });
   }
 
-  public getProductById(id: number): void {
-    this.productService.getProductById(id).subscribe((product) => {
-      this.book = product;
-    });
-  }
-
   protected addToCart(product: Product): void {
     if (!product.enabled) {
-      window.alert('This product is not available for purchase!');
+      this.showSnackBar('PRODUCTS.NOT_AVAILABLE', 'error-snackbar');
       return;
     }
     this.cartService.addCartItem(product);
@@ -81,11 +79,30 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
   protected addToFavorites(product: Product): void {
     if (!this.authService.isAuthenticated()) {
-      window.alert('Log in to add a product to favorites!');
+      this.showSnackBar('PRODUCTS.LOGIN_TO_SAVE', 'error-snackbar');
       return;
     }
-    console.log(`Added ${product.title} to favorites`);
+
+    this.savedItemsService.addSavedItem(product.id);
   }
+
+  private showSnackBar(
+    messageKey: string,
+    panelClass: string = 'info-snackbar'
+  ): void {
+    const message = this.translateService.instant(messageKey);
+    this.snackBar.open(
+      message,
+      this.translateService.instant('SNACKBAR.CLOSE'),
+      {
+        duration: 5000,
+        verticalPosition: 'top',
+        horizontalPosition: 'center',
+        panelClass: [panelClass],
+      }
+    );
+  }
+
   getLocalizedDescription(): string {
     if (!this.book) return '';
 
@@ -97,6 +114,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
       return this.book.descriptionEn || '';
     }
   }
+
   getLocalizedCategoryName(category: Category): string {
     const currentLang = this.translateService.currentLang;
     if (currentLang === 'nl' && category.nameNl) {
@@ -105,6 +123,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
       return category.nameEn || '';
     }
   }
+
   protected goBack(): void {
     this.location.back();
   }

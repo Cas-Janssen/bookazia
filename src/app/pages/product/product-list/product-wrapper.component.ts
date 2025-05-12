@@ -5,7 +5,7 @@ import { ProductService } from '../../../services/product.service';
 import { CategoryService } from '../../../services/category.service';
 import { CategoryDetails } from '../../../models/CategoryDetails';
 import { ProductItemComponent } from './product-item/product-item.component';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil, finalize } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -16,7 +16,8 @@ import { TranslatePipe } from '@ngx-translate/core';
   imports: [NgFor, ProductItemComponent, NgIf, TranslatePipe],
 })
 export class ProductWrapperComponent implements OnInit, OnDestroy {
-  public products: Product[] | null = [];
+  public products: Product[] | null = null;
+  public isLoading: boolean = true;
   private destroy$: Subject<void> = new Subject<void>();
 
   private productService: ProductService = inject(ProductService);
@@ -28,6 +29,7 @@ export class ProductWrapperComponent implements OnInit, OnDestroy {
     this.activatedRoute.params
       .pipe(takeUntil(this.destroy$))
       .subscribe((params) => {
+        this.isLoading = true;
         if (params['categoryname']) {
           this.fetchProductsByCategory(params['categoryname']);
         } else if (params['searchquery']) {
@@ -50,26 +52,35 @@ export class ProductWrapperComponent implements OnInit, OnDestroy {
   private fetchProductsByCategory(categoryName: string): void {
     this.categoryService
       .getCategoryDetails(categoryName)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(
+        takeUntil(this.destroy$),
+        finalize(() => (this.isLoading = false))
+      )
       .subscribe({
         next: (categoryDetails: CategoryDetails) => {
           this.products = categoryDetails.products;
         },
         error: (err) => {
           console.error(err);
+          this.products = [];
         },
       });
   }
+
   private fetchProductsBySearchQuery(searchQuery: string): void {
     this.productService
       .searchProducts(searchQuery)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(
+        takeUntil(this.destroy$),
+        finalize(() => (this.isLoading = false))
+      )
       .subscribe({
         next: (data) => {
           this.products = data;
         },
         error: (err) => {
           console.error(err);
+          this.products = [];
         },
       });
   }
@@ -77,13 +88,17 @@ export class ProductWrapperComponent implements OnInit, OnDestroy {
   private fetchAllProducts(): void {
     this.productService
       .getAllProducts()
-      .pipe(takeUntil(this.destroy$))
+      .pipe(
+        takeUntil(this.destroy$),
+        finalize(() => (this.isLoading = false))
+      )
       .subscribe({
         next: (data) => {
           this.products = data;
         },
         error: (err) => {
           console.error(err);
+          this.products = [];
         },
       });
   }

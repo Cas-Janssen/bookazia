@@ -1,6 +1,6 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { CartService } from '../../services/cart.service';
-import { Subject, take, takeUntil } from 'rxjs';
+import { Subject, takeUntil, finalize } from 'rxjs';
 import { NgFor, NgIf } from '@angular/common';
 import { CartProductDetailed } from '../../models/CartProductDetailed';
 import { FormsModule } from '@angular/forms';
@@ -21,16 +21,22 @@ export class CartComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
   public cartProducts: CartProductDetailed[] = [];
   public totalPrice: number = 0;
+  public isLoading: boolean = true;
 
   ngOnInit(): void {
     this.loadProducts();
   }
 
   private loadProducts(): void {
+    this.isLoading = true;
+
     if (!this.authService.isAuthenticated()) {
       this.cartService
         .getCartProductsLocal()
-        .pipe(takeUntil(this.destroy$))
+        .pipe(
+          takeUntil(this.destroy$),
+          finalize(() => (this.isLoading = false))
+        )
         .subscribe({
           next: (productItems: CartProductDetailed[]) => {
             this.cartProducts = productItems;
@@ -44,7 +50,10 @@ export class CartComponent implements OnInit, OnDestroy {
     } else {
       this.cartService
         .getShoppingCartFromDatabase()
-        .pipe(takeUntil(this.destroy$))
+        .pipe(
+          takeUntil(this.destroy$),
+          finalize(() => (this.isLoading = false))
+        )
         .subscribe({
           next: (cart) => {
             this.totalPrice = cart.totalPrice;
@@ -61,6 +70,9 @@ export class CartComponent implements OnInit, OnDestroy {
                 };
               }
             );
+          },
+          error: (err) => {
+            console.error('Error loading cart from database:', err);
           },
         });
     }
@@ -104,6 +116,7 @@ export class CartComponent implements OnInit, OnDestroy {
       return;
     } else this.router.navigate(['/checkout']);
   }
+
   protected getQuantityArray(stock: number): number[] {
     const amount = Array.from({ length: stock }, (_, i) => i + 1);
     if (amount.length > 10) {

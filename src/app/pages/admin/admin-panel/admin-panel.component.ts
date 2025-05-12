@@ -1,13 +1,14 @@
 import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../../services/product.service';
 import { AuthService } from '../../../services/auth.service';
 import { Product } from '../../../models/Product';
 import { Subject, takeUntil, finalize } from 'rxjs';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+
 @Component({
   selector: 'app-admin-panel',
   imports: [
@@ -21,30 +22,29 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
   styleUrl: './admin-panel.component.scss',
 })
 export class AdminPanelComponent implements OnInit, OnDestroy {
-  products: Product[] = [];
-  filteredProducts: Product[] = [];
-  loading = true;
-  error: string | null = null;
-  success: string | null = null;
-  searchTerm = '';
-  filterStatus = 'all';
+  protected products: Product[] = [];
+  protected filteredProducts: Product[] = [];
+  protected loading = true;
+  protected error: string | null = null;
+  protected success: string | null = null;
+  protected searchTerm = '';
+  protected filterStatus = 'all';
+  protected currentPage = 1;
+  private pageSize = 8;
+  protected totalPages = 1;
+  private sortField = 'title';
+  private sortDirection = 'asc';
+  protected showConfirmDialog = false;
 
-  currentPage = 1;
-  pageSize = 10;
-  totalPages = 1;
-
-  sortField = 'title';
-  sortDirection = 'asc';
-
-  showConfirmDialog = false;
-  confirmAction: () => void = () => {};
+  private confirmAction: () => void = () => {};
   confirmMessage = '';
   confirmTitle = '';
 
-  selectedProduct: Product | null = null;
+  protected selectedProduct: Product | null = null;
   private productService: ProductService = inject(ProductService);
   private authService: AuthService = inject(AuthService);
   private router: Router = inject(Router);
+  private translate: TranslateService = inject(TranslateService);
   private destroy$ = new Subject<void>();
 
   ngOnInit(): void {
@@ -229,22 +229,24 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
 
   protected toggleProductStatus(product: Product): void {
     const newStatus = !product.enabled;
-    const action = newStatus ? 'activate' : 'deactivate';
 
     this.selectedProduct = product;
     this.confirmTitle = newStatus
-      ? 'Make Product Visible'
-      : 'Hide Product from Store';
+      ? this.translate.instant('ADMIN.PANEL.MAKE_VISIBLE_TITLE')
+      : this.translate.instant('ADMIN.PANEL.HIDE_PRODUCT_TITLE');
 
     this.confirmMessage = newStatus
-      ? `This will make "${product.title}" visible to customers. Do you want to proceed?`
-      : `This will hide "${product.title}" from the store. Customers will no longer be able to see or purchase this book. Do you want to proceed?`;
+      ? this.translate.instant('ADMIN.PANEL.MAKE_VISIBLE_MESSAGE', {
+          title: product.title,
+        })
+      : this.translate.instant('ADMIN.PANEL.HIDE_PRODUCT_MESSAGE', {
+          title: product.title,
+        });
 
     this.confirmAction = () => this.updateProductStatus(product.id, newStatus);
     this.showConfirmDialog = true;
   }
 
-  //TODO add translations for the menu.
   private updateProductStatus(productId: number, isEnabled: boolean): void {
     if (isEnabled) {
       this.productService
@@ -289,9 +291,5 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
     }
 
     this.selectedProduct = null;
-  }
-
-  protected navigateToUserManagement(): void {
-    this.router.navigate(['/admin/users']);
   }
 }

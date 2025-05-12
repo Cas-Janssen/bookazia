@@ -9,11 +9,6 @@
       <li class="nav-item">
         <a class="nav-link active">{{ "ADMIN.PANEL.PRODUCTS" | translate }}</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" (click)="navigateToUserManagement()">{{
-          "ADMIN.PANEL.USERS" | translate
-        }}</a>
-      </li>
     </ul>
   </nav>
 
@@ -79,7 +74,7 @@
         <tr>
           <th class="cover-column">{{ "ADMIN.PANEL.COVER" | translate }}</th>
           <th (click)="onSort('title')" class="sortable-column">
-            {{ "ADMIN.PANEL.TITLE" | translate }}
+            {{ "ADMIN.PANEL.TITLE_BOOK" | translate }}
             <i class="fas" [ngClass]="getSortIcon('title')"></i>
           </th>
           <th (click)="onSort('price')" class="sortable-column numeric-column">
@@ -117,8 +112,9 @@
             </span>
           </td>
           <td>
-            <span *ngFor="let author of product.authors; let last = last">
-              {{ author.firstName }} {{ author.lastName }}{{ last ? "" : ", " }}
+            <span>
+              {{ product.authors[0].firstName }}
+              {{ product.authors[0].lastName }}
             </span>
           </td>
           <td>
@@ -143,7 +139,7 @@
                 (click)="editProduct(product)"
               >
                 <i class="fas fa-edit"></i>
-                <span>Edit</span>
+                <span>{{ "ADMIN.PANEL.EDIT_PRODUCT" | translate }}</span>
               </button>
 
               <button
@@ -155,7 +151,11 @@
                   class="fas"
                   [ngClass]="product.enabled ? 'fa-eye-slash' : 'fa-eye'"
                 ></i>
-                <span>{{ product.enabled ? "Deactivate" : "Reactivate" }}</span>
+                <span>{{
+                  product.enabled
+                    ? ("ADMIN.PANEL.DEACTIVATE" | translate)
+                    : ("ADMIN.PANEL.ACTIVATE" | translate)
+                }}</span>
               </button>
             </div>
           </td>

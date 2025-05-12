@@ -12,6 +12,7 @@
     "ACCOUNT": "Account",
     "HOME": "Home",
     "LOGOUT": "Logout",
+    "LOGOUT_SUCCESS": "You have successfully logged out.",
     "switchLanguage.EN": "English",
     "switchLanguage.NL": "Dutch",
     "ADMIN_MENU": "Admin Menu",
@@ -62,6 +63,8 @@
     "CATEGORIES": "Categories",
     "ADD_TO_CART": "Add to cart",
     "ADD_TO_FAVORITES": "Add to favorites",
+    "NOT_AVAILABLE": "Not available",
+    "LOGIN_TO_SAVE": "Log in to save items",
     "NO_PRODUCTS_FOUND": "No products found. Please try another category or search query!",
     "NO_PRODUCTS_FOUND_TITLE": "No Books Found",
     "NO_PRODUCTS_FOUND_MESSAGE": "We couldn't find any books matching your search criteria.",
@@ -71,7 +74,8 @@
     "SUGGESTION_DIFFERENT_KEYWORDS": "Try searching for a different book or author",
     "CLEAR_FILTERS": "Clear Filters",
     "BROWSE_ALL": "Browse All Books",
-    "BACK_TO_HOME": "Back to Home"
+    "BACK_TO_HOME": "Back to Home",
+    "LOADING": "Loading books..."
   },
   "CHECKOUT": {
     "TITLE": "Checkout",
@@ -102,6 +106,10 @@
       "BACK": "Back",
       "NEXT": "Next",
       "BUY": "Buy"
+    },
+    "VALIDATION": {
+      "EMPTY_CART": "Your cart is empty. Please add items to your cart before proceeding to checkout.",
+      "FETCH_CART_ERROR": "Error fetching cart items. Please try again later."
     }
   },
   "CART": {
@@ -129,7 +137,8 @@
     "ERROR_REMOVING_ITEM": "Error removing product from cart. Please try again later.",
     "ERROR_UPDATING_ITEM": "Error updating cart item. Please try again later.",
     "ERROR_FETCHING_CART": "Error fetching shopping cart. Please try again later.",
-    "ITEM_NOT_AVAILABLE": "Product is not available. Try again later."
+    "ITEM_NOT_AVAILABLE": "Product is not available. Try again later.",
+    "LOADING_CART": "Loading your shopping cart..."
   },
   "FOOTER": {
     "ABOUT_US": "About Us",
@@ -218,6 +227,7 @@
       "ACTIVE_PRODUCTS": "Active Books",
       "INACTIVE_PRODUCTS": "Inactive Books",
       "COVER": "Cover",
+      "TITLE_BOOK": "Title",
       "PRICE": "Price",
       "STOCK": "Stock",
       "AUTHORS": "Authors",
@@ -228,18 +238,17 @@
       "DELETE": "Delete",
       "STATUS_ACTIVE": "Active",
       "STATUS_INACTIVE": "Inactive",
+      "EDIT_PRODUCT": "Edit Book",
       "NO_PRODUCTS_FOUND": "No books found matching your search criteria.",
-      "SHOW_PRODUCT": "Make Visible",
-      "HIDE_PRODUCT": "Hide from Store",
-      "EDIT": "Edit Details",
-      "LOADING_ERROR": "Failed to load products. Please try again.",
       "MAKE_VISIBLE_TITLE": "Make Product Visible",
       "HIDE_PRODUCT_TITLE": "Hide Product from Store",
       "MAKE_VISIBLE_MESSAGE": "This will make \"{{title}}\" visible to customers. Do you want to proceed?",
       "HIDE_PRODUCT_MESSAGE": "This will hide \"{{title}}\" from the store. Customers will no longer be able to see or purchase this book. Do you want to proceed?",
       "PRODUCT_ACTIVATED": "Product activated successfully.",
       "PRODUCT_DEACTIVATED": "Product hidden successfully.",
-      "STATUS_UPDATE_ERROR": "Failed to update product status. Please try again."
+      "STATUS_UPDATE_ERROR": "Failed to update product status. Please try again.",
+      "CANCEL": "Cancel",
+      "CONFIRM": "Confirm"
     },
     "BUTTON": {
       "CANCEL": "Cancel"
@@ -274,7 +283,7 @@
       "COVER_IMAGE": "Cover Image",
       "COVER_IMAGE_LABEL": "Book Cover",
       "IMAGE_URL_PLACEHOLDER": "Enter image URL",
-      "IMAGE_URL_HINT": "URL must end with .jpg, .jpeg, .png or .webp",
+      "IMAGE_URL_HINT": "URL must end with .jpg, .jpeg, .png or .webp or can be a google books link",
       "IMAGE_URL_INVALID": "Please enter a valid image URL",
       "DESCRIPTION_TITLE": "Book Description",
       "DESCRIPTION_LABEL": "Description",
@@ -282,7 +291,9 @@
       "DESCRIPTION_LABEL_NL": "Dutch Description",
       "DESCRIPTION_PLACEHOLDER": "Enter detailed book description",
       "DESCRIPTION_PLACEHOLDER_EN": "Enter detailed book description in English",
-      "DESCRIPTION_PLACEHOLDER_NL": "Voer gedetailleerde boekbeschrijving in het Nederlands in",
+      "DESCRIPTION_PLACEHOLDER_NL": "Enter detailed book description in Dutch",
+      "PAGES": "Number of Pages",
+      "PAGES_PLACEHOLDER": "Enter number of pages",
       "CATEGORIES": "Book Categories",
       "SELECT_CATEGORIES": "Select Categories",
       "SEARCH_CATEGORIES": "Search categories",
@@ -338,5 +349,166 @@
     "ERROR_FILL_FIELDS": "Please fill in all fields.",
     "ERROR_CHANGE_VALUE": "Please change a value before submitting again!",
     "ERROR_INVALID_COMBINATION": "The combination of email address and password is not valid!"
+  },
+  "SNACKBAR": {
+    "CLOSE": "Close"
+  },
+  "SAVED_ITEMS": {
+    "TITLE": "Saved Items",
+    "DESCRIPTION": "Here are the items you've saved for later.",
+    "PRICE": "Price",
+    "REMOVE": "Remove",
+    "CLEAR_ALL": "Clear All",
+    "EMPTY_TITLE": "No Saved Items",
+    "EMPTY_MESSAGE": "You haven't saved any items yet.",
+    "ITEM_ADDED": "Item added to saved items!",
+    "ITEM_REMOVED": "Item removed from saved items!",
+    "CLEARED": "All saved items cleared!",
+    "ITEM_ALREADY_SAVED": "This product is already in your saved items!",
+    "ERROR_ADDING_ITEM": "Error adding item to saved items.",
+    "ERROR_REMOVING_ITEM": "Error removing item from saved items.",
+    "ERROR_CLEARING_ITEMS": "Error clearing saved items.",
+    "MOVE_TO_CART": "Move Available Items to Cart",
+    "MOVED_TO_CART": "Available items have been moved to your cart!",
+    "NO_AVAILABLE_ITEMS": "No available items to move to the cart.",
+    "STOCK": "Stock",
+    "OUT_OF_STOCK": "Out of Stock",
+    "ENABLED": "Status",
+    "AVAILABLE": "Available",
+    "NOT_AVAILABLE": "Not Available"
+  },
+  "ORDER_SUCCESS": {
+    "THANK_YOU": "Thank You For Your Order!",
+    "ORDER_CONFIRMED": "Your order has been successfully placed and confirmed.",
+    "ORDER_DETAILS": "Order Details",
+    "ORDER_NUMBER": "Order Number",
+    "DATE": "Date",
+    "TOTAL": "Total Amount",
+    "EMAIL_SENT": "A confirmation email has been sent to your email address.",
+    "ORDER_SUMMARY": "Order Summary",
+    "QUANTITY": "Quantity",
+    "PRICE": "Price",
+    "WHATS_NEXT": "What Happens Next?",
+    "PROCESSING": "We'll start processing your order right away.",
+    "SHIPPING": "You'll receive a shipping confirmation with tracking information once your books are on their way.",
+    "CONTINUE_SHOPPING": "Continue Shopping",
+    "VIEW_ORDERS": "View My Orders",
+    "LOADING": "Loading order details...",
+    "ERROR_TITLE": "Something Went Wrong",
+    "RETURN_HOME": "Return to Home Page"
+  },
+  "ORDER_FAILED": {
+    "TITLE": "Order Processing Failed",
+    "MESSAGE": "We were unable to complete your order. We apologize for the inconvenience.",
+    "DETAILS": "This could be due to one of the following reasons:",
+    "REASON_PAYMENT": "Payment processing issue or insufficient funds",
+    "REASON_CONNECTION": "Connection error during the checkout process",
+    "REASON_SYSTEM": "Temporary system unavailability",
+    "WHAT_NEXT": "What can you do now?",
+    "TRY_AGAIN": "Try placing your order again",
+    "CHECK_CART": "Review your cart items and payment information",
+    "CONTACT_SUPPORT": "Contact our customer support if the problem persists",
+    "TRY_AGAIN_BUTTON": "Try Again",
+    "RETURN_TO_CART": "Return to Cart"
+  },
+  "HOME": {
+    "WELCOME": "Your Literary Journey Begins Here",
+    "TAGLINE": "Discover a world of stories, knowledge, and adventure at Bookazia - your premier online bookstore.",
+    "BROWSE_BOOKS": "Browse Books",
+    "FEATURED_CATEGORIES": "Featured Categories",
+    "CATEGORY": {
+      "FICTION": "Fiction",
+      "FANTASY": "Fantasy",
+      "CLASSICS": "Classics"
+    },
+    "NEW_ARRIVALS": "New Arrivals",
+    "VIEW_ALL": "View All",
+    "WHY_READING": "Why Reading Matters",
+    "BENEFITS": {
+      "KNOWLEDGE": "Expand Knowledge",
+      "KNOWLEDGE_DESC": "Books are gateways to new information, ideas, and perspectives.",
+      "STRESS": "Reduce Stress",
+      "STRESS_DESC": "Reading can lower stress levels by up to 68% and promote better sleep.",
+      "IMAGINATION": "Spark Imagination",
+      "IMAGINATION_DESC": "Stories transport you to new worlds and kindle creativity.",
+      "FOCUS": "Improve Focus",
+      "FOCUS_DESC": "Regular reading enhances concentration and cognitive abilities."
+    },
+    "NEWSLETTER": {
+      "TITLE": "Stay Updated",
+      "SUBTITLE": "Subscribe to our newsletter for exclusive offers, new releases, and literary insights.",
+      "EMAIL_PLACEHOLDER": "Your email address",
+      "SUBSCRIBE": "Subscribe"
+    }
+  },
+  "FAQ": {
+    "TITLE": "Frequently Asked Questions",
+    "SUBTITLE": "Find answers to the most common questions about Bookazia's services, products, and policies.",
+    "SEARCH_PLACEHOLDER": "Search questions...",
+    "CATEGORIES": {
+      "ALL": "All",
+      "ORDERS": "Orders",
+      "SHIPPING": "Shipping",
+      "RETURNS": "Returns",
+      "ACCOUNT": "Account",
+      "PRODUCTS": "Products"
+    },
+    "NO_RESULTS": {
+      "TITLE": "No matching questions found",
+      "SUBTITLE": "Try using different keywords or browse by category",
+      "CLEAR_BUTTON": "Clear Search"
+    },
+    "ADDITIONAL_HELP": {
+      "TITLE": "Still have questions?",
+      "CONTENT": "If you couldn't find the answer you're looking for, please contact our customer support team.",
+      "EMAIL": "Email Support",
+      "CALL": "Call Us"
+    },
+    "ITEMS": {
+      "SHIPPING_NORMAL": {
+        "QUESTION": "How long does normal shipping take?",
+        "ANSWER": "Standard shipping takes 2-5 business days within the Netherlands. International shipping typically takes 7-14 business days, depending on the destination country."
+      },
+      "SHIPPING_EXPRESS": {
+        "QUESTION": "How long does express shipping take?",
+        "ANSWER": "Express shipping takes 1-2 business days within the Netherlands. For international express shipping, delivery times may vary based on the destination."
+      },
+      "TRACK_ORDER": {
+        "QUESTION": "How do I track my order?",
+        "ANSWER": "Once your order has been shipped, you will receive a confirmation email with tracking information. You can also view your order status and tracking information in your account dashboard under \"My orders\"."
+      },
+      "CHANGE_ORDER": {
+        "QUESTION": "Can I change or cancel my order?",
+        "ANSWER": "Orders cannot be modified or canceled yet. If their is any problem with your order, please contact our customer service team as soon as possible. We will do our best to assist you."
+      },
+      "GIFT_WRAPPING": {
+        "QUESTION": "Do you offer gift wrapping?",
+        "ANSWER": "No sadly we do not offer gift wrapping at this time. However, we are working on it! Please check back later."
+      },
+      "EBOOKS": {
+        "QUESTION": "Are e-books available for all titles?",
+        "ANSWER": "Most new releases and bestsellers are available in e-book format, but our entire catalog is not digitized. Mostly because ebooks are not provided yet!"
+      },
+      "RESET_PASSWORD": {
+        "QUESTION": "How do I reset my password?",
+        "ANSWER": "Click on the \"Forgot Password\" link on the login page. Enter your email address, and we will send you instructions to reset your password. For security reasons, password reset links are only valid for 24 hours."
+      },
+      "INTERNATIONAL_SHIPPING": {
+        "QUESTION": "Do you ship internationally?",
+        "ANSWER": "Yes, we ship to most countries worldwide. Shipping costs and delivery times vary by location. International shipping options will be shown at checkout based on your delivery address."
+      },
+      "REQUEST_BOOK": {
+        "QUESTION": "Can I request a book that is not in your inventory?",
+        "ANSWER": "Yes! We accept special order requests for books not currently in our catalog. Please contact our staff with details about the book, including ISBN if available. Special orders typically take 1-3 weeks to fulfill."
+      },
+      "PAYMENT_METHODS": {
+        "QUESTION": "What payment methods do you accept?",
+        "ANSWER": "We accept all major credit cards (Visa, Mastercard, American Express), PayPal, iDEAL, and bank transfers."
+      },
+      "UPDATE_ACCOUNT": {
+        "QUESTION": "How do I update my account information?",
+        "ANSWER": "Log in to your account and click on \"Account\". In the dropdown menu you can see the option \"Edit Profile\". From there, you can update your personal information, and manage your communication preferences."
+      }
+    }
   }
 }

@@ -1,4 +1,11 @@
-<div class="cart-container" *ngIf="cartProducts.length >= 1">
+<div class="loading-container" *ngIf="isLoading">
+  <div class="loading-spinner">
+    <div class="spinner"></div>
+  </div>
+  <p class="loading-text">{{ "CART.LOADING_CART" | translate }}</p>
+</div>
+
+<div class="cart-container" *ngIf="!isLoading && cartProducts.length >= 1">
   <section class="cart-item" *ngFor="let product of cartProducts">
     <img
       [src]="product.coverImgUrl"
@@ -52,7 +59,7 @@
   </div>
 </div>
 
-<div class="empty-cart" *ngIf="cartProducts.length < 1">
+<div class="empty-cart" *ngIf="!isLoading && cartProducts.length < 1">
   <div class="empty-cart__content">
     <div class="empty-cart__icon">
       <svg

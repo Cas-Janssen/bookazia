@@ -11,6 +11,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductService } from '../../../services/product.service';
 import { CategoryService } from '../../../services/category.service';
 import { AuthorService } from '../../../services/author.service';
@@ -30,21 +31,21 @@ import { AuthService } from '../../../services/auth.service';
   styleUrl: './add-product.component.scss',
 })
 export class AddProductComponent implements OnInit, OnDestroy {
-  productForm!: FormGroup;
-  submitted = false;
-  success = false;
-  error: string | null = null;
-  coverImagePreview: string | null = null;
-  categories: Category[] = [];
-  authors: Author[] = [];
-  publishers: Publisher[] = [];
-  filteredAuthors: Author[] = [];
-  authorSearchQuery = '';
-  categorySearchQuery = '';
-  filteredCategories: Category[] = [];
-  selectedCategories: number[] = [];
-  selectedAuthors: number[] = [];
-  languages: string[] = [
+  protected productForm!: FormGroup;
+  protected submitted = false;
+  protected success = false;
+  protected error: string | null = null;
+  protected coverImagePreview: string | null = null;
+  protected categories: Category[] = [];
+  protected authors: Author[] = [];
+  protected publishers: Publisher[] = [];
+  protected filteredAuthors: Author[] = [];
+  protected authorSearchQuery = '';
+  protected categorySearchQuery = '';
+  protected filteredCategories: Category[] = [];
+  protected selectedCategories: number[] = [];
+  protected selectedAuthors: number[] = [];
+  protected languages: string[] = [
     'dutch',
     'english',
     'french',
@@ -58,8 +59,8 @@ export class AddProductComponent implements OnInit, OnDestroy {
     'arabic',
   ];
 
-  maxDate: string = '';
-  private destroy$ = new Subject<void>();
+  protected maxDate: string = '';
+  private destroy$: Subject<void> = new Subject<void>();
   private fb: FormBuilder = inject(FormBuilder);
   private router: Router = inject(Router);
   private productService: ProductService = inject(ProductService);
@@ -67,6 +68,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
   private authorService: AuthorService = inject(AuthorService);
   private publisherService: PublisherService = inject(PublisherService);
   private authService: AuthService = inject(AuthService);
+  private snackBar: MatSnackBar = inject(MatSnackBar);
 
   ngOnInit(): void {
     this.authService.isAdminUser().subscribe((isAdmin) => {
@@ -119,6 +121,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
           Validators.pattern(/^https?:\/\/.+\.(jpg|jpeg|png|webp)$/i),
         ],
       ],
+      pages: ['', [Validators.required, Validators.min(1)]],
       publicationDate: ['', [Validators.required, this.noFutureDateValidator]],
       originalLanguage: ['', [Validators.required]],
       publisherId: ['', [Validators.required]],
@@ -141,6 +144,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
         error: (err) => {
           console.error('Error loading categories', err);
           this.error = 'Failed to load categories';
+          this.scrollToError();
         },
       });
   }
@@ -157,6 +161,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
         error: (err) => {
           console.error('Error loading authors', err);
           this.error = 'Failed to load authors';
+          this.scrollToError();
         },
       });
   }
@@ -172,6 +177,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
         error: (err) => {
           console.error('Error loading publishers', err);
           this.error = 'Failed to load publishers';
+          this.scrollToError();
         },
       });
   }
@@ -244,16 +250,19 @@ export class AddProductComponent implements OnInit, OnDestroy {
     this.error = null;
 
     if (this.productForm.invalid) {
+      this.scrollToError();
       return;
     }
 
     if (this.selectedCategories.length === 0) {
       this.error = 'Please select at least one category';
+      this.scrollToError();
       return;
     }
 
     if (this.selectedAuthors.length === 0) {
       this.error = 'Please select at least one author';
+      this.scrollToError();
       return;
     }
 
@@ -265,6 +274,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
       descriptionEn: this.productForm.value.descriptionEn,
       descriptionNl: this.productForm.value.descriptionNl,
       coverImgUrl: this.productForm.value.coverImgUrl,
+      pages: Number(this.productForm.value.pages),
       publicationDate: this.formatDateForApi(
         this.productForm.value.publicationDate
       ),
@@ -281,14 +291,18 @@ export class AddProductComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (response) => {
           this.success = true;
-
-          setTimeout(() => {
-            this.router.navigate(['/admin']);
-          }, 1500);
+          this.snackBar.open('Product added successfully!', 'Close', {
+            duration: 3000,
+            verticalPosition: 'top',
+            horizontalPosition: 'center',
+            panelClass: ['success-snackbar'],
+          });
+          this.router.navigate(['/admin']);
         },
         error: (err) => {
           console.error('Error creating product', err);
           this.error = err.error?.message || 'Failed to create product';
+          this.scrollToError();
         },
       });
   }
@@ -327,5 +341,54 @@ export class AddProductComponent implements OnInit, OnDestroy {
     }
 
     return null;
+  }
+
+  private scrollToError(): void {
+    setTimeout(() => {
+      const generalError = document.querySelector('.alert-danger');
+      if (generalError) {
+        generalError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      const errorMessages = document.querySelectorAll(
+        '.invalid-feedback[role="alert"]:not([style*="display: none"])'
+      );
+
+      const invalidControls = document.querySelectorAll('.ng-invalid');
+
+      if (errorMessages.length > 0) {
+        const firstError = errorMessages[0];
+        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        const errorParent = firstError.closest('.form-group');
+        if (errorParent) {
+          const input = errorParent.querySelector('input, select, textarea');
+          if (input) {
+            (
+              input as
+                | HTMLInputElement
+                | HTMLSelectElement
+                | HTMLTextAreaElement
+            ).focus();
+          }
+        }
+        return;
+      }
+      if (invalidControls.length > 0) {
+        const firstInvalidControl = invalidControls[0];
+        firstInvalidControl.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+        });
+        if (
+          firstInvalidControl instanceof HTMLInputElement ||
+          firstInvalidControl instanceof HTMLSelectElement ||
+          firstInvalidControl instanceof HTMLTextAreaElement
+        ) {
+          firstInvalidControl.focus();
+        }
+      }
+    }, 100);
   }
 }

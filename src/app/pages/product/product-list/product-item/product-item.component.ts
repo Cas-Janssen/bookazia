@@ -1,6 +1,6 @@
 import { Component, inject, Input } from '@angular/core';
 import { Product } from '../../../../models/Product';
-import { NgClass, NgFor, NgIf } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { CartService } from '../../../../services/cart.service';
@@ -9,7 +9,7 @@ import { CartService } from '../../../../services/cart.service';
   selector: 'app-product-item',
   templateUrl: './product-item.component.html',
   styleUrl: './product-item.component.scss',
-  imports: [NgIf, NgFor, NgClass, TranslatePipe],
+  imports: [NgIf, NgClass, TranslatePipe],
 })
 export class ProductItemComponent {
   @Input() product!: Product;

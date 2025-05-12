@@ -10,7 +10,7 @@
   </div>
 
   <form (ngSubmit)="onSubmit()" *ngIf="!loading" class="edit-form">
-    <div *ngIf="error" class="alert alert-danger">
+    <div *ngIf="error" class="alert alert-danger" #errorMessage>
       {{ error }}
     </div>
     <div *ngIf="success" class="alert alert-success">

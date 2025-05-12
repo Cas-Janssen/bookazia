@@ -13,6 +13,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { SimpleCartProduct } from '../../models/SimpleCartProduct';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
@@ -37,6 +38,7 @@ export class CheckoutComponent implements OnDestroy {
   private authService: AuthService = inject(AuthService);
   private snackBar: MatSnackBar = inject(MatSnackBar);
   private translate: TranslateService = inject(TranslateService);
+  private router: Router = inject(Router);
 
   ngOnDestroy(): void {
     this.destroy$.next();

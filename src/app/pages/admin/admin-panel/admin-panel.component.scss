@@ -1,13 +1,12 @@
 @use "variables" as vars;
 
-// Bookstore color palette
-$bookstore-primary: #7b5d49; // Warm brown
-$bookstore-secondary: #3e6948; // Forest green
-$bookstore-accent: #c29466; // Warm tan
-$bookstore-light: #f7f3ed; // Cream
-$bookstore-dark: #4a3c31; // Dark brown
-$bookstore-error: #913838; // Deep red
-$bookstore-success: #3e6948; // Success green
+$bookstore-primary: #7b5d49;
+$bookstore-secondary: #3e6948;
+$bookstore-accent: #c29466;
+$bookstore-light: #f7f3ed;
+$bookstore-dark: #4a3c31;
+$bookstore-error: #913838;
+$bookstore-success: #3e6948;
 
 .admin-container {
   max-width: 1200px;
@@ -475,7 +474,7 @@ $bookstore-success: #3e6948; // Success green
 
       .search-filter input,
       .status-filter select {
-        width: 100%;
+        width: 85%;
       }
     }
   }

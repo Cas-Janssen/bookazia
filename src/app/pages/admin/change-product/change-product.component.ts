@@ -22,6 +22,7 @@ import { Author } from '../../../models/Author';
 import { AddProduct } from '../../../models/AddProduct';
 import { Product } from '../../../models/Product';
 import { AuthService } from '../../../services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-change-product',
@@ -31,24 +32,24 @@ import { AuthService } from '../../../services/auth.service';
   styleUrl: './change-product.component.scss',
 })
 export class ChangeProductComponent implements OnInit, OnDestroy {
-  productForm!: FormGroup;
-  productId!: number;
-  product: Product | null = null;
-  submitted = false;
-  success = false;
-  error: string | null = null;
-  loading = true;
-  coverImagePreview: string | null = null;
-  categories: Category[] = [];
-  authors: Author[] = [];
-  publishers: Publisher[] = [];
-  filteredAuthors: Author[] = [];
-  authorSearchQuery = '';
-  categorySearchQuery = '';
-  filteredCategories: Category[] = [];
-  selectedCategories: number[] = [];
-  selectedAuthors: number[] = [];
-  languages: string[] = [
+  protected productForm!: FormGroup;
+  protected productId!: number;
+  protected product: Product | null = null;
+  protected submitted = false;
+  protected success = false;
+  protected error: string | null = null;
+  protected loading = true;
+  protected coverImagePreview: string | null = null;
+  protected categories: Category[] = [];
+  protected authors: Author[] = [];
+  protected publishers: Publisher[] = [];
+  protected filteredAuthors: Author[] = [];
+  protected authorSearchQuery = '';
+  protected categorySearchQuery = '';
+  protected filteredCategories: Category[] = [];
+  protected selectedCategories: number[] = [];
+  protected selectedAuthors: number[] = [];
+  protected languages: string[] = [
     'dutch',
     'english',
     'french',
@@ -61,7 +62,7 @@ export class ChangeProductComponent implements OnInit, OnDestroy {
     'russian',
     'arabic',
   ];
-  maxDate: string = '';
+  protected maxDate: string = '';
   private destroy$ = new Subject<void>();
 
   private fb: FormBuilder = inject(FormBuilder);
@@ -72,6 +73,7 @@ export class ChangeProductComponent implements OnInit, OnDestroy {
   private authorService: AuthorService = inject(AuthorService);
   private publisherService: PublisherService = inject(PublisherService);
   private authService: AuthService = inject(AuthService);
+  private snackBar: MatSnackBar = inject(MatSnackBar);
 
   ngOnInit(): void {
     this.authService.isAdminUser().subscribe((isAdmin) => {
@@ -128,11 +130,9 @@ export class ChangeProductComponent implements OnInit, OnDestroy {
       descriptionNl: ['', [Validators.required, Validators.minLength(20)]],
       coverImgUrl: [
         '',
-        [
-          Validators.required,
-          Validators.pattern(/^https?:\/\/.+\.(jpg|jpeg|png|webp)$/i),
-        ],
+        [Validators.required, this.coverImgUrlValidator.bind(this)],
       ],
+      pages: ['', [Validators.required, Validators.min(1)]],
       publicationDate: ['', [Validators.required, this.noFutureDateValidator]],
       originalLanguage: ['', [Validators.required]],
       publisherId: ['', [Validators.required]],
@@ -177,6 +177,7 @@ export class ChangeProductComponent implements OnInit, OnDestroy {
       descriptionEn: product.descriptionEn,
       descriptionNl: product.descriptionNl,
       coverImgUrl: product.coverImgUrl,
+      pages: product.pages,
       publicationDate: publicationDate,
       originalLanguage: product.originalLanguage,
       publisherId: product.publisher.id,
@@ -302,16 +303,19 @@ export class ChangeProductComponent implements OnInit, OnDestroy {
     this.error = null;
 
     if (this.productForm.invalid) {
+      this.scrollToError();
       return;
     }
 
     if (this.selectedCategories.length === 0) {
       this.error = 'Please select at least one category';
+      this.scrollToError();
       return;
     }
 
     if (this.selectedAuthors.length === 0) {
       this.error = 'Please select at least one author';
+      this.scrollToError();
       return;
     }
 
@@ -325,6 +329,7 @@ export class ChangeProductComponent implements OnInit, OnDestroy {
       descriptionEn: this.productForm.value.descriptionEn,
       descriptionNl: this.productForm.value.descriptionNl,
       coverImgUrl: this.productForm.value.coverImgUrl,
+      pages: Number(this.productForm.value.pages),
       publicationDate: this.formatDateForApi(
         this.productForm.value.publicationDate
       ),
@@ -344,16 +349,71 @@ export class ChangeProductComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (response) => {
           this.success = true;
-
-          setTimeout(() => {
-            this.router.navigate(['/admin']);
-          }, 1500);
+          this.snackBar.open('Product updated successfully!', 'Close', {
+            duration: 3000,
+            verticalPosition: 'top',
+            horizontalPosition: 'center',
+            panelClass: ['success-snackbar'],
+          });
+          this.router.navigate(['/admin']);
         },
         error: (err) => {
           console.error('Error updating product', err);
           this.error = err.error?.message || 'Failed to update product';
+          this.scrollToError();
         },
       });
+  }
+
+  private scrollToError(): void {
+    setTimeout(() => {
+      const generalError = document.querySelector('.alert-danger');
+      if (generalError) {
+        generalError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      const errorMessages = document.querySelectorAll(
+        '.invalid-feedback:not([style*="display: none"])'
+      );
+
+      const invalidControls = document.querySelectorAll('.ng-invalid');
+
+      if (errorMessages.length > 0) {
+        const firstError = errorMessages[0];
+        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        const errorParent = firstError.closest('.form-group');
+        if (errorParent) {
+          const input = errorParent.querySelector('input, select, textarea');
+          if (input) {
+            (
+              input as
+                | HTMLInputElement
+                | HTMLSelectElement
+                | HTMLTextAreaElement
+            ).focus();
+          }
+        }
+        return;
+      }
+
+      if (invalidControls.length > 0) {
+        const firstInvalidControl = invalidControls[0];
+        firstInvalidControl.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+        });
+
+        if (
+          firstInvalidControl instanceof HTMLInputElement ||
+          firstInvalidControl instanceof HTMLSelectElement ||
+          firstInvalidControl instanceof HTMLTextAreaElement
+        ) {
+          firstInvalidControl.focus();
+        }
+      }
+    }, 100);
   }
 
   private formatDateForApi(date: string): string {
@@ -390,5 +450,28 @@ export class ChangeProductComponent implements OnInit, OnDestroy {
     }
 
     return null;
+  }
+
+  private coverImgUrlValidator(
+    control: AbstractControl
+  ): ValidationErrors | null {
+    const url = control.value;
+    if (!url) {
+      return null;
+    }
+
+    const standardImagePattern = /^https?:\/\/.+\.(jpg|jpeg|png|webp)$/;
+
+    const isGoogleBooksUrl =
+      url.includes('books.google.com') &&
+      url.includes('content') &&
+      url.includes('img=1') &&
+      url.includes('imgtk=');
+
+    if (standardImagePattern.test(url) || isGoogleBooksUrl) {
+      return null;
+    }
+
+    return { invalidUrl: true };
   }
 }

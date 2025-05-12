@@ -9,8 +9,9 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../../services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-profile-options',
@@ -25,6 +26,8 @@ export class ProfileOptionsComponent {
   private authService: AuthService = inject(AuthService);
   private elementRef: ElementRef = inject(ElementRef);
   protected isAdmin: boolean = false;
+  private snackBar: MatSnackBar = inject(MatSnackBar);
+  private translate: TranslateService = inject(TranslateService);
 
   constructor() {
     this.authService.isAdminUser().subscribe((isAdmin) => {
@@ -61,7 +64,16 @@ export class ProfileOptionsComponent {
 
   protected logout(): void {
     this.authService.logout();
-    window.alert('You have been logged out!');
+    this.snackBar.open(
+      this.translate.instant('HEADER.LOGOUT_SUCCESS'),
+      this.translate.instant('SNACKBAR.CLOSE'),
+      {
+        duration: 3000,
+        panelClass: 'success-snackbar',
+        verticalPosition: 'top',
+        horizontalPosition: 'center',
+      }
+    );
     this.router.navigate(['/']);
     this.closeMenu.emit();
   }

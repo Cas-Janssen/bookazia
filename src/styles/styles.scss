@@ -1,6 +1,7 @@
 html,
 body {
   height: 100%;
+  width: 100%;
 }
 body {
   margin: 0;
@@ -8,7 +9,7 @@ body {
 }
 
 .success-snackbar {
-  background-color: #4caf50; /* Green */
+  background-color: #4caf50;
   color: white;
   font-size: 16px;
   font-weight: bold;
@@ -17,7 +18,7 @@ body {
 }
 
 .error-snackbar {
-  background-color: #f44336; /* Red */
+  background-color: #f44336;
   color: white;
   font-size: 16px;
   font-weight: bold;
@@ -26,21 +27,10 @@ body {
 }
 
 .info-snackbar {
-  background-color: #2196f3; /* Blue */
+  background-color: #2196f3;
   color: white;
   font-size: 16px;
   font-weight: bold;
   border-radius: 4px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-/* Position the snack bar at the top */
-.mat-snack-bar-container {
-  top: 20px !important;
-  bottom: auto !important;
-  left: 50%;
-  transform: translateX(-50%);
-  width: auto;
-  max-width: 90%;
-  border-radius: 4px;
 }
