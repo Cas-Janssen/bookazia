@@ -1,0 +1,514 @@
+{
+  "HEADER": {
+    "LOGO_ALT": "Bookazia logo",
+    "SEARCH": "Search...",
+    "FAVORITE_ALT": "Icon of a heart",
+    "FAVORITES": "Favorites",
+    "CART_ALT": "Icon of a shopping cart",
+    "CART": "Cart",
+    "LOGIN_ALT": "Round icon with a blank silhouette of a person",
+    "LOGIN": "Login",
+    "ACCOUNT_ALT": "Account icon",
+    "ACCOUNT": "Account",
+    "HOME": "Home",
+    "LOGOUT": "Logout",
+    "LOGOUT_SUCCESS": "You have successfully logged out.",
+    "switchLanguage.EN": "English",
+    "switchLanguage.NL": "Dutch",
+    "ADMIN_MENU": "Admin Menu",
+    "ORDERS": "My Orders",
+    "INFO": "Profile Information",
+    "EDIT": "Edit Profile",
+    "ALL": "All products"
+  },
+  "ORDERS": {
+    "TITLE": "My Orders",
+    "NO_ORDERS_HEADING": "No Orders Found",
+    "NO_ORDERS": "You haven't placed any orders yet.",
+    "SHOP_NOW": "Shop Now",
+    "ORDER": "Order",
+    "PAYMENT_METHOD": "Payment Method",
+    "TOTAL": "Total",
+    "CREATED": "Order created at",
+    "UPDATED": "Order last updated at",
+    "STATUS": {
+      "PENDING": "Pending",
+      "PROCESSING": "Processing",
+      "SHIPPED": "Shipped",
+      "DELIVERED": "Delivered",
+      "CANCELLED": "Cancelled"
+    },
+
+    "PAYMENT": {
+      "PAYPAL": "PayPal",
+      "CREDIT_CARD": "Credit Card",
+      "BANK_TRANSFER": "Bank Transfer",
+      "IDEAL": "iDEAL"
+    }
+  },
+  "PRODUCTS": {
+    "GO_BACK": "Go Back",
+    "STOCK": "Stock",
+    "ISBN": "ISBN",
+    "AUTHOR": "Author",
+    "PAGES": "Pages",
+    "DESCRIPTION": "Description",
+    "LOADING_ERROR": "Error loading products!",
+    "PRICE": "Price",
+    "IN_STOCK": "In stock",
+    "OUT_OF_STOCK": "Out of stock",
+    "PUBLICATION_DATE": "Published on",
+    "ORIGINAL_LANGUAGE": "Original language",
+    "PUBLISHER": "Publisher",
+    "CATEGORIES": "Categories",
+    "ADD_TO_CART": "Add to cart",
+    "ADD_TO_FAVORITES": "Add to favorites",
+    "NOT_AVAILABLE": "Not available",
+    "LOGIN_TO_SAVE": "Log in to save items",
+    "NO_PRODUCTS_FOUND": "No products found. Please try another category or search query!",
+    "NO_PRODUCTS_FOUND_TITLE": "No Books Found",
+    "NO_PRODUCTS_FOUND_MESSAGE": "We couldn't find any books matching your search criteria.",
+    "SEARCH_SUGGESTIONS": "Try these suggestions:",
+    "SUGGESTION_CHECK_SPELLING": "Check the spelling of your search terms",
+    "SUGGESTION_FEWER_KEYWORDS": "Try using fewer or more general keywords",
+    "SUGGESTION_DIFFERENT_KEYWORDS": "Try searching for a different book or author",
+    "CLEAR_FILTERS": "Clear Filters",
+    "BROWSE_ALL": "Browse All Books",
+    "BACK_TO_HOME": "Back to Home",
+    "LOADING": "Loading books..."
+  },
+  "CHECKOUT": {
+    "TITLE": "Checkout",
+    "PERSONAL_INFO": {
+      "TITLE": "Step 1: Personal Information",
+      "FIRST_NAME": "First Name",
+      "MIDDLE_NAME": "Middle Name (Optional)",
+      "LAST_NAME": "Last Name",
+      "ADDRESS": "Address",
+      "CITY": "City",
+      "POSTAL_CODE": "Postal Code",
+      "EMAIL": "Email",
+      "PHONE_NUMBER": "Phone Number (Optional)"
+    },
+    "DELIVERY": {
+      "TITLE": "Step 2: Delivery Option",
+      "STANDARD": "Standard Delivery",
+      "EXPRESS": "Express Delivery"
+    },
+    "PAYMENT": {
+      "TITLE": "Step 3: Payment Method",
+      "CREDIT_CARD": "Credit Card",
+      "PAYPAL": "PayPal",
+      "IDEAL": "Ideal",
+      "BANK_TRANSFER": "Bank Transfer"
+    },
+    "BUTTONS": {
+      "BACK": "Back",
+      "NEXT": "Next",
+      "BUY": "Buy"
+    },
+    "VALIDATION": {
+      "EMPTY_CART": "Your cart is empty. Please add items to your cart before proceeding to checkout.",
+      "FETCH_CART_ERROR": "Error fetching cart items. Please try again later."
+    }
+  },
+  "CART": {
+    "PRICE": "Price",
+    "QUANTITY": "Quantity",
+    "TOTAL": "Total",
+    "REMOVE_ITEM": "Remove item",
+    "TOTAL_PRICE": "Total Price",
+    "CLEAR_CART": "Clear Cart",
+    "PLACE_ORDER": "Place Order",
+    "EMPTY_TITLE": "Your Shopping Cart is Empty",
+    "EMPTY_MESSAGE": "Looks like you haven't added any books to your cart yet. Explore our collection to find your next great read!",
+    "BROWSE_BOOKS": "Browse Books",
+    "SUGGESTIONS_TITLE": "You might want to:",
+    "SUGGESTION_1": "Check out our bestsellers and new releases",
+    "SUGGESTION_2": "Explore books by your favorite authors",
+    "SUGGESTION_3": "View your previously saved items in your wishlist",
+    "ITEM_ADDED": "Product added to cart!",
+    "ITEM_ALREADY_IN_CART": "Product already in cart!",
+    "ITEM_REMOVED": "Product removed from cart!",
+    "ITEM_NOT_FOUND": "Product not found in cart!",
+    "ITEM_QUANTITY_UPDATED": "Cart item quantity updated!",
+    "CART_CLEARED": "Cart cleared!",
+    "ERROR_ADDING_ITEM": "Error adding product to cart. Please try again later.",
+    "ERROR_REMOVING_ITEM": "Error removing product from cart. Please try again later.",
+    "ERROR_UPDATING_ITEM": "Error updating cart item. Please try again later.",
+    "ERROR_FETCHING_CART": "Error fetching shopping cart. Please try again later.",
+    "ITEM_NOT_AVAILABLE": "Product is not available. Try again later.",
+    "LOADING_CART": "Loading your shopping cart..."
+  },
+  "FOOTER": {
+    "ABOUT_US": "About Us",
+    "ABOUT_TEXT": "Welcome to Bookazia, your go-to online bookstore for the best reads! Created by Cas Janssen a student at Leiden University of Applied Sciences. It is a fullstack application built with Angular, Spring Boot and PostgreSQL.",
+    "QUICK_LINKS": "Quick Links",
+    "FAQ": "FAQ",
+    "TERMS": "Terms of Service",
+    "PRIVACY": "Privacy Policy",
+    "CONTACT": "Contact",
+    "EMAIL": "Email",
+    "ADDRESS": "Address",
+    "LOCATION": "Zernikedreef 11 Leiden",
+    "COPYRIGHT": "© {{year}} Bookazia. All Rights Reserved."
+  },
+  "USER": {
+    "PROFILE": {
+      "TITLE": "My Profile",
+      "LOADING": "Loading your profile information...",
+      "PERSONAL_INFO": "Personal Information",
+      "ADDRESS_INFO": "Address Information",
+      "NAME": "Name",
+      "EMAIL": "Email",
+      "PHONE": "Phone Number",
+      "ADDRESS": "Address",
+      "POSTAL_CODE": "Postal Code",
+      "CITY": "City",
+      "EDIT_PROFILE": "Edit Profile",
+      "VIEW_ORDERS": "View My Orders"
+    },
+    "EDIT": {
+      "TITLE": "Edit Profile",
+      "DESCRIPTION": "Update your account information below",
+      "LOADING": "Loading your information...",
+      "PERSONAL_INFO": "Personal Information",
+      "ADDRESS_INFO": "Address Information",
+      "FIRST_NAME": "First Name",
+      "FIRST_NAME_PLACEHOLDER": "Enter your first name",
+      "MIDDLE_NAME": "Middle Name",
+      "MIDDLE_NAME_PLACEHOLDER": "Enter your middle name (optional)",
+      "LAST_NAME": "Last Name",
+      "LAST_NAME_PLACEHOLDER": "Enter your last name",
+      "EMAIL": "Email Address",
+      "EMAIL_PLACEHOLDER": "Enter your email address",
+      "PHONE": "Phone Number",
+      "PHONE_PLACEHOLDER": "Enter your phone number (optional)",
+      "ADDRESS": "Street Address",
+      "ADDRESS_PLACEHOLDER": "Enter your street address",
+      "POSTAL_CODE": "Postal Code",
+      "POSTAL_CODE_PLACEHOLDER": "Enter postal code",
+      "CITY": "City",
+      "CITY_PLACEHOLDER": "Enter city",
+      "REQUIRED_FIELD": "This field is required",
+      "CANCEL": "Cancel",
+      "SAVE": "Save Changes",
+      "SUCCESS_MESSAGE": "Your profile has been updated successfully!",
+      "AUTHENTICATION": "Authentication",
+      "AUTH_DESCRIPTION": "Please enter your current password to confirm these changes.",
+      "PASSWORD": "Current Password",
+      "PASSWORD_PLACEHOLDER": "Enter your current password"
+    }
+  },
+  "ERROR": {
+    "NOT_FOUND": {
+      "TITLE": "Page Not Found",
+      "MESSAGE": "Oops! It seems the page you're looking for has been checked out of our library.",
+      "SUGGESTIONS": "You might want to try:",
+      "SUGGESTION1": "Checking the URL for any typos",
+      "SUGGESTION2": "Using the navigation menu to find what you're looking for",
+      "SUGGESTION3": "Browsing our book categories for something interesting to read",
+      "HOME_BUTTON": "Go to Homepage",
+      "BACK_BUTTON": "Go Back"
+    }
+  },
+  "ADMIN": {
+    "LOADING": "Loading admin panel...",
+    "PANEL": {
+      "TITLE": "Admin Dashboard",
+      "DESCRIPTION": "Manage your bookstore inventory and users",
+      "PRODUCTS": "Books",
+      "USERS": "Admin Users",
+      "ADD_PRODUCT": "Add New Book",
+      "SEARCH": "Search books",
+      "SEARCH_PLACEHOLDER": "Search by title, ISBN, or author...",
+      "FILTER_STATUS": "Filter by status",
+      "ALL_PRODUCTS": "All Books",
+      "ACTIVE_PRODUCTS": "Active Books",
+      "INACTIVE_PRODUCTS": "Inactive Books",
+      "COVER": "Cover",
+      "TITLE_BOOK": "Title",
+      "PRICE": "Price",
+      "STOCK": "Stock",
+      "AUTHORS": "Authors",
+      "STATUS": "Status",
+      "ACTIONS": "Actions",
+      "ACTIVATE": "Activate",
+      "DEACTIVATE": "Deactivate",
+      "DELETE": "Delete",
+      "STATUS_ACTIVE": "Active",
+      "STATUS_INACTIVE": "Inactive",
+      "EDIT_PRODUCT": "Edit Book",
+      "NO_PRODUCTS_FOUND": "No books found matching your search criteria.",
+      "MAKE_VISIBLE_TITLE": "Make Product Visible",
+      "HIDE_PRODUCT_TITLE": "Hide Product from Store",
+      "MAKE_VISIBLE_MESSAGE": "This will make \"{{title}}\" visible to customers. Do you want to proceed?",
+      "HIDE_PRODUCT_MESSAGE": "This will hide \"{{title}}\" from the store. Customers will no longer be able to see or purchase this book. Do you want to proceed?",
+      "PRODUCT_ACTIVATED": "Product activated successfully.",
+      "PRODUCT_DEACTIVATED": "Product hidden successfully.",
+      "STATUS_UPDATE_ERROR": "Failed to update product status. Please try again.",
+      "CANCEL": "Cancel",
+      "CONFIRM": "Confirm"
+    },
+    "BUTTON": {
+      "CANCEL": "Cancel"
+    },
+    "PRODUCT": {
+      "STATUS": "Status",
+      "STATUS_ENABLED": "Enabled",
+      "STATUS_DISABLED": "Disabled"
+    },
+    "FORM": {
+      "REQUIRED": "This field is required",
+      "MIN_LENGTH": "Minimum length is {{length}} characters",
+      "MIN_VALUE": "Minimum value is {{value}}",
+      "FUTURE_DATE_NOT_ALLOWED": "Publication date cannot be in the future"
+    },
+    "ADD_PRODUCT": {
+      "TITLE": "Add New Book",
+      "DESCRIPTION": "Create a new book listing with details",
+      "BASIC_INFO": "Basic Information",
+      "TITLE_LABEL": "Book Title",
+      "TITLE_PLACEHOLDER": "Enter book title",
+      "PRICE": "Price",
+      "PRICE_PLACEHOLDER": "0.00",
+      "STOCK": "Stock Quantity",
+      "STOCK_PLACEHOLDER": "Enter quantity in stock",
+      "ISBN": "ISBN",
+      "ISBN_PLACEHOLDER": "Enter 10 or 13-digit ISBN",
+      "ISBN_INVALID": "Please enter a valid 10 or 13-digit ISBN",
+      "PUBLICATION_DATE": "Publication Date",
+      "LANGUAGE": "Original Language",
+      "SELECT_LANGUAGE": "Select a language",
+      "COVER_IMAGE": "Cover Image",
+      "COVER_IMAGE_LABEL": "Book Cover",
+      "IMAGE_URL_PLACEHOLDER": "Enter image URL",
+      "IMAGE_URL_HINT": "URL must end with .jpg, .jpeg, .png or .webp or can be a google books link",
+      "IMAGE_URL_INVALID": "Please enter a valid image URL",
+      "DESCRIPTION_TITLE": "Book Description",
+      "DESCRIPTION_LABEL": "Description",
+      "DESCRIPTION_LABEL_EN": "English Description",
+      "DESCRIPTION_LABEL_NL": "Dutch Description",
+      "DESCRIPTION_PLACEHOLDER": "Enter detailed book description",
+      "DESCRIPTION_PLACEHOLDER_EN": "Enter detailed book description in English",
+      "DESCRIPTION_PLACEHOLDER_NL": "Enter detailed book description in Dutch",
+      "PAGES": "Number of Pages",
+      "PAGES_PLACEHOLDER": "Enter number of pages",
+      "CATEGORIES": "Book Categories",
+      "SELECT_CATEGORIES": "Select Categories",
+      "SEARCH_CATEGORIES": "Search categories",
+      "CATEGORY_REQUIRED": "Please select at least one category",
+      "AUTHORS": "Author Information",
+      "SELECT_AUTHORS": "Select Authors",
+      "SEARCH_AUTHORS": "Search authors",
+      "AUTHOR_REQUIRED": "Please select at least one author",
+      "PUBLISHER": "Publisher Information",
+      "SELECT_PUBLISHER": "Publisher",
+      "SELECT_PUBLISHER_PLACEHOLDER": "Select a publisher",
+      "SUBMIT": "Add Book",
+      "SUCCESS": "Book added successfully!"
+    },
+    "CHANGE_PRODUCT": {
+      "TITLE": "Edit Book",
+      "DESCRIPTION": "Update book details",
+      "SUBMIT": "Update book"
+    }
+  },
+  "REGISTER": {
+    "GO_BACK": "Go back",
+    "LOGIN_DETAILS": "Login details:",
+    "USER_DETAILS": "User details:",
+    "EMAIL": "Email",
+    "EMAIL_PLACEHOLDER": "example@email.com",
+    "EMAIL_REQUIRED": "Email is required.",
+    "EMAIL_INVALID": "Please enter a valid email address.",
+    "PASSWORD": "Password",
+    "PASSWORD_PLACEHOLDER": "Password123!",
+    "FIRST_NAME": "First name",
+    "FIRST_NAME_PLACEHOLDER": "John",
+    "MIDDLE_NAME": "Middle name",
+    "MIDDLE_NAME_PLACEHOLDER": "William",
+    "LAST_NAME": "Last name",
+    "LAST_NAME_PLACEHOLDER": "Doe",
+    "SUBMIT": "Submit",
+    "ERROR_FILL_FIELDS": "Please fill in all fields.",
+    "ERROR_INVALID_EMAIL": "Please enter a valid email address.",
+    "ERROR_PASSWORD_REQUIREMENTS": "Password must be at least 8 characters and contain at least one uppercase letter, one lowercase letter, one number, and one special character!",
+    "SUCCESS": "Registration successful! You are now logged in."
+  },
+  "LOGIN": {
+    "GO_BACK": "Go back",
+    "TITLE": "Login",
+    "REGISTER": "Register",
+    "EMAIL": "Email",
+    "EMAIL_PLACEHOLDER": "example@email.com",
+    "PASSWORD": "Password",
+    "PASSWORD_PLACEHOLDER": "Password123!",
+    "FORGOT_PASSWORD": "Forgot password?",
+    "BUTTON": "Login",
+    "ERROR_FILL_FIELDS": "Please fill in all fields.",
+    "ERROR_CHANGE_VALUE": "Please change a value before submitting again!",
+    "ERROR_INVALID_COMBINATION": "The combination of email address and password is not valid!"
+  },
+  "SNACKBAR": {
+    "CLOSE": "Close"
+  },
+  "SAVED_ITEMS": {
+    "TITLE": "Saved Items",
+    "DESCRIPTION": "Here are the items you've saved for later.",
+    "PRICE": "Price",
+    "REMOVE": "Remove",
+    "CLEAR_ALL": "Clear All",
+    "EMPTY_TITLE": "No Saved Items",
+    "EMPTY_MESSAGE": "You haven't saved any items yet.",
+    "ITEM_ADDED": "Item added to saved items!",
+    "ITEM_REMOVED": "Item removed from saved items!",
+    "CLEARED": "All saved items cleared!",
+    "ITEM_ALREADY_SAVED": "This product is already in your saved items!",
+    "ERROR_ADDING_ITEM": "Error adding item to saved items.",
+    "ERROR_REMOVING_ITEM": "Error removing item from saved items.",
+    "ERROR_CLEARING_ITEMS": "Error clearing saved items.",
+    "MOVE_TO_CART": "Move Available Items to Cart",
+    "MOVED_TO_CART": "Available items have been moved to your cart!",
+    "NO_AVAILABLE_ITEMS": "No available items to move to the cart.",
+    "STOCK": "Stock",
+    "OUT_OF_STOCK": "Out of Stock",
+    "ENABLED": "Status",
+    "AVAILABLE": "Available",
+    "NOT_AVAILABLE": "Not Available"
+  },
+  "ORDER_SUCCESS": {
+    "THANK_YOU": "Thank You For Your Order!",
+    "ORDER_CONFIRMED": "Your order has been successfully placed and confirmed.",
+    "ORDER_DETAILS": "Order Details",
+    "ORDER_NUMBER": "Order Number",
+    "DATE": "Date",
+    "TOTAL": "Total Amount",
+    "EMAIL_SENT": "A confirmation email has been sent to your email address.",
+    "ORDER_SUMMARY": "Order Summary",
+    "QUANTITY": "Quantity",
+    "PRICE": "Price",
+    "WHATS_NEXT": "What Happens Next?",
+    "PROCESSING": "We'll start processing your order right away.",
+    "SHIPPING": "You'll receive a shipping confirmation with tracking information once your books are on their way.",
+    "CONTINUE_SHOPPING": "Continue Shopping",
+    "VIEW_ORDERS": "View My Orders",
+    "LOADING": "Loading order details...",
+    "ERROR_TITLE": "Something Went Wrong",
+    "RETURN_HOME": "Return to Home Page"
+  },
+  "ORDER_FAILED": {
+    "TITLE": "Order Processing Failed",
+    "MESSAGE": "We were unable to complete your order. We apologize for the inconvenience.",
+    "DETAILS": "This could be due to one of the following reasons:",
+    "REASON_PAYMENT": "Payment processing issue or insufficient funds",
+    "REASON_CONNECTION": "Connection error during the checkout process",
+    "REASON_SYSTEM": "Temporary system unavailability",
+    "WHAT_NEXT": "What can you do now?",
+    "TRY_AGAIN": "Try placing your order again",
+    "CHECK_CART": "Review your cart items and payment information",
+    "CONTACT_SUPPORT": "Contact our customer support if the problem persists",
+    "TRY_AGAIN_BUTTON": "Try Again",
+    "RETURN_TO_CART": "Return to Cart"
+  },
+  "HOME": {
+    "WELCOME": "Your Literary Journey Begins Here",
+    "TAGLINE": "Discover a world of stories, knowledge, and adventure at Bookazia - your premier online bookstore.",
+    "BROWSE_BOOKS": "Browse Books",
+    "FEATURED_CATEGORIES": "Featured Categories",
+    "CATEGORY": {
+      "FICTION": "Fiction",
+      "FANTASY": "Fantasy",
+      "CLASSICS": "Classics"
+    },
+    "NEW_ARRIVALS": "New Arrivals",
+    "VIEW_ALL": "View All",
+    "WHY_READING": "Why Reading Matters",
+    "BENEFITS": {
+      "KNOWLEDGE": "Expand Knowledge",
+      "KNOWLEDGE_DESC": "Books are gateways to new information, ideas, and perspectives.",
+      "STRESS": "Reduce Stress",
+      "STRESS_DESC": "Reading can lower stress levels by up to 68% and promote better sleep.",
+      "IMAGINATION": "Spark Imagination",
+      "IMAGINATION_DESC": "Stories transport you to new worlds and kindle creativity.",
+      "FOCUS": "Improve Focus",
+      "FOCUS_DESC": "Regular reading enhances concentration and cognitive abilities."
+    },
+    "NEWSLETTER": {
+      "TITLE": "Stay Updated",
+      "SUBTITLE": "Subscribe to our newsletter for exclusive offers, new releases, and literary insights.",
+      "EMAIL_PLACEHOLDER": "Your email address",
+      "SUBSCRIBE": "Subscribe"
+    }
+  },
+  "FAQ": {
+    "TITLE": "Frequently Asked Questions",
+    "SUBTITLE": "Find answers to the most common questions about Bookazia's services, products, and policies.",
+    "SEARCH_PLACEHOLDER": "Search questions...",
+    "CATEGORIES": {
+      "ALL": "All",
+      "ORDERS": "Orders",
+      "SHIPPING": "Shipping",
+      "RETURNS": "Returns",
+      "ACCOUNT": "Account",
+      "PRODUCTS": "Products"
+    },
+    "NO_RESULTS": {
+      "TITLE": "No matching questions found",
+      "SUBTITLE": "Try using different keywords or browse by category",
+      "CLEAR_BUTTON": "Clear Search"
+    },
+    "ADDITIONAL_HELP": {
+      "TITLE": "Still have questions?",
+      "CONTENT": "If you couldn't find the answer you're looking for, please contact our customer support team.",
+      "EMAIL": "Email Support",
+      "CALL": "Call Us"
+    },
+    "ITEMS": {
+      "SHIPPING_NORMAL": {
+        "QUESTION": "How long does normal shipping take?",
+        "ANSWER": "Standard shipping takes 2-5 business days within the Netherlands. International shipping typically takes 7-14 business days, depending on the destination country."
+      },
+      "SHIPPING_EXPRESS": {
+        "QUESTION": "How long does express shipping take?",
+        "ANSWER": "Express shipping takes 1-2 business days within the Netherlands. For international express shipping, delivery times may vary based on the destination."
+      },
+      "TRACK_ORDER": {
+        "QUESTION": "How do I track my order?",
+        "ANSWER": "Once your order has been shipped, you will receive a confirmation email with tracking information. You can also view your order status and tracking information in your account dashboard under \"My orders\"."
+      },
+      "CHANGE_ORDER": {
+        "QUESTION": "Can I change or cancel my order?",
+        "ANSWER": "Orders cannot be modified or canceled yet. If their is any problem with your order, please contact our customer service team as soon as possible. We will do our best to assist you."
+      },
+      "GIFT_WRAPPING": {
+        "QUESTION": "Do you offer gift wrapping?",
+        "ANSWER": "No sadly we do not offer gift wrapping at this time. However, we are working on it! Please check back later."
+      },
+      "EBOOKS": {
+        "QUESTION": "Are e-books available for all titles?",
+        "ANSWER": "Most new releases and bestsellers are available in e-book format, but our entire catalog is not digitized. Mostly because ebooks are not provided yet!"
+      },
+      "RESET_PASSWORD": {
+        "QUESTION": "How do I reset my password?",
+        "ANSWER": "Click on the \"Forgot Password\" link on the login page. Enter your email address, and we will send you instructions to reset your password. For security reasons, password reset links are only valid for 24 hours."
+      },
+      "INTERNATIONAL_SHIPPING": {
+        "QUESTION": "Do you ship internationally?",
+        "ANSWER": "Yes, we ship to most countries worldwide. Shipping costs and delivery times vary by location. International shipping options will be shown at checkout based on your delivery address."
+      },
+      "REQUEST_BOOK": {
+        "QUESTION": "Can I request a book that is not in your inventory?",
+        "ANSWER": "Yes! We accept special order requests for books not currently in our catalog. Please contact our staff with details about the book, including ISBN if available. Special orders typically take 1-3 weeks to fulfill."
+      },
+      "PAYMENT_METHODS": {
+        "QUESTION": "What payment methods do you accept?",
+        "ANSWER": "We accept all major credit cards (Visa, Mastercard, American Express), PayPal, iDEAL, and bank transfers."
+      },
+      "UPDATE_ACCOUNT": {
+        "QUESTION": "How do I update my account information?",
+        "ANSWER": "Log in to your account and click on \"Account\". In the dropdown menu you can see the option \"Edit Profile\". From there, you can update your personal information, and manage your communication preferences."
+      }
+    }
+  }
+}

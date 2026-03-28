@@ -1,0 +1,61 @@
+<main class="saved-items-container">
+  <header class="page-header">
+    <h1>{{ "SAVED_ITEMS.TITLE" | translate }}</h1>
+    <p class="page-description">{{ "SAVED_ITEMS.DESCRIPTION" | translate }}</p>
+  </header>
+
+  <div *ngIf="savedItems.length > 0; else emptyState">
+    <section class="saved-item" *ngFor="let item of savedItems">
+      <img
+        [src]="item.coverImgUrl"
+        [alt]="item.title"
+        class="saved-item__image"
+      />
+      <div class="saved-item__details">
+        <h2 class="saved-item__name">{{ item.title }}</h2>
+        <p class="saved-item__price">
+          {{ "SAVED_ITEMS.PRICE" | translate }}: €{{ item.price }}
+        </p>
+        <p class="saved-item__stock">
+          {{ "SAVED_ITEMS.STOCK" | translate }}:
+          <span [ngClass]="{ 'out-of-stock': item.stock <= 0 }">
+            {{
+              item.stock > 0
+                ? item.stock
+                : ("SAVED_ITEMS.OUT_OF_STOCK" | translate)
+            }}
+          </span>
+        </p>
+        <p class="saved-item__enabled">
+          {{ "SAVED_ITEMS.ENABLED" | translate }}:
+          <span [ngClass]="{ disabled: !item.enabled || item.stock <= 0 }">
+            {{
+              !item.enabled || item.stock <= 0
+                ? ("SAVED_ITEMS.NOT_AVAILABLE" | translate)
+                : ("SAVED_ITEMS.AVAILABLE" | translate)
+            }}
+          </span>
+        </p>
+        <button
+          class="saved-item__remove-btn"
+          (click)="removeSavedItem(item.id)"
+        >
+          {{ "SAVED_ITEMS.REMOVE" | translate }}
+        </button>
+      </div>
+    </section>
+    <button class="clear-saved-items-btn" (click)="clearSavedItems()">
+      {{ "SAVED_ITEMS.CLEAR_ALL" | translate }}
+    </button>
+    <button class="move-to-cart-btn" (click)="moveToCart()">
+      {{ "SAVED_ITEMS.MOVE_TO_CART" | translate }}
+    </button>
+  </div>
+
+  <ng-template #emptyState>
+    <div class="empty-saved-items">
+      <h2>{{ "SAVED_ITEMS.EMPTY_TITLE" | translate }}</h2>
+      <p>{{ "SAVED_ITEMS.EMPTY_MESSAGE" | translate }}</p>
+    </div>
+  </ng-template>
+</main>

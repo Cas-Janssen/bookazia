@@ -1,0 +1,45 @@
+<footer class="footer">
+  <section class="container">
+    <article class="footer-section">
+      <h3>{{ "FOOTER.ABOUT_US" | translate }}</h3>
+      <p>{{ "FOOTER.ABOUT_TEXT" | translate }}</p>
+    </article>
+
+    <nav class="footer-section">
+      <h3>{{ "FOOTER.QUICK_LINKS" | translate }}</h3>
+      <ul>
+        <li>
+          <p (click)="navigateTo('home')">{{ "HEADER.HOME" | translate }}</p>
+        </li>
+        <li>
+          <p (click)="navigateTo('faq')">{{ "FOOTER.FAQ" | translate }}</p>
+        </li>
+        <li>
+          <p (click)="navigateTo('legal/privacy')">
+            {{ "FOOTER.PRIVACY" | translate }}
+          </p>
+        </li>
+      </ul>
+    </nav>
+
+    <address class="footer-section">
+      <h3>{{ "FOOTER.CONTACT" | translate }}</h3>
+      <p>
+        {{ "FOOTER.EMAIL" | translate }}:
+        <a href="mailto:s1156741@student.hsleiden.nl"
+          >s1156741&#64;student.hsleiden.nl</a
+        >
+      </p>
+      <p>
+        {{ "FOOTER.ADDRESS" | translate }}:
+        <a href="https://maps.app.goo.gl/Q5gZhMBXYr1G4cYn9" target="_blank">
+          Zernikedreef 11 Leiden
+        </a>
+      </p>
+    </address>
+  </section>
+
+  <section class="footer-bottom">
+    <p>{{ "FOOTER.COPYRIGHT" | translate : { year: currentYear } }}</p>
+  </section>
+</footer>

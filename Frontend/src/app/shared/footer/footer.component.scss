@@ -1,0 +1,67 @@
+@use "variables" as vars;
+
+.footer {
+  background: vars.$primary-bg;
+  color: vars.$text-color;
+  text-align: center;
+  width: 100%;
+  height: auto;
+  padding: 15px 0;
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    .footer-section {
+      flex: 1;
+      min-width: 200px;
+      padding: 0 15px;
+
+      h3 {
+        color: vars.$accent-color;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+
+        li {
+          margin: 5px 0;
+
+          a {
+            color: vars.$text-color;
+            text-decoration: none;
+            transition: 0.3s;
+
+            &:hover {
+              color: vars.$accent-color;
+            }
+          }
+        }
+      }
+
+      .social-icons {
+        a {
+          color: vars.$accent-color;
+          margin: 0 10px;
+          font-size: 20px;
+          transition: 0.3s;
+
+          &:hover {
+            color: vars.$text-color;
+          }
+        }
+      }
+    }
+
+    .footer-bottom {
+      margin-top: 20px;
+      border-top: 1px solid vars.$border-color;
+      padding-top: 10px;
+      font-size: 14px;
+    }
+  }
+}

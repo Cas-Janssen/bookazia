@@ -1,0 +1,23 @@
+<div class="step">
+  <h3>{{ "CHECKOUT.DELIVERY.TITLE" | translate }}</h3>
+  <label>
+    <input
+      type="radio"
+      name="delivery"
+      value="standard"
+      [(ngModel)]="selectedOption"
+      (ngModelChange)="onOptionChange()"
+    />
+    {{ "CHECKOUT.DELIVERY.STANDARD" | translate }}
+  </label>
+  <label>
+    <input
+      type="radio"
+      name="delivery"
+      value="express"
+      [(ngModel)]="selectedOption"
+      (ngModelChange)="onOptionChange()"
+    />
+    {{ "CHECKOUT.DELIVERY.EXPRESS" | translate }}
+  </label>
+</div>

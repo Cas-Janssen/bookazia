@@ -1,0 +1,143 @@
+@use "variables" as vars;
+
+.language-dropdown {
+  position: relative;
+  margin: 0 15px;
+  z-index: 50;
+
+  .language-toggle {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: vars.$text-color;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+
+    &:hover {
+      background-color: vars.$hover-bg;
+    }
+
+    .current-flag {
+      width: 20px;
+      height: 15px;
+      margin-right: 6px;
+      object-fit: cover;
+      border-radius: 2px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .current-language {
+      font-size: 14px;
+      font-weight: 500;
+      margin-right: 4px;
+    }
+
+    .smaller-language {
+      display: none;
+    }
+
+    .dropdown-arrow {
+      font-size: 10px;
+      transition: transform 0.2s ease;
+    }
+  }
+
+  .language-options {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: vars.$primary-bg;
+    min-width: 150px;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 50;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: all 0.3s ease;
+
+    &.open {
+      max-height: 200px;
+      opacity: 1;
+    }
+
+    .language-option {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      text-align: left;
+      padding: 10px 15px;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+
+      img {
+        width: 20px;
+        height: 15px;
+        margin-right: 10px;
+        border-radius: 2px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      span {
+        font-size: 14px;
+        color: vars.$text-color;
+      }
+
+      &:hover {
+        background-color: vars.$hover-bg;
+      }
+
+      &.active {
+        background-color: rgba(0, 0, 0, 0.05);
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+@media (max-width: vars.$breakpoint-md) {
+  .language-dropdown {
+    .language-toggle {
+      .current-language {
+        display: none;
+      }
+      .smaller-language {
+        display: block;
+      }
+      .dropdown-arrow {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: vars.$breakpoint-sm) {
+  .language-dropdown {
+    margin: 0;
+    display: flex;
+    justify-content: flex-end;
+
+    .language-toggle {
+      padding: 4px 6px;
+      height: 32px;
+
+      .current-flag {
+        width: 24px;
+        height: 16px;
+        margin-right: 0;
+      }
+    }
+
+    .language-options {
+      right: 0;
+      left: auto;
+      transform: none;
+    }
+  }
+}

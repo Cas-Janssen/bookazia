@@ -1,0 +1,22 @@
+<section class="search-wrapper">
+  <button
+    class="hamburger-menu"
+    [class.active]="menuOpen"
+    (click)="toggleMenu()"
+  >
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <ul [class.open]="menuOpen">
+    <li>
+      <button (click)="goToCategory('')">{{ "HEADER.ALL" | translate }}</button>
+    </li>
+    <li *ngFor="let category of categories">
+      <button (click)="goToCategory(category.nameEn)">
+        {{ getLocalizedCategoryName(category) }}
+      </button>
+    </li>
+  </ul>
+</section>

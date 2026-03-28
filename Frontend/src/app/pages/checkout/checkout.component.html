@@ -1,0 +1,61 @@
+<div class="checkout-container">
+  <h2>{{ "CHECKOUT.TITLE" | translate }}</h2>
+
+  <div class="steps">
+    <div
+      [class.active]="currentStep === 1"
+      [class.completed]="currentStep > 1"
+      [class.inactive]="currentStep < 1"
+    >
+      <div class="step-icon">📝</div>
+      <div class="step-text">
+        {{ "CHECKOUT.PERSONAL_INFO.TITLE" | translate }}
+      </div>
+    </div>
+
+    <div
+      [class.active]="currentStep === 2"
+      [class.completed]="currentStep > 2"
+      [class.inactive]="currentStep < 2"
+    >
+      <div class="step-icon">🚚</div>
+      <div class="step-text">{{ "CHECKOUT.DELIVERY.TITLE" | translate }}</div>
+    </div>
+
+    <div
+      [class.active]="currentStep === 3"
+      [class.completed]="currentStep > 3"
+      [class.inactive]="currentStep < 3"
+    >
+      <div class="step-icon">💳</div>
+      <div class="step-text">{{ "CHECKOUT.PAYMENT.TITLE" | translate }}</div>
+    </div>
+  </div>
+
+  <app-personal-info
+    (personalInfoChange)="personalInfo = $event"
+    *ngIf="currentStep === 1"
+  ></app-personal-info>
+
+  <app-delivery-option
+    (deliveryOptionChange)="deliveryOption = $event"
+    *ngIf="currentStep === 2"
+  ></app-delivery-option>
+
+  <app-payment
+    (paymentMethodChange)="paymentMethod = $event"
+    *ngIf="currentStep === 3"
+  ></app-payment>
+
+  <div class="buttons">
+    <button *ngIf="currentStep > 1" (click)="previousStep()">
+      {{ "CHECKOUT.BUTTONS.BACK" | translate }}
+    </button>
+    <button *ngIf="currentStep < 3" (click)="nextStep()">
+      {{ "CHECKOUT.BUTTONS.NEXT" | translate }}
+    </button>
+    <button *ngIf="currentStep === 3" (click)="submitOrder()">
+      {{ "CHECKOUT.BUTTONS.BUY" | translate }}
+    </button>
+  </div>
+</div>

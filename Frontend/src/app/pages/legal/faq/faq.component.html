@@ -1,0 +1,119 @@
+<div class="faq-container">
+  <header class="faq-header">
+    <h1>{{ "FAQ.TITLE" | translate }}</h1>
+    <p class="faq-intro">
+      {{ "FAQ.SUBTITLE" | translate }}
+    </p>
+  </header>
+
+  <div class="faq-search">
+    <input
+      type="text"
+      [placeholder]="'FAQ.SEARCH_PLACEHOLDER' | translate"
+      [(ngModel)]="searchQuery"
+      (input)="filterQuestions()"
+    />
+    <button class="search-clear" *ngIf="searchQuery" (click)="clearSearch()">
+      ×
+    </button>
+  </div>
+
+  <section class="faq-categories">
+    <button
+      class="category-btn"
+      [class.active]="selectedCategory === 'all'"
+      (click)="filterByCategory('all')"
+    >
+      {{ "FAQ.CATEGORIES.ALL" | translate }}
+    </button>
+    <button
+      class="category-btn"
+      [class.active]="selectedCategory === 'orders'"
+      (click)="filterByCategory('orders')"
+    >
+      {{ "FAQ.CATEGORIES.ORDERS" | translate }}
+    </button>
+    <button
+      class="category-btn"
+      [class.active]="selectedCategory === 'shipping'"
+      (click)="filterByCategory('shipping')"
+    >
+      {{ "FAQ.CATEGORIES.SHIPPING" | translate }}
+    </button>
+    <button
+      class="category-btn"
+      [class.active]="selectedCategory === 'returns'"
+      (click)="filterByCategory('returns')"
+    >
+      {{ "FAQ.CATEGORIES.RETURNS" | translate }}
+    </button>
+    <button
+      class="category-btn"
+      [class.active]="selectedCategory === 'account'"
+      (click)="filterByCategory('account')"
+    >
+      {{ "FAQ.CATEGORIES.ACCOUNT" | translate }}
+    </button>
+    <button
+      class="category-btn"
+      [class.active]="selectedCategory === 'products'"
+      (click)="filterByCategory('products')"
+    >
+      {{ "FAQ.CATEGORIES.PRODUCTS" | translate }}
+    </button>
+  </section>
+
+  <section class="faq-list" *ngIf="filteredQuestions.length > 0">
+    <div
+      class="faq-item"
+      *ngFor="let question of filteredQuestions; let i = index"
+    >
+      <button
+        class="faq-question"
+        [class.active]="question.isOpen"
+        (click)="toggleQuestion(question)"
+        [attr.aria-expanded]="question.isOpen"
+        [attr.aria-controls]="'faq-answer-' + i"
+      >
+        <span>{{ getTranslatedQuestion(question) }}</span>
+        <i class="faq-icon" [class.active]="question.isOpen"></i>
+      </button>
+
+      <div
+        class="faq-answer"
+        [class.open]="question.isOpen"
+        [id]="'faq-answer-' + i"
+      >
+        <p [innerHTML]="getTranslatedAnswer(question)"></p>
+      </div>
+    </div>
+  </section>
+
+  <div class="no-results" *ngIf="filteredQuestions.length === 0">
+    <div class="no-results-content">
+      <i class="fas fa-search"></i>
+      <h3>{{ "FAQ.NO_RESULTS.TITLE" | translate }}</h3>
+      <p>{{ "FAQ.NO_RESULTS.SUBTITLE" | translate }}</p>
+      <button class="btn-clear" (click)="clearSearch()">
+        {{ "FAQ.NO_RESULTS.CLEAR_BUTTON" | translate }}
+      </button>
+    </div>
+  </div>
+
+  <section class="additional-help">
+    <h2>{{ "FAQ.ADDITIONAL_HELP.TITLE" | translate }}</h2>
+    <p>
+      {{ "FAQ.ADDITIONAL_HELP.CONTENT" | translate }}
+    </p>
+    <div class="contact-options">
+      <a href="mailto:support@bookazia.com" class="contact-btn">
+        <i class="fas fa-envelope"></i>
+        {{ "FAQ.ADDITIONAL_HELP.EMAIL" | translate }}
+      </a>
+      <a href="tel:+31201234567" class="contact-btn">
+        <i class="fas fa-phone"></i>
+        {{ "FAQ.ADDITIONAL_HELP.CALL" | translate }}
+      </a>
+    </div>
+  </section>
+</div>

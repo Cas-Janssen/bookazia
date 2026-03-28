@@ -1,0 +1,66 @@
+<header>
+  <nav>
+    <img
+      class="nav-logo"
+      src="assets/img/bookazia_banner.png"
+      alt="{{ 'HEADER.LOGO_ALT' | translate }}"
+      (click)="goToMenu('home')"
+    />
+    <input
+      #search_bar
+      type="search"
+      name="search_bar"
+      [(ngModel)]="searchQuery"
+      class="nav-search_input"
+      placeholder="{{ 'HEADER.SEARCH' | translate }}"
+      (keydown.enter)="navigateFromQuery(searchQuery, search_bar)"
+    />
+    <app-switch-language></app-switch-language>
+
+    <section class="nav-button-section">
+      <button class="nav-favorite_menu" (click)="goToMenu('saved')">
+        <img
+          class="nav-favorite_picture"
+          src="assets/img/favorite.svg"
+          alt="{{ 'HEADER.FAVORITE_ALT' | translate }}"
+        />
+        <p>{{ "HEADER.FAVORITES" | translate }}</p>
+      </button>
+      <button class="nav-shopping_menu" (click)="goToMenu('cart')">
+        <img
+          class="nav-cart_picture"
+          src="assets/img/shopping_cart_icon.svg"
+          alt="{{ 'HEADER.CART_ALT' | translate }}"
+        />
+        <p>{{ "HEADER.CART" | translate }}</p>
+      </button>
+      <button
+        *ngIf="!isLoggedIn"
+        class="nav-profile_menu"
+        (click)="goToMenu('login')"
+      >
+        <img
+          class="nav-profile_picture"
+          src="assets/img/default_profile_picture.svg"
+          alt="{{ 'HEADER.LOGIN_ALT' | translate }}"
+        />
+        <p>{{ "HEADER.LOGIN" | translate }}</p>
+      </button>
+      <div class="profile-menu-container" *ngIf="isLoggedIn">
+        <button class="nav-profile_menu" (click)="toggleProfileMenu()">
+          <img
+            class="nav-profile_picture"
+            src="assets/img/default_profile_picture.svg"
+            alt="{{ 'HEADER.ACCOUNT_ALT' | translate }}"
+          />
+          <p>{{ "HEADER.ACCOUNT" | translate }}</p>
+        </button>
+        <app-profile-options
+          [isOpen]="isProfileMenuOpen"
+          (closeMenu)="closeProfileMenu()"
+        ></app-profile-options>
+      </div>
+    </section>
+  </nav>
+  <app-search-filters></app-search-filters>
+</header>

@@ -1,0 +1,177 @@
+@use "variables" as vars;
+
+div {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  color: #333;
+  line-height: 1.6;
+
+  @media (max-width: vars.$breakpoint-sm) {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+    color: vars.$primary-bg;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid vars.$border-color;
+
+    @media (max-width: vars.$breakpoint-sm) {
+      font-size: 1.8rem;
+    }
+  }
+
+  p:nth-of-type(1) {
+    font-style: italic;
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+    color: vars.$primary-bg;
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid vars.$border-color;
+
+    @media (max-width: vars.$breakpoint-sm) {
+      font-size: 1.6rem;
+      margin: 2rem 0 0.8rem;
+    }
+  }
+
+  h3 {
+    font-size: 1.4rem;
+    color: vars.$secondary-bg;
+    margin: 2rem 0 0.75rem;
+
+    @media (max-width: vars.$breakpoint-sm) {
+      font-size: 1.2rem;
+      margin: 1.5rem 0 0.6rem;
+    }
+  }
+
+  h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 1.5rem 0 0.5rem;
+
+    @media (max-width: vars.$breakpoint-sm) {
+      font-size: 1.1rem;
+    }
+  }
+
+  p {
+    margin-bottom: 1rem;
+  }
+
+  ul {
+    margin: 1rem 0 1.5rem 1.25rem;
+
+    li {
+      margin-bottom: 0.75rem;
+      position: relative;
+      padding-left: 0.25rem;
+
+      &::marker {
+        color: vars.$accent-color;
+      }
+
+      p {
+        margin-bottom: 0.5rem;
+      }
+
+      @media (max-width: vars.$breakpoint-sm) {
+        margin-bottom: 0.6rem;
+      }
+    }
+  }
+
+  strong {
+    color: #222;
+    font-weight: 600;
+  }
+
+  a {
+    color: vars.$accent-color;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover,
+    &:focus {
+      color: vars.$hover-bg;
+      text-decoration: underline;
+      outline: 2px solid vars.$focus-outline;
+      outline-offset: 2px;
+    }
+  }
+
+  h2 + p,
+  h3 + p,
+  h4 + p {
+    background-color: rgba(vars.$secondary-bg, 0.07);
+    padding: 0.75rem;
+    border-radius: 4px;
+
+    @media (max-width: vars.$breakpoint-sm) {
+      padding: 0.5rem;
+    }
+  }
+
+  h2:last-of-type {
+    margin-top: 3rem;
+
+    + p + ul {
+      margin-left: 0;
+      list-style: none;
+
+      li {
+        padding-left: 0;
+        display: flex;
+        align-items: center;
+
+        &::before {
+          content: "✉️";
+          margin-right: 0.5rem;
+        }
+      }
+    }
+  }
+}
+
+div {
+  box-shadow: vars.$shadow;
+  background-color: white;
+  border-radius: 8px;
+
+  @media (max-width: vars.$breakpoint-sm) {
+    border-radius: 4px;
+  }
+}
+
+@media print {
+  div {
+    padding: 0;
+    max-width: 100%;
+    box-shadow: none;
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      page-break-after: avoid;
+    }
+
+    h2 {
+      margin-top: 1.5rem;
+    }
+
+    a {
+      text-decoration: underline;
+      color: #000;
+    }
+  }
+}

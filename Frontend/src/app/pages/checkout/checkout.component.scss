@@ -1,0 +1,98 @@
+.checkout-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+
+  h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  .steps {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+
+    div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      flex: 1;
+
+      .step-icon {
+        font-size: 2rem;
+        margin-bottom: 10px;
+      }
+
+      .step-text {
+        font-size: 1rem;
+        font-weight: bold;
+        color: #666;
+      }
+
+      &.active {
+        .step-icon {
+          color: #007bff;
+        }
+        .step-text {
+          color: #007bff;
+        }
+      }
+
+      &.completed {
+        .step-icon {
+          color: #28a745;
+        }
+        .step-text {
+          color: #28a745;
+        }
+      }
+
+      &.inactive {
+        opacity: 0.5;
+      }
+    }
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        opacity: 0.9;
+      }
+
+      &:first-child {
+        background-color: #6c757d;
+        color: white;
+      }
+
+      &:nth-child(2) {
+        background-color: #007bff;
+        color: white;
+      }
+
+      &:last-child {
+        background-color: #28a745;
+        color: white;
+      }
+    }
+  }
+}

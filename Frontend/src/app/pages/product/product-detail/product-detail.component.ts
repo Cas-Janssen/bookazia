@@ -1,0 +1,130 @@
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Product } from '../../../models/Product';
+import { ProductService } from '../../../services/product.service';
+import { NgClass, NgFor, NgIf, Location } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
+import { AuthService } from '../../../services/auth.service';
+import { CartService } from '../../../services/cart.service';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { Category } from '../../../models/Category';
+import { SavedItemsService } from '../../../services/saved-items.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+@Component({
+  selector: 'app-product-detail',
+  imports: [NgFor, NgIf, TranslatePipe],
+  templateUrl: './product-detail.component.html',
+  styleUrl: './product-detail.component.scss',
+})
+export class ProductDetailComponent implements OnInit, OnDestroy {
+  public book?: Product;
+  public bookTitle!: string;
+  public isbn!: string;
+  public bookId!: number;
+  public errorMessage?: string;
+  private destroy$ = new Subject<void>();
+  private authService: AuthService = inject(AuthService);
+  private productService: ProductService = inject(ProductService);
+  private cartService: CartService = inject(CartService);
+  private savedItemsService: SavedItemsService = inject(SavedItemsService);
+  private route: ActivatedRoute = inject(ActivatedRoute);
+  private router: Router = inject(Router);
+  private translateService: TranslateService = inject(TranslateService);
+  private location: Location = inject(Location);
+  private snackBar: MatSnackBar = inject(MatSnackBar);
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((params) => {
+      const id = params.get('id');
+
+      if (id) {
+        this.bookId = parseInt(id);
+        this.loadBookDetails(this.bookId);
+      }
+    });
+  }
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  private loadBookDetails(bookId: number): void {
+    this.productService
+      .getProductById(bookId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (book) => {
+          this.bookTitle = book.title.replaceAll(' ', '-').toLowerCase();
+          this.isbn = book.isbn;
+          this.book = book;
+          this.router.navigate(
+            ['/products', this.bookId, `${this.bookTitle}-${this.isbn}`],
+            { replaceUrl: true }
+          );
+        },
+        error: (err) => {
+          this.router.navigate(['/not-found']);
+        },
+      });
+  }
+
+  protected addToCart(product: Product): void {
+    if (!product.enabled) {
+      this.showSnackBar('PRODUCTS.NOT_AVAILABLE', 'error-snackbar');
+      return;
+    }
+    this.cartService.addCartItem(product);
+  }
+
+  protected addToFavorites(product: Product): void {
+    if (!this.authService.isAuthenticated()) {
+      this.showSnackBar('PRODUCTS.LOGIN_TO_SAVE', 'error-snackbar');
+      return;
+    }
+
+    this.savedItemsService.addSavedItem(product.id);
+  }
+
+  private showSnackBar(
+    messageKey: string,
+    panelClass: string = 'info-snackbar'
+  ): void {
+    const message = this.translateService.instant(messageKey);
+    this.snackBar.open(
+      message,
+      this.translateService.instant('SNACKBAR.CLOSE'),
+      {
+        duration: 5000,
+        verticalPosition: 'top',
+        horizontalPosition: 'center',
+        panelClass: [panelClass],
+      }
+    );
+  }
+
+  getLocalizedDescription(): string {
+    if (!this.book) return '';
+
+    const currentLang = this.translateService.currentLang;
+
+    if (currentLang === 'nl' && this.book.descriptionNl) {
+      return this.book.descriptionNl;
+    } else {
+      return this.book.descriptionEn || '';
+    }
+  }
+
+  getLocalizedCategoryName(category: Category): string {
+    const currentLang = this.translateService.currentLang;
+    if (currentLang === 'nl' && category.nameNl) {
+      return category.nameNl;
+    } else {
+      return category.nameEn || '';
+    }
+  }
+
+  protected goBack(): void {
+    this.location.back();
+  }
+}

@@ -1,0 +1,43 @@
+<div class="step">
+  <h3>{{ "CHECKOUT.PAYMENT.TITLE" | translate }}</h3>
+  <label>
+    <input
+      type="radio"
+      name="payment"
+      value="CREDIT_CARD"
+      [(ngModel)]="selectedPaymentMethod"
+      (ngModelChange)="onPaymentMethodChange()"
+    />
+    {{ "CHECKOUT.PAYMENT.CREDIT_CARD" | translate }}
+  </label>
+  <label>
+    <input
+      type="radio"
+      name="payment"
+      value="PAYPAL"
+      [(ngModel)]="selectedPaymentMethod"
+      (ngModelChange)="onPaymentMethodChange()"
+    />
+    {{ "CHECKOUT.PAYMENT.PAYPAL" | translate }}
+  </label>
+  <label>
+    <input
+      type="radio"
+      name="payment"
+      value="IDEAL"
+      [(ngModel)]="selectedPaymentMethod"
+      (ngModelChange)="onPaymentMethodChange()"
+    />
+    {{ "CHECKOUT.PAYMENT.IDEAL" | translate }}
+  </label>
+  <label>
+    <input
+      type="radio"
+      name="payment"
+      value="BANK_TRANSFER"
+      [(ngModel)]="selectedPaymentMethod"
+      (ngModelChange)="onPaymentMethodChange()"
+    />
+    {{ "CHECKOUT.PAYMENT.BANK_TRANSFER" | translate }}
+  </label>
+</div>

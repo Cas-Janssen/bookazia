@@ -1,0 +1,78 @@
+<div *ngIf="book == null">
+  <p>{{ "PRODUCTS.LOADING_ERROR" | translate }}</p>
+</div>
+<div *ngIf="book != null" class="book-card">
+  <button class="go-back-btn" (click)="goBack()">
+    &#8592; {{ "PRODUCTS.GO_BACK" | translate }}
+  </button>
+
+  <img
+    [src]="book.coverImgUrl"
+    alt="{{ book.title }} cover"
+    class="book-cover"
+  />
+
+  <div class="book-details">
+    <h2 class="book-title">{{ book.title }}</h2>
+
+    <div class="book-info-grid">
+      <p class="book-info-item" *ngFor="let author of book.authors">
+        <strong>{{ "PRODUCTS.AUTHOR" | translate }}:</strong>
+        {{ author.firstName }} {{ author.lastName }}
+      </p>
+      <p class="book-info-item">
+        <strong>{{ "PRODUCTS.PRICE" | translate }}:</strong> &euro;{{
+          book.price
+        }}
+      </p>
+      <p class="book-info-item">
+        <strong>{{ "PRODUCTS.STOCK" | translate }}:</strong>
+        {{
+          book.stock > 0
+            ? ("PRODUCTS.IN_STOCK" | translate)
+            : ("PRODUCTS.OUT_OF_STOCK" | translate)
+        }}
+      </p>
+      <p class="book-info-item">
+        <strong>{{ "PRODUCTS.ISBN" | translate }}:</strong> {{ book.isbn }}
+      </p>
+      <p class="book-info-item">
+        <strong>{{ "PRODUCTS.PUBLICATION_DATE" | translate }}:</strong>
+        {{ book.publicationDate }}
+      </p>
+      <p class="book-info-item">
+        <strong>{{ "PRODUCTS.PAGES" | translate }}:</strong> {{ book.pages }}
+      </p>
+      <p class="book-info-item">
+        <strong>{{ "PRODUCTS.ORIGINAL_LANGUAGE" | translate }}:</strong>
+        {{ book.originalLanguage }}
+      </p>
+      <p class="book-info-item">
+        <strong>{{ "PRODUCTS.PUBLISHER" | translate }}:</strong>
+        {{ book.publisher.firstName }} {{ book.publisher.lastName }}
+      </p>
+    </div>
+
+    <p class="book-description">
+      <strong>{{ "PRODUCTS.DESCRIPTION" | translate }}:</strong>
+      {{ getLocalizedDescription() }}
+    </p>
+
+    <div class="book-categories">
+      <strong>{{ "PRODUCTS.CATEGORIES" | translate }}:</strong>
+      <span *ngFor="let category of book.categories" class="category">
+        {{ getLocalizedCategoryName(category) }}
+      </span>
+    </div>
+    <button
+      class="add-to-cart"
+      (click)="addToCart(book)"
+      [disabled]="!book.enabled || book.stock <= 0"
+    >
+      {{ "PRODUCTS.ADD_TO_CART" | translate }}
+    </button>
+    <button class="add-to-favorites" (click)="addToFavorites(book)">
+      {{ "PRODUCTS.ADD_TO_FAVORITES" | translate }}
+    </button>
+  </div>
+</div>

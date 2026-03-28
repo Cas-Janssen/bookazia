@@ -1,0 +1,150 @@
+@use "variables" as vars;
+
+.order-failed-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+  background-color: #f9f9f9;
+}
+
+.failed-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  max-width: 800px;
+  width: 100%;
+}
+
+.failed-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+
+  h1 {
+    color: #d32f2f;
+    margin: 1rem 0 0.5rem;
+    font-size: 2rem;
+  }
+
+  .failed-message {
+    font-size: 1.2rem;
+    color: #666;
+  }
+}
+
+.failed-icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+
+  i {
+    font-size: 5rem;
+    color: #d32f2f;
+  }
+}
+
+.error-details {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: #ffebee;
+  border-radius: 8px;
+
+  p {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+
+  ul {
+    margin-left: 1.5rem;
+
+    li {
+      margin-bottom: 0.5rem;
+      color: #666;
+    }
+  }
+}
+
+.next-steps {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: #f0f4f8;
+  border-radius: 8px;
+
+  h2 {
+    color: vars.$primary-bg;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  ul {
+    margin-left: 1.5rem;
+
+    li {
+      margin-bottom: 0.5rem;
+      color: #666;
+    }
+  }
+}
+
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+
+  button {
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+
+    &.try-again {
+      background-color: vars.$primary-bg;
+      color: white;
+
+      &:hover {
+        background-color: #004a5a;
+      }
+    }
+
+    &.return-cart {
+      background-color: white;
+      color: vars.$primary-bg;
+      border: 2px solid vars.$primary-bg;
+
+      &:hover {
+        background-color: #e6f0f2;
+      }
+    }
+
+    &.contact-support {
+      background-color: #757575;
+      color: white;
+
+      &:hover {
+        background-color: #616161;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .failed-card {
+    padding: 1.5rem;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+
+    button {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,90 @@
+<div class="step">
+  <h3>{{ "CHECKOUT.PERSONAL_INFO.TITLE" | translate }}</h3>
+  <form>
+    <label for="firstName"
+      >{{ "CHECKOUT.PERSONAL_INFO.FIRST_NAME" | translate }} *</label
+    >
+    <input
+      type="text"
+      id="firstName"
+      name="firstName"
+      [(ngModel)]="firstName"
+      (ngModelChange)="onInputChange()"
+    />
+
+    <label for="middleName">{{
+      "CHECKOUT.PERSONAL_INFO.MIDDLE_NAME" | translate
+    }}</label>
+    <input
+      type="text"
+      id="middleName"
+      name="middleName"
+      [(ngModel)]="middleName"
+      (ngModelChange)="onInputChange()"
+    />
+
+    <label for="lastName"
+      >{{ "CHECKOUT.PERSONAL_INFO.LAST_NAME" | translate }} *</label
+    >
+    <input
+      type="text"
+      id="lastName"
+      name="lastName"
+      [(ngModel)]="lastName"
+      (ngModelChange)="onInputChange()"
+    />
+
+    <label for="address"
+      >{{ "CHECKOUT.PERSONAL_INFO.ADDRESS" | translate }} *</label
+    >
+    <input
+      type="text"
+      id="address"
+      name="address"
+      [(ngModel)]="address"
+      (ngModelChange)="onInputChange()"
+    />
+
+    <label for="city">{{ "CHECKOUT.PERSONAL_INFO.CITY" | translate }} *</label>
+    <input
+      type="text"
+      id="city"
+      name="city"
+      [(ngModel)]="city"
+      (ngModelChange)="onInputChange()"
+    />
+
+    <label for="postalCode"
+      >{{ "CHECKOUT.PERSONAL_INFO.POSTAL_CODE" | translate }} *</label
+    >
+    <input
+      type="text"
+      id="postalCode"
+      name="postalCode"
+      [(ngModel)]="postalCode"
+      (ngModelChange)="onInputChange()"
+    />
+
+    <label for="email"
+      >{{ "CHECKOUT.PERSONAL_INFO.EMAIL" | translate }} *</label
+    >
+    <input
+      type="email"
+      id="email"
+      name="email"
+      [(ngModel)]="email"
+      (ngModelChange)="onInputChange()"
+    />
+
+    <label for="phoneNumber">{{
+      "CHECKOUT.PERSONAL_INFO.PHONE_NUMBER" | translate
+    }}</label>
+    <input
+      type="text"
+      id="phoneNumber"
+      name="phoneNumber"
+      [(ngModel)]="phoneNumber"
+      (ngModelChange)="onInputChange()"
+    />
+  </form>
+</div>

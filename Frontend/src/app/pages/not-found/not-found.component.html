@@ -1,0 +1,38 @@
+<section class="not-found-container">
+  <div class="content">
+    <h1 class="error-code">404</h1>
+    <h2 class="title">{{ "ERROR.NOT_FOUND.TITLE" | translate }}</h2>
+
+    <div class="book-illustration">
+      <div class="book-wrapper">
+        <div class="book">
+          <div class="book-spine"></div>
+          <div class="book-cover">
+            <div class="book-title">Bookazia</div>
+          </div>
+        </div>
+        <div class="page-marker"></div>
+      </div>
+    </div>
+
+    <p class="message">{{ "ERROR.NOT_FOUND.MESSAGE" | translate }}</p>
+
+    <div class="suggestions">
+      <p>{{ "ERROR.NOT_FOUND.SUGGESTIONS" | translate }}</p>
+      <ul>
+        <li>{{ "ERROR.NOT_FOUND.SUGGESTION1" | translate }}</li>
+        <li>{{ "ERROR.NOT_FOUND.SUGGESTION2" | translate }}</li>
+        <li>{{ "ERROR.NOT_FOUND.SUGGESTION3" | translate }}</li>
+      </ul>
+    </div>
+
+    <div class="actions">
+      <button class="btn-primary" (click)="goHome()">
+        {{ "ERROR.NOT_FOUND.HOME_BUTTON" | translate }}
+      </button>
+      <button class="btn-secondary" (click)="goBack()">
+        {{ "ERROR.NOT_FOUND.BACK_BUTTON" | translate }}
+      </button>
+    </div>
+  </div>
+</section>

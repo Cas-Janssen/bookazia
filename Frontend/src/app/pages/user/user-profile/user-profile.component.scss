@@ -1,0 +1,133 @@
+@use "variables" as vars;
+
+.profile-container {
+  max-width: 768px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.profile-header {
+  margin-bottom: 30px;
+
+  h1 {
+    font-size: 28px;
+    color: vars.$text-color;
+    font-weight: 600;
+  }
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 0;
+
+  .spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top: 4px solid vars.$primary-bg;
+    width: 36px;
+    height: 36px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 16px;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  p {
+    color: vars.$text-color;
+  }
+}
+
+.profile-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.profile-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: vars.$shadow;
+  padding: 24px;
+
+  h2 {
+    font-size: 20px;
+    color: #333333;
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid vars.$border-color;
+  }
+
+  .info-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .info-row {
+    .info-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: vars.$secondary-bg;
+      margin-bottom: 4px;
+    }
+
+    .info-value {
+      font-size: 16px;
+      color: #333333;
+      margin: 0;
+    }
+  }
+}
+
+.profile-actions {
+  display: flex;
+  gap: 16px;
+
+  button {
+    flex: 1;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &.edit-button {
+      background-color: vars.$primary-bg;
+      color: white;
+      border: none;
+
+      &:hover {
+        background-color: 10%;
+      }
+    }
+
+    &.orders-button {
+      background-color: transparent;
+      border: 1px solid vars.$primary-bg;
+      color: vars.$primary-bg;
+
+      &:hover {
+        background-color: rgba(vars.$primary-bg, 0.1);
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .profile-content {
+    grid-template-columns: 1fr 1fr;
+  }
+}

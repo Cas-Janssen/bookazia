@@ -1,0 +1,60 @@
+<section class="login-section">
+  <nav class="nav-login">
+    <p class="nav-login-go_back" (click)="goBack()">
+      &lt; {{ "LOGIN.GO_BACK" | translate }}
+    </p>
+    <div class="nav-login-actions">
+      <h2>{{ "LOGIN.TITLE" | translate }}</h2>
+      <p class="nav-login-register" (click)="goToRegisterMenu()">
+        {{ "LOGIN.REGISTER" | translate }}
+      </p>
+    </div>
+    <div class="nav-login-divider"></div>
+  </nav>
+  <div *ngIf="errorMessage != null" class="error-message">
+    <img
+      class="error-icon"
+      src="assets/img/error_icon.svg"
+      alt="Icon of a warning symbol"
+    />
+    <p>{{ errorMessage }}</p>
+  </div>
+  <form class="login-form">
+    <label for="email">{{ "LOGIN.EMAIL" | translate }}:</label>
+    <input
+      id="email"
+      type="email"
+      [(ngModel)]="email"
+      (ngModelChange)="onInputChange()"
+      name="email"
+      required
+      autocomplete="email"
+      placeholder="{{ 'LOGIN.EMAIL_PLACEHOLDER' | translate }}"
+    />
+    <div class="password-actions">
+      <label for="password">{{ "LOGIN.PASSWORD" | translate }}:</label>
+      <p class="nav-forgot_password">
+        {{ "LOGIN.FORGOT_PASSWORD" | translate }}
+      </p>
+    </div>
+    <input
+      id="password"
+      type="password"
+      [(ngModel)]="password"
+      (ngModelChange)="onInputChange()"
+      name="password"
+      required
+      autocomplete="new-password"
+      placeholder="{{ 'LOGIN.PASSWORD_PLACEHOLDER' | translate }}"
+    />
+
+    <button
+      (click)="login()"
+      [disabled]="isButtonDisabled"
+      [ngClass]="{ 'login-button-disabled': isButtonDisabled }"
+      class="login-button"
+    >
+      {{ "LOGIN.BUTTON" | translate }}
+    </button>
+  </form>
+</section>

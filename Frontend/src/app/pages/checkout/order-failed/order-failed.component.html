@@ -1,0 +1,38 @@
+<div class="order-failed-container">
+  <div class="failed-card">
+    <div class="failed-header">
+      <div class="failed-icon">
+        <i class="material-icons">error_outline</i>
+      </div>
+      <h1>{{ "ORDER_FAILED.TITLE" | translate }}</h1>
+      <p class="failed-message">{{ "ORDER_FAILED.MESSAGE" | translate }}</p>
+    </div>
+
+    <div class="error-details">
+      <p>{{ "ORDER_FAILED.DETAILS" | translate }}</p>
+      <ul>
+        <li>{{ "ORDER_FAILED.REASON_PAYMENT" | translate }}</li>
+        <li>{{ "ORDER_FAILED.REASON_CONNECTION" | translate }}</li>
+        <li>{{ "ORDER_FAILED.REASON_SYSTEM" | translate }}</li>
+      </ul>
+    </div>
+
+    <div class="next-steps">
+      <h2>{{ "ORDER_FAILED.WHAT_NEXT" | translate }}</h2>
+      <ul>
+        <li>{{ "ORDER_FAILED.TRY_AGAIN" | translate }}</li>
+        <li>{{ "ORDER_FAILED.CHECK_CART" | translate }}</li>
+        <li>{{ "ORDER_FAILED.CONTACT_SUPPORT" | translate }}</li>
+      </ul>
+    </div>
+
+    <div class="action-buttons">
+      <button class="try-again" routerLink="/checkout">
+        {{ "ORDER_FAILED.TRY_AGAIN_BUTTON" | translate }}
+      </button>
+      <button class="return-cart" routerLink="/cart">
+        {{ "ORDER_FAILED.RETURN_TO_CART" | translate }}
+      </button>
+    </div>
+  </div>
+</div>

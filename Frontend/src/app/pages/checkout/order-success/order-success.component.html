@@ -1,0 +1,93 @@
+<div class="order-success-container">
+  <!-- Loading state -->
+  <div class="loading-state" *ngIf="loading">
+    <div class="spinner"></div>
+    <p>{{ "ORDER_SUCCESS.LOADING" | translate }}</p>
+  </div>
+
+  <!-- Error state -->
+  <div class="error-state" *ngIf="error">
+    <i class="material-icons error-icon">error</i>
+    <h2>{{ "ORDER_SUCCESS.ERROR_TITLE" | translate }}</h2>
+    <p>{{ error }}</p>
+    <button class="return-home" routerLink="/">
+      {{ "ORDER_SUCCESS.RETURN_HOME" | translate }}
+    </button>
+  </div>
+
+  <!-- Success state -->
+  <div class="success-card" *ngIf="!loading && !error">
+    <div class="success-header">
+      <div class="success-icon">
+        <i class="material-icons">check_circle</i>
+      </div>
+      <h1>{{ "ORDER_SUCCESS.THANK_YOU" | translate }}</h1>
+      <p class="success-message">
+        {{ "ORDER_SUCCESS.ORDER_CONFIRMED" | translate }}
+      </p>
+    </div>
+
+    <div class="order-details">
+      <h2>{{ "ORDER_SUCCESS.ORDER_DETAILS" | translate }}</h2>
+      <div class="order-info">
+        <p>
+          <strong>{{ "ORDER_SUCCESS.ORDER_NUMBER" | translate }}:</strong> #{{
+            orderId
+          }}
+        </p>
+        <p>
+          <strong>{{ "ORDER_SUCCESS.DATE" | translate }}:</strong>
+          {{ orderDate | date : "medium" }}
+        </p>
+        <p>
+          <strong>{{ "ORDER_SUCCESS.TOTAL" | translate }}:</strong> €{{
+            orderTotal | number : "1.2-2"
+          }}
+        </p>
+      </div>
+
+      <div class="confirmation-message">
+        <p>{{ "ORDER_SUCCESS.EMAIL_SENT" | translate }}</p>
+      </div>
+    </div>
+
+    <div class="order-summary" *ngIf="orderItems && orderItems.length > 0">
+      <h2>{{ "ORDER_SUCCESS.ORDER_SUMMARY" | translate }}</h2>
+      <div class="order-items">
+        <div class="order-item" *ngFor="let item of orderItems">
+          <img
+            [src]="item.product.coverImgUrl"
+            [alt]="item.product.title"
+            class="item-image"
+          />
+          <div class="item-details">
+            <h3>{{ item.product.title }}</h3>
+            <p>
+              {{ "ORDER_SUCCESS.QUANTITY" | translate }}: {{ item.quantity }}
+            </p>
+            <p>
+              {{ "ORDER_SUCCESS.PRICE" | translate }}: €{{
+                item.price | number : "1.2-2"
+              }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="next-steps">
+      <h2>{{ "ORDER_SUCCESS.WHATS_NEXT" | translate }}</h2>
+      <p>{{ "ORDER_SUCCESS.PROCESSING" | translate }}</p>
+      <p>{{ "ORDER_SUCCESS.SHIPPING" | translate }}</p>
+    </div>
+
+    <div class="action-buttons">
+      <button class="continue-shopping" routerLink="/books">
+        {{ "ORDER_SUCCESS.CONTINUE_SHOPPING" | translate }}
+      </button>
+      <button class="view-orders" routerLink="/profile/orders" *ngIf="true">
+        {{ "ORDER_SUCCESS.VIEW_ORDERS" | translate }}
+      </button>
+    </div>
+  </div>
+</div>
