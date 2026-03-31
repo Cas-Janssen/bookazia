@@ -12,18 +12,24 @@
     </ul>
   </nav>
 
-  <section *ngIf="loading" class="loading-spinner" role="status">
-    <span class="spinner" aria-hidden="true"></span>
-    <p>{{ "ADMIN.LOADING" | translate }}</p>
-  </section>
+  @if (loading) {
+    <section class="loading-spinner" role="status">
+      <span class="spinner" aria-hidden="true"></span>
+      <p>{{ "ADMIN.LOADING" | translate }}</p>
+    </section>
+  }
 
-  <section *ngIf="success" class="alert alert-success" role="alert">
-    {{ success }}
-  </section>
+  @if (success) {
+    <section class="alert alert-success" role="alert">
+      {{ success }}
+    </section>
+  }
 
-  <section *ngIf="error" class="alert alert-danger" role="alert">
-    {{ error }}
-  </section>
+  @if (error) {
+    <section class="alert alert-danger" role="alert">
+      {{ error }}
+    </section>
+  }
 
   <section class="admin-actions">
     <button class="btn btn-primary" (click)="addProduct()">
@@ -39,176 +45,182 @@
           [(ngModel)]="searchTerm"
           (input)="onSearch()"
           [placeholder]="'ADMIN.PANEL.SEARCH_PLACEHOLDER' | translate"
-        />
-      </fieldset>
+          />
+        </fieldset>
 
-      <fieldset class="status-filter">
-        <legend class="sr-only">
-          {{ "ADMIN.PANEL.FILTER_STATUS" | translate }}
-        </legend>
-        <select
-          name="statusFilter"
-          [(ngModel)]="filterStatus"
-          (change)="onFilterChange()"
-        >
-          <option value="all">
-            {{ "ADMIN.PANEL.ALL_PRODUCTS" | translate }}
-          </option>
-          <option value="active">
-            {{ "ADMIN.PANEL.ACTIVE_PRODUCTS" | translate }}
-          </option>
-          <option value="inactive">
-            {{ "ADMIN.PANEL.INACTIVE_PRODUCTS" | translate }}
-          </option>
-        </select>
-      </fieldset>
+        <fieldset class="status-filter">
+          <legend class="sr-only">
+            {{ "ADMIN.PANEL.FILTER_STATUS" | translate }}
+          </legend>
+          <select
+            name="statusFilter"
+            [(ngModel)]="filterStatus"
+            (change)="onFilterChange()"
+            >
+            <option value="all">
+              {{ "ADMIN.PANEL.ALL_PRODUCTS" | translate }}
+            </option>
+            <option value="active">
+              {{ "ADMIN.PANEL.ACTIVE_PRODUCTS" | translate }}
+            </option>
+            <option value="inactive">
+              {{ "ADMIN.PANEL.INACTIVE_PRODUCTS" | translate }}
+            </option>
+          </select>
+        </fieldset>
+      </section>
     </section>
-  </section>
 
-  <section class="table-responsive">
-    <table
-      class="products-table"
-      *ngIf="!loading && filteredProducts.length > 0"
-    >
-      <thead>
-        <tr>
-          <th class="cover-column">{{ "ADMIN.PANEL.COVER" | translate }}</th>
-          <th (click)="onSort('title')" class="sortable-column">
-            {{ "ADMIN.PANEL.TITLE_BOOK" | translate }}
-            <i class="fas" [ngClass]="getSortIcon('title')"></i>
-          </th>
-          <th (click)="onSort('price')" class="sortable-column numeric-column">
-            {{ "ADMIN.PANEL.PRICE" | translate }}
-            <i class="fas" [ngClass]="getSortIcon('price')"></i>
-          </th>
-          <th (click)="onSort('stock')" class="sortable-column numeric-column">
-            {{ "ADMIN.PANEL.STOCK" | translate }}
-            <i class="fas" [ngClass]="getSortIcon('stock')"></i>
-          </th>
-          <th>{{ "ADMIN.PANEL.AUTHORS" | translate }}</th>
-          <th>{{ "ADMIN.PANEL.STATUS" | translate }}</th>
-          <th>{{ "ADMIN.PANEL.ACTIONS" | translate }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let product of getCurrentPageProducts()">
-          <td class="cover-column">
-            <img
-              [src]="product.coverImgUrl"
-              [alt]="product.title + ' cover'"
-              class="book-cover"
-            />
-          </td>
-          <td>
-            <strong>{{ product.title }}</strong>
-            <small class="isbn">ISBN: {{ product.isbn }}</small>
-          </td>
-          <td class="numeric-column">
-            €{{ product.price | number : "1.2-2" }}
-          </td>
-          <td class="numeric-column">
-            <span [ngClass]="{ 'low-stock': product.stock < 5 }">
-              {{ product.stock }}
-            </span>
-          </td>
-          <td>
-            <span>
-              {{ product.authors[0].firstName }}
-              {{ product.authors[0].lastName }}
-            </span>
-          </td>
-          <td>
-            <span
-              class="status-badge"
+    <section class="table-responsive">
+      @if (!loading && filteredProducts.length > 0) {
+        <table
+          class="products-table"
+          >
+          <thead>
+            <tr>
+              <th class="cover-column">{{ "ADMIN.PANEL.COVER" | translate }}</th>
+              <th (click)="onSort('title')" class="sortable-column">
+                {{ "ADMIN.PANEL.TITLE_BOOK" | translate }}
+                <i class="fas" [ngClass]="getSortIcon('title')"></i>
+              </th>
+              <th (click)="onSort('price')" class="sortable-column numeric-column">
+                {{ "ADMIN.PANEL.PRICE" | translate }}
+                <i class="fas" [ngClass]="getSortIcon('price')"></i>
+              </th>
+              <th (click)="onSort('stock')" class="sortable-column numeric-column">
+                {{ "ADMIN.PANEL.STOCK" | translate }}
+                <i class="fas" [ngClass]="getSortIcon('stock')"></i>
+              </th>
+              <th>{{ "ADMIN.PANEL.AUTHORS" | translate }}</th>
+              <th>{{ "ADMIN.PANEL.STATUS" | translate }}</th>
+              <th>{{ "ADMIN.PANEL.ACTIONS" | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (product of getCurrentPageProducts(); track product) {
+              <tr>
+                <td class="cover-column">
+                  <img
+                    [src]="product.coverImgUrl"
+                    [alt]="product.title + ' cover'"
+                    class="book-cover"
+                    />
+                  </td>
+                  <td>
+                    <strong>{{ product.title }}</strong>
+                    <small class="isbn">ISBN: {{ product.isbn }}</small>
+                  </td>
+                  <td class="numeric-column">
+                    €{{ product.price | number : "1.2-2" }}
+                  </td>
+                  <td class="numeric-column">
+                    <span [ngClass]="{ 'low-stock': product.stock < 5 }">
+                      {{ product.stock }}
+                    </span>
+                  </td>
+                  <td>
+                    <span>
+                      {{ product.authors[0].firstName }}
+                      {{ product.authors[0].lastName }}
+                    </span>
+                  </td>
+                  <td>
+                    <span
+                      class="status-badge"
               [ngClass]="{
                 'status-active': product.enabled,
                 'status-inactive': !product.enabled
               }"
+                      >
+                      {{
+                      product.enabled
+                      ? ("ADMIN.PANEL.STATUS_ACTIVE" | translate)
+                      : ("ADMIN.PANEL.STATUS_INACTIVE" | translate)
+                      }}
+                    </span>
+                  </td>
+                  <td class="actions-column">
+                    <div class="action-buttons">
+                      <button
+                        class="btn action-btn edit-btn"
+                        (click)="editProduct(product)"
+                        >
+                        <i class="fas fa-edit"></i>
+                        <span>{{ "ADMIN.PANEL.EDIT_PRODUCT" | translate }}</span>
+                      </button>
+                      <button
+                        class="btn action-btn"
+                        [ngClass]="product.enabled ? 'deactivate-btn' : 'activate-btn'"
+                        (click)="toggleProductStatus(product)"
+                        >
+                        <i
+                          class="fas"
+                          [ngClass]="product.enabled ? 'fa-eye-slash' : 'fa-eye'"
+                        ></i>
+                        <span>{{
+                          product.enabled
+                          ? ("ADMIN.PANEL.DEACTIVATE" | translate)
+                          : ("ADMIN.PANEL.ACTIVATE" | translate)
+                        }}</span>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        }
+
+        @if (!loading && filteredProducts.length === 0) {
+          <section
+            class="no-results"
             >
-              {{
-                product.enabled
-                  ? ("ADMIN.PANEL.STATUS_ACTIVE" | translate)
-                  : ("ADMIN.PANEL.STATUS_INACTIVE" | translate)
-              }}
-            </span>
-          </td>
-          <td class="actions-column">
-            <div class="action-buttons">
+            <p>{{ "ADMIN.PANEL.NO_PRODUCTS_FOUND" | translate }}</p>
+          </section>
+        }
+      </section>
+
+      @if (totalPages > 1) {
+        <nav class="pagination">
+          <ul>
+            <li>
               <button
-                class="btn action-btn edit-btn"
-                (click)="editProduct(product)"
-              >
-                <i class="fas fa-edit"></i>
-                <span>{{ "ADMIN.PANEL.EDIT_PRODUCT" | translate }}</span>
+                (click)="previousPage()"
+                [disabled]="currentPage === 1"
+                class="btn-nav"
+                >
+                <i class="fas fa-chevron-left"></i>
               </button>
-
+            </li>
+            @for (page of getPageNumbers(); track page) {
+              <li>
+                <button
+                  (click)="goToPage(page)"
+                  [class.active]="currentPage === page"
+                  class="btn-page"
+                  >
+                  {{ page }}
+                </button>
+              </li>
+            }
+            <li>
               <button
-                class="btn action-btn"
-                [ngClass]="product.enabled ? 'deactivate-btn' : 'activate-btn'"
-                (click)="toggleProductStatus(product)"
-              >
-                <i
-                  class="fas"
-                  [ngClass]="product.enabled ? 'fa-eye-slash' : 'fa-eye'"
-                ></i>
-                <span>{{
-                  product.enabled
-                    ? ("ADMIN.PANEL.DEACTIVATE" | translate)
-                    : ("ADMIN.PANEL.ACTIVATE" | translate)
-                }}</span>
+                (click)="nextPage()"
+                [disabled]="currentPage === totalPages"
+                class="btn-nav"
+                >
+                <i class="fas fa-chevron-right"></i>
               </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            </li>
+          </ul>
+        </nav>
+      }
 
-    <section
-      *ngIf="!loading && filteredProducts.length === 0"
-      class="no-results"
-    >
-      <p>{{ "ADMIN.PANEL.NO_PRODUCTS_FOUND" | translate }}</p>
-    </section>
-  </section>
-
-  <nav class="pagination" *ngIf="totalPages > 1">
-    <ul>
-      <li>
-        <button
-          (click)="previousPage()"
-          [disabled]="currentPage === 1"
-          class="btn-nav"
-        >
-          <i class="fas fa-chevron-left"></i>
-        </button>
-      </li>
-
-      <li *ngFor="let page of getPageNumbers()">
-        <button
-          (click)="goToPage(page)"
-          [class.active]="currentPage === page"
-          class="btn-page"
-        >
-          {{ page }}
-        </button>
-      </li>
-
-      <li>
-        <button
-          (click)="nextPage()"
-          [disabled]="currentPage === totalPages"
-          class="btn-nav"
-        >
-          <i class="fas fa-chevron-right"></i>
-        </button>
-      </li>
-    </ul>
-  </nav>
-
-  <app-confirmation-dialog
-    *ngIf="showConfirmDialog"
-    [title]="confirmTitle"
-    [message]="confirmMessage"
-    (result)="closeConfirmDialog($event)"
-  ></app-confirmation-dialog>
-</main>
+      @if (showConfirmDialog) {
+        <app-confirmation-dialog
+          [title]="confirmTitle"
+          [message]="confirmMessage"
+          (result)="closeConfirmDialog($event)"
+        ></app-confirmation-dialog>
+      }
+    </main>

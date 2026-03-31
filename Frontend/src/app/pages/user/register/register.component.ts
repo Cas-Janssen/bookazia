@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Location, NgIf } from '@angular/common';
+import { Location } from '@angular/common';
 import { Register } from '../../../models/Register';
 import { AuthService } from '../../../services/auth.service';
 import { Subject, takeUntil } from 'rxjs';
@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register',
-  imports: [FormsModule, NgIf, TranslatePipe],
+  imports: [FormsModule, TranslatePipe],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })

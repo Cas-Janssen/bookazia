@@ -13,92 +13,93 @@
       <img
         src="assets/img/bookazia_banner_aigen.jpg"
         alt="Bookazia - Your literary journey begins here"
-      />
-    </div>
-  </section>
-
-  <section class="featured-section">
-    <h2>{{ "HOME.FEATURED_CATEGORIES" | translate }}</h2>
-    <div class="category-cards">
-      <div class="category-card" routerLink="/books/fiction">
-        <div class="category-icon fiction-icon"></div>
-        <h3>{{ "HOME.CATEGORY.FICTION" | translate }}</h3>
-      </div>
-      <div class="category-card" routerLink="/books/fantasy">
-        <div class="category-icon non-fiction-icon"></div>
-        <h3>{{ "HOME.CATEGORY.FANTASY" | translate }}</h3>
-      </div>
-      <div class="category-card" routerLink="/books/classics">
-        <div class="category-icon children-icon"></div>
-        <h3>{{ "HOME.CATEGORY.CLASSICS" | translate }}</h3>
-      </div>
-    </div>
-  </section>
-
-  <section class="new-arrivals-section">
-    <div class="section-header">
-      <h2>{{ "HOME.NEW_ARRIVALS" | translate }}</h2>
-      <button routerLink="/books/" class="text-button">
-        {{ "HOME.VIEW_ALL" | translate }} →
-      </button>
-    </div>
-    <div class="book-slider">
-      <div
-        class="book-card"
-        *ngFor="let book of newArrivals"
-        routerLink="/products/{{ book.id }}/info"
-      >
-        <div class="book-cover">
-          <img [src]="book.coverImgUrl" [alt]="book.title" />
-        </div>
-        <h4>{{ book.title }}</h4>
-        <p class="author">
-          {{ book.authors[0].firstName }} {{ book.authors[0].lastName }}
-        </p>
-        <p class="price">€{{ book.price | number : "1.2-2" }}</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="benefits-section">
-    <h2>{{ "HOME.WHY_READING" | translate }}</h2>
-    <div class="benefits-grid">
-      <div class="benefit-item">
-        <div class="benefit-icon knowledge-icon"></div>
-        <h3>{{ "HOME.BENEFITS.KNOWLEDGE" | translate }}</h3>
-        <p>{{ "HOME.BENEFITS.KNOWLEDGE_DESC" | translate }}</p>
-      </div>
-      <div class="benefit-item">
-        <div class="benefit-icon stress-icon"></div>
-        <h3>{{ "HOME.BENEFITS.STRESS" | translate }}</h3>
-        <p>{{ "HOME.BENEFITS.STRESS_DESC" | translate }}</p>
-      </div>
-      <div class="benefit-item">
-        <div class="benefit-icon imagination-icon"></div>
-        <h3>{{ "HOME.BENEFITS.IMAGINATION" | translate }}</h3>
-        <p>{{ "HOME.BENEFITS.IMAGINATION_DESC" | translate }}</p>
-      </div>
-      <div class="benefit-item">
-        <div class="benefit-icon focus-icon"></div>
-        <h3>{{ "HOME.BENEFITS.FOCUS" | translate }}</h3>
-        <p>{{ "HOME.BENEFITS.FOCUS_DESC" | translate }}</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="newsletter-section">
-    <div class="newsletter-content">
-      <h2>{{ "HOME.NEWSLETTER.TITLE" | translate }}</h2>
-      <p>{{ "HOME.NEWSLETTER.SUBTITLE" | translate }}</p>
-      <form class="newsletter-form">
-        <input
-          type="email"
-          placeholder="{{ 'HOME.NEWSLETTER.EMAIL_PLACEHOLDER' | translate }}"
         />
-        <button type="submit">
-          {{ "HOME.NEWSLETTER.SUBSCRIBE" | translate }}
+      </div>
+    </section>
+
+    <section class="featured-section">
+      <h2>{{ "HOME.FEATURED_CATEGORIES" | translate }}</h2>
+      <div class="category-cards">
+        <div class="category-card" routerLink="/books/fiction">
+          <div class="category-icon fiction-icon"></div>
+          <h3>{{ "HOME.CATEGORY.FICTION" | translate }}</h3>
+        </div>
+        <div class="category-card" routerLink="/books/fantasy">
+          <div class="category-icon non-fiction-icon"></div>
+          <h3>{{ "HOME.CATEGORY.FANTASY" | translate }}</h3>
+        </div>
+        <div class="category-card" routerLink="/books/classics">
+          <div class="category-icon children-icon"></div>
+          <h3>{{ "HOME.CATEGORY.CLASSICS" | translate }}</h3>
+        </div>
+      </div>
+    </section>
+
+    <section class="new-arrivals-section">
+      <div class="section-header">
+        <h2>{{ "HOME.NEW_ARRIVALS" | translate }}</h2>
+        <button routerLink="/books/" class="text-button">
+          {{ "HOME.VIEW_ALL" | translate }} →
         </button>
-      </form>
-    </div>
-  </section>
-</main>
+      </div>
+      <div class="book-slider">
+        @for (book of newArrivals; track book) {
+          <div
+            class="book-card"
+            routerLink="/products/{{ book.id }}/info"
+            >
+            <div class="book-cover">
+              <img [src]="book.coverImgUrl" [alt]="book.title" />
+            </div>
+            <h4>{{ book.title }}</h4>
+            <p class="author">
+              {{ book.authors[0].firstName }} {{ book.authors[0].lastName }}
+            </p>
+            <p class="price">€{{ book.price | number : "1.2-2" }}</p>
+          </div>
+        }
+      </div>
+    </section>
+
+    <section class="benefits-section">
+      <h2>{{ "HOME.WHY_READING" | translate }}</h2>
+      <div class="benefits-grid">
+        <div class="benefit-item">
+          <div class="benefit-icon knowledge-icon"></div>
+          <h3>{{ "HOME.BENEFITS.KNOWLEDGE" | translate }}</h3>
+          <p>{{ "HOME.BENEFITS.KNOWLEDGE_DESC" | translate }}</p>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon stress-icon"></div>
+          <h3>{{ "HOME.BENEFITS.STRESS" | translate }}</h3>
+          <p>{{ "HOME.BENEFITS.STRESS_DESC" | translate }}</p>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon imagination-icon"></div>
+          <h3>{{ "HOME.BENEFITS.IMAGINATION" | translate }}</h3>
+          <p>{{ "HOME.BENEFITS.IMAGINATION_DESC" | translate }}</p>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon focus-icon"></div>
+          <h3>{{ "HOME.BENEFITS.FOCUS" | translate }}</h3>
+          <p>{{ "HOME.BENEFITS.FOCUS_DESC" | translate }}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="newsletter-section">
+      <div class="newsletter-content">
+        <h2>{{ "HOME.NEWSLETTER.TITLE" | translate }}</h2>
+        <p>{{ "HOME.NEWSLETTER.SUBTITLE" | translate }}</p>
+        <form class="newsletter-form">
+          <input
+            type="email"
+            placeholder="{{ 'HOME.NEWSLETTER.EMAIL_PLACEHOLDER' | translate }}"
+            />
+            <button type="submit">
+              {{ "HOME.NEWSLETTER.SUBSCRIBE" | translate }}
+            </button>
+          </form>
+        </div>
+      </section>
+    </main>

@@ -1,6 +1,6 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
+
 import { SearchFiltersComponent } from './search-filters/search-filters.component';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -13,12 +13,11 @@ import { ProfileOptionsComponent } from './profile-options/profile-options.compo
   selector: 'app-header',
   imports: [
     SearchFiltersComponent,
-    NgIf,
     FormsModule,
     LanguageSwitchComponent,
     TranslatePipe,
-    ProfileOptionsComponent,
-  ],
+    ProfileOptionsComponent
+],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })

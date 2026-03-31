@@ -8,14 +8,14 @@ import {
   ElementRef,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgIf } from '@angular/common';
+
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../../services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-profile-options',
-  imports: [NgIf, TranslatePipe],
+  imports: [TranslatePipe],
   templateUrl: './profile-options.component.html',
   styleUrl: './profile-options.component.scss',
 })

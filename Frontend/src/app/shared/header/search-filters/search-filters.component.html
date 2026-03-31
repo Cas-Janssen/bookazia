@@ -3,7 +3,7 @@
     class="hamburger-menu"
     [class.active]="menuOpen"
     (click)="toggleMenu()"
-  >
+    >
     <span></span>
     <span></span>
     <span></span>
@@ -13,10 +13,12 @@
     <li>
       <button (click)="goToCategory('')">{{ "HEADER.ALL" | translate }}</button>
     </li>
-    <li *ngFor="let category of categories">
-      <button (click)="goToCategory(category.nameEn)">
-        {{ getLocalizedCategoryName(category) }}
-      </button>
-    </li>
+    @for (category of categories; track category) {
+      <li>
+        <button (click)="goToCategory(category.nameEn)">
+          {{ getLocalizedCategoryName(category) }}
+        </button>
+      </li>
+    }
   </ul>
 </section>

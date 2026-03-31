@@ -13,14 +13,14 @@ import { AuthService } from '../../../../services/auth.service';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { CartService } from '../../../../services/cart.service';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-personal-info',
   templateUrl: './personal-info.component.html',
   styleUrls: ['./personal-info.component.scss'],
-  imports: [FormsModule, TranslatePipe, CommonModule],
+  imports: [FormsModule, TranslatePipe],
 })
 export class PersonalInfoComponent implements OnInit, OnDestroy {
   @Output() personalInfoChange = new EventEmitter<any>();

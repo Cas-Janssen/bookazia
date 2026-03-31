@@ -5,7 +5,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { NgFor } from '@angular/common';
+
 import { CategoryService } from '../../../services/category.service';
 import { Category } from '../../../models/Category';
 import { Router } from '@angular/router';
@@ -14,7 +14,7 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-search-filters',
-  imports: [NgFor, TranslatePipe],
+  imports: [TranslatePipe],
   templateUrl: './search-filters.component.html',
   styleUrl: './search-filters.component.scss',
 })

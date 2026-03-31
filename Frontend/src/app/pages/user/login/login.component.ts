@@ -2,7 +2,7 @@ import { Component, inject, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
-import { NgClass, NgIf, Location } from '@angular/common';
+import { NgClass, Location } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
@@ -10,7 +10,7 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  imports: [FormsModule, NgIf, NgClass, TranslatePipe],
+  imports: [FormsModule, NgClass, TranslatePipe],
 })
 export class LoginComponent implements OnDestroy {
   private router: Router = inject(Router);

@@ -1,6 +1,10 @@
-<section *ngIf="currentLang === 'en'">
-  <app-privacyEn />
-</section>
-<section *ngIf="currentLang === 'nl'">
-  <app-privacyNl />
-</section>
+@if (currentLang === 'en') {
+  <section>
+    <app-privacyEn />
+  </section>
+}
+@if (currentLang === 'nl') {
+  <section>
+    <app-privacyNl />
+  </section>
+}

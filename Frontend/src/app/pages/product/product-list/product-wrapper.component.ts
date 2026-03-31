@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
-import { NgFor, NgIf } from '@angular/common';
+
 import { Product } from '../../../models/Product';
 import { ProductService } from '../../../services/product.service';
 import { CategoryService } from '../../../services/category.service';
@@ -13,7 +13,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   selector: 'app-product',
   templateUrl: './product-wrapper.component.html',
   styleUrls: ['./product-wrapper.component.scss'],
-  imports: [NgFor, ProductItemComponent, NgIf, TranslatePipe],
+  imports: [ProductItemComponent, TranslatePipe],
 })
 export class ProductWrapperComponent implements OnInit, OnDestroy {
   public products: Product[] | null = null;

@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { UserService } from '../../../services/user.service';
@@ -8,7 +8,7 @@ import { UserInfo } from '../../../models/UserInfo';
 @Component({
   selector: 'app-user-profile',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [TranslateModule],
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.scss',
 })

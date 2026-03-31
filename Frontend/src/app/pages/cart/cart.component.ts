@@ -1,7 +1,7 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { Subject, takeUntil, finalize } from 'rxjs';
-import { NgFor, NgIf } from '@angular/common';
+
 import { CartProductDetailed } from '../../models/CartProductDetailed';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-card',
-  imports: [NgIf, NgFor, FormsModule, TranslatePipe],
+  imports: [FormsModule, TranslatePipe],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
 })

@@ -1,105 +1,109 @@
-<div class="loading-container" *ngIf="isLoading">
-  <div class="loading-spinner">
-    <div class="spinner"></div>
-  </div>
-  <p class="loading-text">{{ "CART.LOADING_CART" | translate }}</p>
-</div>
-
-<div class="cart-container" *ngIf="!isLoading && cartProducts.length >= 1">
-  <section class="cart-item" *ngFor="let product of cartProducts">
-    <img
-      [src]="product.coverImgUrl"
-      [alt]="product.name"
-      class="cart-item__image"
-    />
-
-    <div class="cart-item__details">
-      <h2 class="cart-item__name">{{ product.name }}</h2>
-      <p class="cart-item__price">
-        {{ "CART.PRICE" | translate }}: €{{ product.price }}
-      </p>
-
-      <label for="quantity-{{ product.id }}" class="cart-item__label">
-        {{ "CART.QUANTITY" | translate }}:
-      </label>
-      <select
-        [id]="'quantity-' + product.id"
-        [(ngModel)]="product.quantity"
-        (change)="updateTotalPrice(product)"
-        class="cart-item__select"
-      >
-        <option
-          *ngFor="let qty of getQuantityArray(product.stock)"
-          [value]="qty"
-        >
-          {{ qty }}
-        </option>
-      </select>
-      <button class="cart-remove-item-btn" (click)="removeCartItem(product)">
-        {{ "CART.REMOVE_ITEM" | translate }}
-      </button>
-      <p class="cart-item__total">
-        {{ "CART.TOTAL" | translate }}: €{{ product.totalPrice }}
-      </p>
+@if (isLoading) {
+  <div class="loading-container">
+    <div class="loading-spinner">
+      <div class="spinner"></div>
     </div>
-  </section>
-
-  <div class="cart-total" *ngIf="cartProducts.length >= 1">
-    <h3 class="cart-total__label">{{ "CART.TOTAL_PRICE" | translate }}:</h3>
-    <p class="cart-total__value">€{{ totalPrice.toFixed(2) }}</p>
+    <p class="loading-text">{{ "CART.LOADING_CART" | translate }}</p>
   </div>
+}
 
-  <div class="cart-actions">
-    <button class="cart-clear-btn" (click)="clearCartItems()">
-      {{ "CART.CLEAR_CART" | translate }}
-    </button>
-    <button class="cart-order-btn" (click)="placeOrder()">
-      {{ "CART.PLACE_ORDER" | translate }}
-    </button>
-  </div>
-</div>
-
-<div class="empty-cart" *ngIf="!isLoading && cartProducts.length < 1">
-  <div class="empty-cart__content">
-    <div class="empty-cart__icon">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="80"
-        height="80"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <circle cx="9" cy="21" r="1"></circle>
-        <circle cx="20" cy="21" r="1"></circle>
-        <path
-          d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
-        ></path>
-      </svg>
+@if (!isLoading && cartProducts.length >= 1) {
+  <div class="cart-container">
+    @for (product of cartProducts; track product) {
+      <section class="cart-item">
+        <img
+          [src]="product.coverImgUrl"
+          [alt]="product.name"
+          class="cart-item__image"
+          />
+          <div class="cart-item__details">
+            <h2 class="cart-item__name">{{ product.name }}</h2>
+            <p class="cart-item__price">
+              {{ "CART.PRICE" | translate }}: €{{ product.price }}
+            </p>
+            <label for="quantity-{{ product.id }}" class="cart-item__label">
+              {{ "CART.QUANTITY" | translate }}:
+            </label>
+            <select
+              [id]="'quantity-' + product.id"
+              [(ngModel)]="product.quantity"
+              (change)="updateTotalPrice(product)"
+              class="cart-item__select"
+              >
+              @for (qty of getQuantityArray(product.stock); track qty) {
+                <option
+                  [value]="qty"
+                  >
+                  {{ qty }}
+                </option>
+              }
+            </select>
+            <button class="cart-remove-item-btn" (click)="removeCartItem(product)">
+              {{ "CART.REMOVE_ITEM" | translate }}
+            </button>
+            <p class="cart-item__total">
+              {{ "CART.TOTAL" | translate }}: €{{ product.totalPrice }}
+            </p>
+          </div>
+        </section>
+      }
+      @if (cartProducts.length >= 1) {
+        <div class="cart-total">
+          <h3 class="cart-total__label">{{ "CART.TOTAL_PRICE" | translate }}:</h3>
+          <p class="cart-total__value">€{{ totalPrice.toFixed(2) }}</p>
+        </div>
+      }
+      <div class="cart-actions">
+        <button class="cart-clear-btn" (click)="clearCartItems()">
+          {{ "CART.CLEAR_CART" | translate }}
+        </button>
+        <button class="cart-order-btn" (click)="placeOrder()">
+          {{ "CART.PLACE_ORDER" | translate }}
+        </button>
+      </div>
     </div>
-    <h2 class="empty-cart__title">{{ "CART.EMPTY_TITLE" | translate }}</h2>
-    <p class="empty-cart__message">{{ "CART.EMPTY_MESSAGE" | translate }}</p>
+  }
 
-    <div class="empty-cart__book-stack">
-      <div class="book book-1"></div>
-      <div class="book book-2"></div>
-      <div class="book book-3"></div>
+  @if (!isLoading && cartProducts.length < 1) {
+    <div class="empty-cart">
+      <div class="empty-cart__content">
+        <div class="empty-cart__icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="80"
+            height="80"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            >
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path
+              d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+            ></path>
+          </svg>
+        </div>
+        <h2 class="empty-cart__title">{{ "CART.EMPTY_TITLE" | translate }}</h2>
+        <p class="empty-cart__message">{{ "CART.EMPTY_MESSAGE" | translate }}</p>
+        <div class="empty-cart__book-stack">
+          <div class="book book-1"></div>
+          <div class="book book-2"></div>
+          <div class="book book-3"></div>
+        </div>
+        <button class="empty-cart__button" (click)="navigateToBooks()">
+          {{ "CART.BROWSE_BOOKS" | translate }}
+        </button>
+        <p class="empty-cart__suggestions-title">
+          {{ "CART.SUGGESTIONS_TITLE" | translate }}
+        </p>
+        <ul class="empty-cart__suggestions">
+          <li>{{ "CART.SUGGESTION_1" | translate }}</li>
+          <li>{{ "CART.SUGGESTION_2" | translate }}</li>
+          <li>{{ "CART.SUGGESTION_3" | translate }}</li>
+        </ul>
+      </div>
     </div>
-
-    <button class="empty-cart__button" (click)="navigateToBooks()">
-      {{ "CART.BROWSE_BOOKS" | translate }}
-    </button>
-
-    <p class="empty-cart__suggestions-title">
-      {{ "CART.SUGGESTIONS_TITLE" | translate }}
-    </p>
-    <ul class="empty-cart__suggestions">
-      <li>{{ "CART.SUGGESTION_1" | translate }}</li>
-      <li>{{ "CART.SUGGESTION_2" | translate }}</li>
-      <li>{{ "CART.SUGGESTION_3" | translate }}</li>
-    </ul>
-  </div>
-</div>
+  }

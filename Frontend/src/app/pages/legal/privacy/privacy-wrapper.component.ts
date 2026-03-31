@@ -2,11 +2,11 @@ import { Component, inject, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { PrivacyComponentEn } from './en/privacy.component';
 import { PrivacyComponentNl } from './nl/privacy.component';
-import { NgIf } from '@angular/common';
+
 
 @Component({
   selector: 'app-privacy',
-  imports: [PrivacyComponentEn, PrivacyComponentNl, NgIf],
+  imports: [PrivacyComponentEn, PrivacyComponentNl],
   templateUrl: './privacy-wrapper.component.html',
   styleUrl: './privacy-wrapper.component.scss',
 })

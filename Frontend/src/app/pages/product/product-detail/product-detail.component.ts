@@ -1,7 +1,7 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Product } from '../../../models/Product';
 import { ProductService } from '../../../services/product.service';
-import { NgClass, NgFor, NgIf, Location } from '@angular/common';
+import { NgClass, Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from '../../../services/auth.service';
@@ -13,7 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-detail',
-  imports: [NgFor, NgIf, TranslatePipe],
+  imports: [TranslatePipe],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss',
 })

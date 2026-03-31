@@ -2,7 +2,7 @@ import { Component, inject, OnDestroy } from '@angular/core';
 import { PersonalInfoComponent } from './steps/1-personal-info/personal-info.component';
 import { DeliveryOptionComponent } from './steps/2-delivery-option/delivery-option.component';
 import { PaymentComponent } from './steps/3-payment/payment.component';
-import { NgIf } from '@angular/common';
+
 import { CartService } from '../../services/cart.service';
 import { Order } from '../../models/Order';
 import { UserInfo } from '../../models/UserInfo';
@@ -23,9 +23,8 @@ import { Router } from '@angular/router';
     PersonalInfoComponent,
     DeliveryOptionComponent,
     PaymentComponent,
-    NgIf,
-    TranslatePipe,
-  ],
+    TranslatePipe
+],
 })
 export class CheckoutComponent implements OnDestroy {
   protected currentStep: number = 1;

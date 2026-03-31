@@ -1,59 +1,63 @@
-<section
-  *ngIf="product != null"
-  class="product-item"
-  (click)="goToProductDetails(product)"
->
-  <div class="product-image">
-    <img [src]="product.coverImgUrl" alt="{{ product.title }}" />
-  </div>
-  <div class="product-details">
-    <h2 class="product-title">{{ product.title }}</h2>
-    <ul class="product-info">
-      <li>
-        <strong>{{ "PRODUCTS.AUTHOR" | translate }}:</strong>
-        {{ product.authors[0].firstName }} {{ product.authors[0].lastName }}
-      </li>
-      <li>
-        <strong>{{ "PRODUCTS.ORIGINAL_LANGUAGE" | translate }}:</strong>
-        {{ product.originalLanguage }}
-      </li>
-      <li>
-        <strong>{{ "PRODUCTS.ISBN" | translate }}:</strong> {{ product.isbn }}
-      </li>
-      <li>
-        <strong>{{ "PRODUCTS.PUBLICATION_DATE" | translate }}:</strong>
-        {{ product.publicationDate }}
-      </li>
-      <li>
-        <strong>{{ "PRODUCTS.PAGES" | translate }}:</strong> {{ product.pages }}
-      </li>
-      <li>
-        <strong>{{ "PRODUCTS.STOCK" | translate }}: </strong>
-        <span *ngIf="product.stock > 0; else outOfStock">{{
-          product.stock
-        }}</span>
-        <ng-template #outOfStock>
-          <span class="out-of-stock">{{
-            "PRODUCTS.OUT_OF_STOCK" | translate
-          }}</span>
-        </ng-template>
-      </li>
-      <li>
-        <strong>{{ "PRODUCTS.PRICE" | translate }}:</strong> ${{
-          product.price
-        }}
-      </li>
-    </ul>
-    <button
-      class="add-to-cart-btn"
-      [disabled]="product.stock === 0"
-      [ngClass]="{ disabled: product.stock === 0 || product.enabled === false }"
-      (click)="addToCart(product); $event.stopPropagation()"
+@if (product != null) {
+  <section
+    class="product-item"
+    (click)="goToProductDetails(product)"
     >
-      {{ "PRODUCTS.ADD_TO_CART" | translate }}
-    </button>
+    <div class="product-image">
+      <img [src]="product.coverImgUrl" alt="{{ product.title }}" />
+    </div>
+    <div class="product-details">
+      <h2 class="product-title">{{ product.title }}</h2>
+      <ul class="product-info">
+        <li>
+          <strong>{{ "PRODUCTS.AUTHOR" | translate }}:</strong>
+          {{ product.authors[0].firstName }} {{ product.authors[0].lastName }}
+        </li>
+        <li>
+          <strong>{{ "PRODUCTS.ORIGINAL_LANGUAGE" | translate }}:</strong>
+          {{ product.originalLanguage }}
+        </li>
+        <li>
+          <strong>{{ "PRODUCTS.ISBN" | translate }}:</strong> {{ product.isbn }}
+        </li>
+        <li>
+          <strong>{{ "PRODUCTS.PUBLICATION_DATE" | translate }}:</strong>
+          {{ product.publicationDate }}
+        </li>
+        <li>
+          <strong>{{ "PRODUCTS.PAGES" | translate }}:</strong> {{ product.pages }}
+        </li>
+        <li>
+          <strong>{{ "PRODUCTS.STOCK" | translate }}: </strong>
+          @if (product.stock > 0) {
+            <span>{{
+              product.stock
+            }}</span>
+          } @else {
+            <span class="out-of-stock">{{
+              "PRODUCTS.OUT_OF_STOCK" | translate
+            }}</span>
+          }
+        </li>
+        <li>
+          <strong>{{ "PRODUCTS.PRICE" | translate }}:</strong> ${{
+          product.price
+          }}
+        </li>
+      </ul>
+      <button
+        class="add-to-cart-btn"
+        [disabled]="product.stock === 0"
+        [ngClass]="{ disabled: product.stock === 0 || product.enabled === false }"
+        (click)="addToCart(product); $event.stopPropagation()"
+        >
+        {{ "PRODUCTS.ADD_TO_CART" | translate }}
+      </button>
+    </div>
+  </section>
+}
+@if (product == null) {
+  <div>
+    <h1>{{ "PRODUCTS.NO_PRODUCTS_FOUND" | translate }}</h1>
   </div>
-</section>
-<div *ngIf="product == null">
-  <h1>{{ "PRODUCTS.NO_PRODUCTS_FOUND" | translate }}</h1>
-</div>
+}

@@ -3,7 +3,7 @@ import { SavedItemsService } from '../../services/saved-items.service';
 import { Subject, takeUntil } from 'rxjs';
 import { Product } from '../../models/Product';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { NgClass, NgFor, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { CartService } from '../../services/cart.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   selector: 'app-saved-items',
   templateUrl: './saved-items.component.html',
   styleUrl: './saved-items.component.scss',
-  imports: [TranslatePipe, NgIf, NgFor, NgClass],
+  imports: [TranslatePipe, NgClass],
 })
 export class SavedItemsComponent implements OnInit, OnDestroy {
   private savedItemsService: SavedItemsService = inject(SavedItemsService);

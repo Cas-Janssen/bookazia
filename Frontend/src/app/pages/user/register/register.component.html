@@ -1,88 +1,95 @@
 <section class="registration">
   <p (click)="goBack()">&lt; {{ "REGISTER.GO_BACK" | translate }}</p>
-  <div *ngIf="errorMessage != null" class="error-message">
-    <img
-      class="error-icon"
-      src="assets/img/error_icon.svg"
-      alt="Icon of a warning symbol"
-    />
-    <p>{{ errorMessage }}</p>
-  </div>
-  <form #registerForm="ngForm">
-    <section class="form-login-details">
-      <h1>{{ "REGISTER.LOGIN_DETAILS" | translate }}</h1>
-      <label for="email">{{ "REGISTER.EMAIL" | translate }} *</label>
-      <input
-        id="email"
-        type="email"
-        [(ngModel)]="email"
-        name="email"
-        required
-        autocomplete="email"
-        placeholder="{{ 'REGISTER.EMAIL_PLACEHOLDER' | translate }}"
-        #emailInput="ngModel"
-      />
-      <div
-        *ngIf="emailInput.invalid && emailInput.touched"
-        class="validation-error"
-      >
-        <p *ngIf="emailInput.errors?.['required']">
-          {{ "REGISTER.EMAIL_REQUIRED" | translate }}
-        </p>
-        <p *ngIf="emailInput.errors?.['email']">
-          {{ "REGISTER.EMAIL_INVALID" | translate }}
-        </p>
+  @if (errorMessage != null) {
+    <div class="error-message">
+      <img
+        class="error-icon"
+        src="assets/img/error_icon.svg"
+        alt="Icon of a warning symbol"
+        />
+        <p>{{ errorMessage }}</p>
       </div>
-      <label for="password">{{ "REGISTER.PASSWORD" | translate }} *</label>
-      <input
-        id="password"
-        type="password"
-        [(ngModel)]="password"
-        name="password"
-        required
-        autocomplete="new-password"
-        placeholder="{{ 'REGISTER.PASSWORD_PLACEHOLDER' | translate }}"
-      />
-    </section>
-    <section class="form-notrequired">
-      <h1>{{ "REGISTER.USER_DETAILS" | translate }}</h1>
-      <label for="first_name">{{ "REGISTER.FIRST_NAME" | translate }} *</label>
-      <input
-        id="first_name"
-        type="text"
-        [(ngModel)]="firstName"
-        name="first_name"
-        required
-        autocomplete="given-name"
-        placeholder="{{ 'REGISTER.FIRST_NAME_PLACEHOLDER' | translate }}"
-      />
-      <label for="middle_name">{{ "REGISTER.MIDDLE_NAME" | translate }}</label>
-      <input
-        id="middle_name"
-        type="text"
-        [(ngModel)]="middleName"
-        name="middle_name"
-        autocomplete="additional-name"
-        placeholder="{{ 'REGISTER.MIDDLE_NAME_PLACEHOLDER' | translate }}"
-      />
-      <label for="last_name">{{ "REGISTER.LAST_NAME" | translate }} *</label>
-      <input
-        id="last_name"
-        type="text"
-        [(ngModel)]="lastName"
-        name="last_name"
-        required
-        autocomplete="family-name"
-        placeholder="{{ 'REGISTER.LAST_NAME_PLACEHOLDER' | translate }}"
-      />
-    </section>
-    <button
-      (click)="register()"
-      type="submit"
-      class="submit-button"
-      [disabled]="registerForm.invalid"
-    >
-      {{ "REGISTER.SUBMIT" | translate }}
-    </button>
-  </form>
-</section>
+    }
+    <form #registerForm="ngForm">
+      <section class="form-login-details">
+        <h1>{{ "REGISTER.LOGIN_DETAILS" | translate }}</h1>
+        <label for="email">{{ "REGISTER.EMAIL" | translate }} *</label>
+        <input
+          id="email"
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          required
+          autocomplete="email"
+          placeholder="{{ 'REGISTER.EMAIL_PLACEHOLDER' | translate }}"
+          #emailInput="ngModel"
+          />
+          @if (emailInput.invalid && emailInput.touched) {
+            <div
+              class="validation-error"
+              >
+              @if (emailInput.errors?.['required']) {
+                <p>
+                  {{ "REGISTER.EMAIL_REQUIRED" | translate }}
+                </p>
+              }
+              @if (emailInput.errors?.['email']) {
+                <p>
+                  {{ "REGISTER.EMAIL_INVALID" | translate }}
+                </p>
+              }
+            </div>
+          }
+          <label for="password">{{ "REGISTER.PASSWORD" | translate }} *</label>
+          <input
+            id="password"
+            type="password"
+            [(ngModel)]="password"
+            name="password"
+            required
+            autocomplete="new-password"
+            placeholder="{{ 'REGISTER.PASSWORD_PLACEHOLDER' | translate }}"
+            />
+          </section>
+          <section class="form-notrequired">
+            <h1>{{ "REGISTER.USER_DETAILS" | translate }}</h1>
+            <label for="first_name">{{ "REGISTER.FIRST_NAME" | translate }} *</label>
+            <input
+              id="first_name"
+              type="text"
+              [(ngModel)]="firstName"
+              name="first_name"
+              required
+              autocomplete="given-name"
+              placeholder="{{ 'REGISTER.FIRST_NAME_PLACEHOLDER' | translate }}"
+              />
+              <label for="middle_name">{{ "REGISTER.MIDDLE_NAME" | translate }}</label>
+              <input
+                id="middle_name"
+                type="text"
+                [(ngModel)]="middleName"
+                name="middle_name"
+                autocomplete="additional-name"
+                placeholder="{{ 'REGISTER.MIDDLE_NAME_PLACEHOLDER' | translate }}"
+                />
+                <label for="last_name">{{ "REGISTER.LAST_NAME" | translate }} *</label>
+                <input
+                  id="last_name"
+                  type="text"
+                  [(ngModel)]="lastName"
+                  name="last_name"
+                  required
+                  autocomplete="family-name"
+                  placeholder="{{ 'REGISTER.LAST_NAME_PLACEHOLDER' | translate }}"
+                  />
+                </section>
+                <button
+                  (click)="register()"
+                  type="submit"
+                  class="submit-button"
+                  [disabled]="registerForm.invalid"
+                  >
+                  {{ "REGISTER.SUBMIT" | translate }}
+                </button>
+              </form>
+            </section>
