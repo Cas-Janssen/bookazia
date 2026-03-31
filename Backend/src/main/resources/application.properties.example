@@ -1,0 +1,21 @@
+spring.application.name=
+
+spring.datasource.url=database-url
+spring.datasource.username=
+spring.datasource.password=
+
+spring.datasource.hikari.maximum-pool-size=1
+spring.datasource.hikari.minimum-idle=1
+spring.datasource.hikari.max-lifetime=20000
+spring.datasource.hikari.connection-timeout=30000
+spring.datasource.hikari.idle-timeout=10000
+
+#Hibernate ddl auto (create, create-drop, validate, update)
+spring.jpa.hibernate.ddl-auto=create-drop
+
+server.error.include-message=always
+server.port=8080
+server.servlet.context-path=/api
+
+jwt.secret=LongPasswordHere
+jwt.tokenExpiration=14

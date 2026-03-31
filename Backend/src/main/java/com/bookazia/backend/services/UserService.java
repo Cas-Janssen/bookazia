@@ -6,15 +6,12 @@ import com.bookazia.backend.dao.UserRepository;
 import com.bookazia.backend.models.CustomUser;
 import com.bookazia.backend.models.Role;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
-
 import java.util.Collections;
 import java.util.Optional;
 

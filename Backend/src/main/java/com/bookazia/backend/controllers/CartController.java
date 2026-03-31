@@ -5,12 +5,10 @@ import com.bookazia.backend.dao.CustomUserDAO;
 import com.bookazia.backend.dto.CartItemDTO;
 import com.bookazia.backend.models.CustomUser;
 import com.bookazia.backend.models.ShoppingCart;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
 import java.util.Map;
