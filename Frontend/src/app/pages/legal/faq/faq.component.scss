@@ -1,5 +1,5 @@
 @use "../../../../styles/variables" as vars;
-
+@use "sass:color";
 .faq-container {
   max-width: 900px;
   margin: 0 auto;
@@ -188,7 +188,7 @@
       background-color: #f9f9f9;
 
       &.open {
-        max-height: 500px; /* This is a fallback height */
+        max-height: 500px;
         padding: 1.25rem;
         opacity: 1;
         border-top: 1px solid #eee;
@@ -248,7 +248,7 @@
       transition: background-color 0.3s;
 
       &:hover {
-        background-color: darken(vars.$accent-color, 10%);
+        background-color: color.adjust(vars.$accent-color, $lightness: -10%);
       }
     }
   }
