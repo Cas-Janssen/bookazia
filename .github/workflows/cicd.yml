@@ -1,0 +1,117 @@
+name: CI-CD
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Compute image names
+        id: images
+        shell: bash
+        run: |
+          owner_lc=$(echo "${GITHUB_REPOSITORY_OWNER}" | tr '[:upper:]' '[:lower:]')
+          repo_lc=$(echo "${GITHUB_REPOSITORY#*/}" | tr '[:upper:]' '[:lower:]')
+          echo "backend_image=ghcr.io/${owner_lc}/${repo_lc}-backend" >> "$GITHUB_OUTPUT"
+          echo "frontend_image=ghcr.io/${owner_lc}/${repo_lc}-frontend" >> "$GITHUB_OUTPUT"
+
+      - name: Build backend image
+        run: |
+          docker build \
+            -f Backend/dockerfile \
+            -t ${{ steps.images.outputs.backend_image }}:${{ github.sha }} \
+            -t ${{ steps.images.outputs.backend_image }}:latest \
+            Backend
+
+      - name: Build frontend image
+        run: |
+          docker build \
+            --build-arg FRONTEND_API_URL=https://${{ secrets.DOMAIN }}/api \
+            -f Frontend/dockerfile \
+            -t ${{ steps.images.outputs.frontend_image }}:${{ github.sha }} \
+            -t ${{ steps.images.outputs.frontend_image }}:latest \
+            Frontend
+
+      - name: Push backend image
+        run: |
+          docker push ${{ steps.images.outputs.backend_image }}:${{ github.sha }}
+          docker push ${{ steps.images.outputs.backend_image }}:latest
+
+      - name: Push frontend image
+        run: |
+          docker push ${{ steps.images.outputs.frontend_image }}:${{ github.sha }}
+          docker push ${{ steps.images.outputs.frontend_image }}:latest
+
+  deploy:
+    needs: build-and-push
+    runs-on:
+      - self-hosted
+      - linux
+    permissions:
+      contents: read
+      packages: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compute image names
+        id: images
+        shell: bash
+        run: |
+          owner_lc=$(echo "${GITHUB_REPOSITORY_OWNER}" | tr '[:upper:]' '[:lower:]')
+          repo_lc=$(echo "${GITHUB_REPOSITORY#*/}" | tr '[:upper:]' '[:lower:]')
+          echo "backend_image=ghcr.io/${owner_lc}/${repo_lc}-backend:latest" >> "$GITHUB_OUTPUT"
+          echo "frontend_image=ghcr.io/${owner_lc}/${repo_lc}-frontend:latest" >> "$GITHUB_OUTPUT"
+
+      - name: Prepare shared env file
+        shell: bash
+        run: |
+          {
+            echo "DOMAIN=${{ secrets.DOMAIN }}"
+            echo "TRAEFIK_NETWORK=proxy"
+            echo "TRAEFIK_ENTRYPOINT=https"
+            echo "TRAEFIK_CERT_RESOLVER=letsencrypt"
+            echo "BACKEND_IMAGE=${{ steps.images.outputs.backend_image }}"
+            echo "FRONTEND_IMAGE=${{ steps.images.outputs.frontend_image }}"
+            echo "FRONTEND_API_URL=https://${{ secrets.DOMAIN }}/api"
+            echo "SPRING_DATASOURCE_URL=${{ secrets.SPRING_DATASOURCE_URL }}"
+            echo "SPRING_DATASOURCE_USERNAME=${{ secrets.SPRING_DATASOURCE_USERNAME }}"
+            echo "SPRING_DATASOURCE_PASSWORD=${{ secrets.SPRING_DATASOURCE_PASSWORD }}"
+            echo "SPRING_JPA_HIBERNATE_DDL_AUTO=update"
+            echo "SERVER_PORT=16741"
+            echo "SERVER_SERVLET_CONTEXT_PATH=/api"
+            echo "JWT_SECRET=${{ secrets.JWT_SECRET }}"
+            echo "APP_CORS_ALLOWED_ORIGINS=https://${{ secrets.DOMAIN }}"
+          } > .env
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull and deploy
+        run: |
+          docker compose --env-file .env pull
+          docker compose --env-file .env up -d --remove-orphans
