@@ -108,6 +108,7 @@ jobs:
             printf 'SERVER_PORT=%s\n' '16741'
             printf 'SERVER_SERVLET_CONTEXT_PATH=%s\n' '/api'
             printf 'JWT_SECRET=%s\n' "$JWT_SECRET"
+            printf 'JWT_TOKEN_EXPIRATION=%s\n' '1'
             printf 'APP_CORS_ALLOWED_ORIGINS=%s\n' "https://$DOMAIN"
           } > .env
 
