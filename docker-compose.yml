@@ -17,11 +17,12 @@ services:
       - traefik.http.routers.bookazia-api.rule=Host(`${DOMAIN}`) && PathPrefix(`/api`)
       - traefik.http.routers.bookazia-api.entrypoints=${TRAEFIK_ENTRYPOINT:-https}
       - traefik.http.routers.bookazia-api.tls=true
-      - traefik.http.routers.bookazia-api.tls.certresolver=${TRAEFIK_CERT_RESOLVER:-letsencrypt}
+      - traefik.http.routers.bookazia-api.tls.certresolver=${TRAEFIK_CERT_RESOLVER:-cloudflare}
       - traefik.http.services.bookazia-api.loadbalancer.server.port=${SERVER_PORT}
       - traefik.docker.network=${TRAEFIK_NETWORK:-proxy}
     networks:
       - proxy
+      - backend
 
   frontend:
     image: ${FRONTEND_IMAGE}
@@ -34,7 +35,7 @@ services:
       - traefik.http.routers.bookazia-frontend.rule=Host(`${DOMAIN}`)
       - traefik.http.routers.bookazia-frontend.entrypoints=${TRAEFIK_ENTRYPOINT:-https}
       - traefik.http.routers.bookazia-frontend.tls=true
-      - traefik.http.routers.bookazia-frontend.tls.certresolver=${TRAEFIK_CERT_RESOLVER:-letsencrypt}
+      - traefik.http.routers.bookazia-frontend.tls.certresolver=${TRAEFIK_CERT_RESOLVER:-cloudflare}
       - traefik.http.routers.bookazia-frontend.priority=1
       - traefik.http.services.bookazia-frontend.loadbalancer.server.port=80
       - traefik.docker.network=${TRAEFIK_NETWORK:-proxy}
@@ -44,4 +45,5 @@ services:
 networks:
   proxy:
     external: true
-    name: ${TRAEFIK_NETWORK:-proxy}
+  backend:
+    external: true

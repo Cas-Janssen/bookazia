@@ -90,7 +90,7 @@ jobs:
             echo "DOMAIN=${{ secrets.DOMAIN }}"
             echo "TRAEFIK_NETWORK=proxy"
             echo "TRAEFIK_ENTRYPOINT=https"
-            echo "TRAEFIK_CERT_RESOLVER=letsencrypt"
+            echo "TRAEFIK_CERT_RESOLVER=cloudflare"
             echo "BACKEND_IMAGE=${{ steps.images.outputs.backend_image }}"
             echo "FRONTEND_IMAGE=${{ steps.images.outputs.frontend_image }}"
             echo "FRONTEND_API_URL=https://${{ secrets.DOMAIN }}/api"
