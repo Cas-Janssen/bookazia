@@ -15,6 +15,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.bookazia-api.rule=Host(`${DOMAIN}`) && PathPrefix(`/api`)
+      - traefik.http.routers.bookazia-api.priority=100
       - traefik.http.routers.bookazia-api.entrypoints=${TRAEFIK_ENTRYPOINT:-https}
       - traefik.http.routers.bookazia-api.tls=true
       - traefik.http.routers.bookazia-api.tls.certresolver=${TRAEFIK_CERT_RESOLVER:-cloudflare}
@@ -32,7 +33,7 @@ services:
       - backend
     labels:
       - traefik.enable=true
-      - traefik.http.routers.bookazia-frontend.rule=Host(`${DOMAIN}`)
+      - traefik.http.routers.bookazia-frontend.rule=Host(`${DOMAIN}`) && !PathPrefix(`/api`)
       - traefik.http.routers.bookazia-frontend.entrypoints=${TRAEFIK_ENTRYPOINT:-https}
       - traefik.http.routers.bookazia-frontend.tls=true
       - traefik.http.routers.bookazia-frontend.tls.certresolver=${TRAEFIK_CERT_RESOLVER:-cloudflare}
