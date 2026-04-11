@@ -19,3 +19,4 @@ server.servlet.context-path=/api
 
 jwt.secret=LongPasswordHere
 jwt.tokenExpiration=14
+app.cors.allowed-origins=http://localhost:4200
