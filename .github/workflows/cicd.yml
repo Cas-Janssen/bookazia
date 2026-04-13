@@ -104,7 +104,7 @@ jobs:
             printf 'SPRING_DATASOURCE_URL=%s\n' "$SPRING_DATASOURCE_URL"
             printf 'SPRING_DATASOURCE_USERNAME=%s\n' "$SPRING_DATASOURCE_USERNAME"
             printf 'SPRING_DATASOURCE_PASSWORD=%s\n' "$SPRING_DATASOURCE_PASSWORD"
-            printf 'SPRING_JPA_HIBERNATE_DDL_AUTO=%s\n' 'update'
+            printf 'SPRING_JPA_HIBERNATE_DDL_AUTO=%s\n' 'create-drop'
             printf 'SERVER_PORT=%s\n' '16741'
             printf 'SERVER_SERVLET_CONTEXT_PATH=%s\n' '/api'
             printf 'JWT_SECRET=%s\n' "$JWT_SECRET"
